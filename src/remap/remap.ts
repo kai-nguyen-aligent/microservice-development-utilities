@@ -15,7 +15,7 @@ type SimplifyIntersection<
 type ObjectMap = readonly ((readonly [string, string, ((...args: any[]) => any)?]))[];
 
 type GetKeyType<
-    Key extends string, 
+    Key extends string,
     O extends { [key: string]: any },
     M extends ObjectMap[number]
 > =

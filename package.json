@@ -4,7 +4,11 @@
   "description": "A set of utility functions for Aligent Microservices",
   "main": "index.js",
   "scripts": {
-    "test": "jest src/"
+    "test": "npm run lint && npm run test:types && npm run test:jest",
+    "test:jest": "jest src/",
+    "test:types": "tsc --noEmit",
+    "lint": "eslint src/*.ts src/**/*.ts",
+    "lint:fix": "eslint --fix src/*.ts src/**/*.ts"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
-import { remap } from './remap';
+import remap from './remap';
 
-describe('remap()', () => {
+describe('remap', () => {
     it('remaps an object with one value', () => {
         const obj = { foo: 7 };
         const map = [
@@ -52,5 +52,14 @@ describe('remap()', () => {
         ] as const;
         const newObj = remap(obj, map);
         expect(newObj).toEqual({ foo: [1, 2, 7] });
+    });
+
+    it('follows the logic in the example code in the docs', () => {
+        const map = [
+            ['foo', 'baz'],
+            ['bar', 'qux.0', (x: number) => x + 1]
+        ] as const;
+        const obj = { foo: 'hi', bar: 7 }
+        expect(remap(obj, map)).toEqual({ baz: 'hi', qux: [8] });
     })
 })

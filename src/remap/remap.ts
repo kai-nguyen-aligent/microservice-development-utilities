@@ -77,11 +77,19 @@ type Remap<
  * Map one object's values to another structure
  * @param object the object to map from
  * @param map the keys for the mapping
+ * @example ```ts
+ * const map = [
+ * 	['foo', 'baz'],
+ * 	['bar', 'qux.0', (x: number) => x + 1]
+ * ] as const;
+ * const obj = { foo: 'hi', bar: 7 }
+ * remap(obj, map); // { baz: 'hi', qux: [8] }
+ * ```
  */
 function remap<
-    T extends ObjectMap,
-    O extends { [key: string]: any }
->(object: O, map: T): Remap<T, O> {
+    O extends { [key: string]: any },
+    M extends ObjectMap
+>(object: O, map: M): Remap<M, O> {
     const out = {};
     map.forEach(item => {
         const parser = item[2] ? item[2] : (val: any) => val;
@@ -91,4 +99,6 @@ function remap<
     return out as any;
 }
 
-export { Remap, ObjectMap, remap, SimplifyIntersection };
+export { Remap, ObjectMap };
+
+export default remap;

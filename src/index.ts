@@ -3,10 +3,10 @@ import remap, { Remap, ObjectMap } from '@/remap/remap';
 import retryWrapper, { RetryConfig } from '@/retryWrapper/retryWrapper';
 
 export {
-    chunkBy,
-    remap,
-    Remap,
-    ObjectMap,
-    retryWrapper,
-    RetryConfig
-}
+  chunkBy,
+  remap,
+  Remap,
+  ObjectMap,
+  retryWrapper,
+  RetryConfig
+};

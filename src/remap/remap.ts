@@ -12,7 +12,9 @@ type SimplifyIntersection<
     : A;
 
 /** A list of keys to keys, with an optional parser function */
-type ObjectMap = readonly ((readonly [string, string, ((...args: any[]) => any)?]))[];
+type ObjectMap = readonly ((
+  readonly [string, string, ((...args: any[]) => any)?]
+))[];
 
 type GetKeyType<
     Key extends string,
@@ -40,7 +42,9 @@ type ConstructTypeFromPropertiesInternal<
     O extends { [key: string]: any }
 > =
     M[1] extends `${infer P}.${infer Rest}`
-            ? { [key in P]: ConstructTypeFromPropertiesInternal<OverrideIndex<M, Rest>, O> }
+            ? { [key in P]: ConstructTypeFromPropertiesInternal<
+                OverrideIndex<M, Rest>, O
+              > }
             : { [key in M[1]]: GetKeyType<M[0], O, M> };
 
 type Length<T extends any[] | readonly any[]> =
@@ -64,7 +68,8 @@ type ConstructTypeFromProperties<
     L extends Length<M>
         ? unknown
         : Add<L, 1> extends number
-            ? ConstructTypeFromPropertiesInternal<M[L], O> & ConstructTypeFromProperties<M, O, Add<L, 1>>
+            ? ConstructTypeFromPropertiesInternal<M[L], O>
+              & ConstructTypeFromProperties<M, O, Add<L, 1>>
             : never;
 
 type Remap<
@@ -79,8 +84,8 @@ type Remap<
  * @param map the keys for the mapping
  * @example ```ts
  * const map = [
- * 	['foo', 'baz'],
- * 	['bar', 'qux.0', (x: number) => x + 1]
+ *  ['foo', 'baz'],
+ *  ['bar', 'qux.0', (x: number) => x + 1]
  * ] as const;
  * const obj = { foo: 'hi', bar: 7 }
  * remap(obj, map); // { baz: 'hi', qux: [8] }
@@ -90,13 +95,13 @@ function remap<
     O extends { [key: string]: any },
     M extends ObjectMap
 >(object: O, map: M): Remap<M, O> {
-    const out = {};
-    map.forEach(item => {
-        const parser = item[2] ? item[2] : (val: any) => val;
-        const value = item[0] ? _.get(object, item[0]) : object;
-        return _.set(out, item[1], parser(value as any));
-    });
-    return out as any;
+  const out = {};
+  map.forEach(item => {
+    const parser = item[2] ? item[2] : (val: any) => val;
+    const value = item[0] ? _.get(object, item[0]) : object;
+    return _.set(out, item[1], parser(value as any));
+  });
+  return out as any;
 }
 
 export { Remap, ObjectMap };

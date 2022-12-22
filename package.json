@@ -2,7 +2,7 @@
   "name": "aligent-microservices-utilities",
   "version": "1.0.0",
   "description": "A set of utility functions for Aligent Microservices",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "npm run lint && npm run test:types && npm run test:jest",
     "test:jest": "jest src/",

@@ -2,20 +2,16 @@
   "compilerOptions": {
     "lib": ["ES2020"],
     "noImplicitAny": true,
-    "removeComments": true,
+    "removeComments": false,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "declaration": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "sourceMap": true,
-    "target": "ES2020",
+    "target": "es5",
     "outDir": "dist",
-    "typeRoots": ["./types", "./node_modules/@types"],
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    }
+    "typeRoots": ["./types", "./node_modules/@types"]
   },
   "include": [
       "./src/**/*.ts",

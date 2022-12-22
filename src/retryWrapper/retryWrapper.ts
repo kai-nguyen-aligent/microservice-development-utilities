@@ -1,11 +1,20 @@
 /** Configuration for the retryWrapper */
 interface RetryConfig {
-  /** The number of retries to attempt after the first run (default: 1)*/
+  /**
+   * The number of retries to attempt after the first run 
+   * @default 1
+   */
   retries?: number;
-  /** The base delay between retries in ms (default: 0ms)*/
+  /**
+   * The base delay between retries (in ms)
+   * @default 0
+   */
   delay?: number;
-  /** The amount to linearly increase the delay by each retry in ms (default: 0ms)*/
-  backoffRate?: number;
+  /**
+   * The amount to increase the delay by each retry (in ms)
+   * @default 0
+   */
+  backoffAmount?: number;
   /**
    * A callback to run before each retry
    * @param retries the number of retries so far (will start at 1)
@@ -45,7 +54,7 @@ async function retryWrapperInternal<T>(
       {
         ...config,
         retries: config.retries - 1,
-        delay: config.delay + config.backoffRate,
+        delay: config.delay + config.backoffAmount,
       },
       retryCount + 1,
       err
@@ -65,7 +74,7 @@ async function retryWrapper<T>(
   const defaultConfig: Required<RetryConfig> = {
     retries: 1,
     delay: 0,
-    backoffRate: 0,
+    backoffAmount: 0,
     onRetry: () => null
   };
   return await retryWrapperInternal(

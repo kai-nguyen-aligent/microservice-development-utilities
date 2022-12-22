@@ -105,7 +105,7 @@ describe('retryWrapper', () => {
       retries: 0,
       onRetry,
       delay: 0,
-      backoffRate: 0
+      backoffAmount: 0
     });
   });
 });

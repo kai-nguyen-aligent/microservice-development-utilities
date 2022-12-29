@@ -1,4 +1,4 @@
-import { fetchSsmParams } from './fetchSsmParams';
+import fetchSsmParams from './fetchSsmParams';
 
 const getParam = jest.fn();
 const getParams = jest.fn();

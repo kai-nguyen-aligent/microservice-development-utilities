@@ -73,9 +73,9 @@ type ConstructTypeFromProperties<
             : never;
 
 type Remap<
-    M extends ObjectMap,
-    O extends { [key: string]: any }
-> = SimplifyIntersection<ConstructTypeFromProperties<M, O>>;
+    MapArray extends ObjectMap,
+    Original extends { [key: string]: any }
+> = SimplifyIntersection<ConstructTypeFromProperties<MapArray, Original>>;
 
 
 /**
@@ -92,9 +92,9 @@ type Remap<
  * ```
  */
 function remap<
-    O extends { [key: string]: any },
-    M extends ObjectMap
->(object: O, map: M): Remap<M, O> {
+    Original extends { [key: string]: any },
+    MapArray extends ObjectMap
+>(object: Original, map: MapArray): Remap<MapArray, Original> {
   const out = {};
   map.forEach(item => {
     const parser = item[2] ? item[2] : (val: any) => val;

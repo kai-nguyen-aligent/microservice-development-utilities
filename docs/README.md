@@ -1,11 +1,9 @@
+aligent-microservices-utilities / [Exports](modules.md)
+
 # Microservices Utilities Library
 
 This library includes utility functions to simplify & standardise common 
 MicroServices tasks.
-
-## Documentation
-
-Documentation on each function can be found [here](./docs/modules.md)
 
 ## Build
 

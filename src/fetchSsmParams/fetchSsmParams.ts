@@ -3,19 +3,23 @@ import { SSM } from 'aws-sdk';
 const ssm = new SSM();
 
 /**
- * Fetch one SSM param
+ * Fetch one SSM parameter
  * @param param key of the parameter to fetch
  */
-export async function fetchSsmParams(param: string): Promise<SSM.Parameter>;
+async function fetchSsmParams(param: string): Promise<SSM.Parameter>;
 
 /**
- * Fetch multiple ssm params
+ * Fetch a list of SSM parameters
  * @param params list of parameter keys to fetch
  */
-export async function fetchSsmParams(...params: string[]):
+async function fetchSsmParams(...params: string[]):
   Promise<SSM.ParameterList>;
 
-export async function fetchSsmParams(...params: string[]) {
+/**
+ * Fetch SSM Parameters
+ * @param params the keys of the parameters to fetch
+ */
+async function fetchSsmParams(...params: string[]) {
   if (params.length === 0) {
     throw new Error('No SSM Params supplied');
   }
@@ -37,3 +41,5 @@ export async function fetchSsmParams(...params: string[]) {
 
   return result.Parameters;
 }
+
+export default fetchSsmParams;

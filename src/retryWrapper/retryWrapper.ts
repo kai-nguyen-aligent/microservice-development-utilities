@@ -66,6 +66,13 @@ async function retryWrapperInternal<T>(
  * Retry an async function if it fails
  * @param fn the function to be retried
  * @param config the configuration for retries
+ * @example
+ * ```ts
+ * retryWrapper(someAsyncFunction, {
+ *   retries: 3,
+ *   onRetry: (_, error) => console.error(error)
+ * });
+ * ```
  */
 async function retryWrapper<T>(
   fn: () => Promise<T>,

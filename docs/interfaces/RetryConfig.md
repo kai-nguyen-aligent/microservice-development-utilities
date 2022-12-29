@@ -15,7 +15,7 @@ Configuration for the retryWrapper
 
 ## Properties
 
-### backoffAmount
+### <a id="backoffamount" name="backoffamount"></a> backoffAmount
 
 • `Optional` **backoffAmount**: `number`
 
@@ -27,11 +27,11 @@ The amount to increase the delay by each retry (in ms)
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:17](https://bitbucket.org/aligent/microservices-utilities/src/e6a71ba/src/retryWrapper/retryWrapper.ts#lines-17)
+[retryWrapper/retryWrapper.ts:17](https://bitbucket.org/aligent/microservices-utilities/src/9e92208/src/retryWrapper/retryWrapper.ts#lines-17)
 
 ___
 
-### delay
+### <a id="delay" name="delay"></a> delay
 
 • `Optional` **delay**: `number`
 
@@ -43,11 +43,11 @@ The base delay between retries (in ms)
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:12](https://bitbucket.org/aligent/microservices-utilities/src/e6a71ba/src/retryWrapper/retryWrapper.ts#lines-12)
+[retryWrapper/retryWrapper.ts:12](https://bitbucket.org/aligent/microservices-utilities/src/9e92208/src/retryWrapper/retryWrapper.ts#lines-12)
 
 ___
 
-### onRetry
+### <a id="onretry" name="onretry"></a> onRetry
 
 • `Optional` **onRetry**: (`retries`: `number`, `error`: `Error`, `config`: [`RetryConfig`](RetryConfig.md)) => `void`
 
@@ -71,11 +71,11 @@ A callback to run before each retry
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:24](https://bitbucket.org/aligent/microservices-utilities/src/e6a71ba/src/retryWrapper/retryWrapper.ts#lines-24)
+[retryWrapper/retryWrapper.ts:24](https://bitbucket.org/aligent/microservices-utilities/src/9e92208/src/retryWrapper/retryWrapper.ts#lines-24)
 
 ___
 
-### retries
+### <a id="retries" name="retries"></a> retries
 
 • `Optional` **retries**: `number`
 
@@ -87,4 +87,4 @@ The number of retries to attempt after the first run
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:7](https://bitbucket.org/aligent/microservices-utilities/src/e6a71ba/src/retryWrapper/retryWrapper.ts#lines-7)
+[retryWrapper/retryWrapper.ts:7](https://bitbucket.org/aligent/microservices-utilities/src/9e92208/src/retryWrapper/retryWrapper.ts#lines-7)

@@ -23,7 +23,7 @@
 
 ## Type Aliases
 
-### ObjectMap
+### <a id="objectmap" name="objectmap"></a> ObjectMap
 
 Ƭ **ObjectMap**: readonly readonly [`string`, `string`, Function?][]
 
@@ -31,11 +31,11 @@ A list of keys to keys, with an optional parser function
 
 #### Defined in
 
-[remap/remap.ts:15](https://bitbucket.org/aligent/microservices-utilities/src/e6a71ba/src/remap/remap.ts#lines-15)
+[remap/remap.ts:15](https://bitbucket.org/aligent/microservices-utilities/src/9e92208/src/remap/remap.ts#lines-15)
 
 ___
 
-### Remap
+### <a id="remap" name="remap"></a> Remap
 
 Ƭ **Remap**<`MapArray`, `Original`\>: `SimplifyIntersection`<`ConstructTypeFromProperties`<`MapArray`, `Original`\>\>
 
@@ -48,11 +48,11 @@ ___
 
 #### Defined in
 
-[remap/remap.ts:75](https://bitbucket.org/aligent/microservices-utilities/src/e6a71ba/src/remap/remap.ts#lines-75)
+[remap/remap.ts:75](https://bitbucket.org/aligent/microservices-utilities/src/9e92208/src/remap/remap.ts#lines-75)
 
 ## Functions
 
-### chunkBy
+### <a id="chunkby" name="chunkby"></a> chunkBy
 
 ▸ **chunkBy**<`ArrayItem`\>(`source`, `chunkSize`): `ArrayItem`[][]
 
@@ -83,11 +83,11 @@ chunkBy([1, 2, 3, 4, 5, 6, 7], 2) // [[1, 2], [3, 4], [5, 6], [7]]
 
 #### Defined in
 
-[chunkBy/chunkBy.ts:10](https://bitbucket.org/aligent/microservices-utilities/src/e6a71ba/src/chunkBy/chunkBy.ts#lines-10)
+[chunkBy/chunkBy.ts:10](https://bitbucket.org/aligent/microservices-utilities/src/9e92208/src/chunkBy/chunkBy.ts#lines-10)
 
 ___
 
-### fetchSsmParams
+### <a id="fetchssmparams" name="fetchssmparams"></a> fetchSsmParams
 
 ▸ **fetchSsmParams**(`param`): `Promise`<`SSM.Parameter`\>
 
@@ -105,7 +105,7 @@ Fetch one SSM parameter
 
 #### Defined in
 
-[fetchSsmParams/fetchSsmParams.ts:9](https://bitbucket.org/aligent/microservices-utilities/src/e6a71ba/src/fetchSsmParams/fetchSsmParams.ts#lines-9)
+[fetchSsmParams/fetchSsmParams.ts:9](https://bitbucket.org/aligent/microservices-utilities/src/9e92208/src/fetchSsmParams/fetchSsmParams.ts#lines-9)
 
 ▸ **fetchSsmParams**(`...params`): `Promise`<`SSM.ParameterList`\>
 
@@ -123,11 +123,11 @@ Fetch a list of SSM parameters
 
 #### Defined in
 
-[fetchSsmParams/fetchSsmParams.ts:15](https://bitbucket.org/aligent/microservices-utilities/src/e6a71ba/src/fetchSsmParams/fetchSsmParams.ts#lines-15)
+[fetchSsmParams/fetchSsmParams.ts:15](https://bitbucket.org/aligent/microservices-utilities/src/9e92208/src/fetchSsmParams/fetchSsmParams.ts#lines-15)
 
 ___
 
-### getDateByTimezone
+### <a id="getdatebytimezone" name="getdatebytimezone"></a> getDateByTimezone
 
 ▸ **getDateByTimezone**(`date`, `timezone`): `Date`
 
@@ -146,11 +146,11 @@ Convert a date into a different timezone
 
 #### Defined in
 
-[getDateByTimezone/getDateByTimezone.ts:6](https://bitbucket.org/aligent/microservices-utilities/src/e6a71ba/src/getDateByTimezone/getDateByTimezone.ts#lines-6)
+[getDateByTimezone/getDateByTimezone.ts:6](https://bitbucket.org/aligent/microservices-utilities/src/9e92208/src/getDateByTimezone/getDateByTimezone.ts#lines-6)
 
 ___
 
-### remap
+### <a id="remap-1" name="remap-1"></a> remap
 
 ▸ **remap**<`Original`, `MapArray`\>(`object`, `map`): [`Remap`](modules.md#remap)<`MapArray`, `Original`\>
 
@@ -187,11 +187,11 @@ remap(obj, map); // { baz: 'hi', qux: [8] }
 
 #### Defined in
 
-[remap/remap.ts:94](https://bitbucket.org/aligent/microservices-utilities/src/e6a71ba/src/remap/remap.ts#lines-94)
+[remap/remap.ts:94](https://bitbucket.org/aligent/microservices-utilities/src/9e92208/src/remap/remap.ts#lines-94)
 
 ___
 
-### retryWrapper
+### <a id="retrywrapper" name="retrywrapper"></a> retryWrapper
 
 ▸ **retryWrapper**<`T`\>(`fn`, `config`): `Promise`<`T`\>
 
@@ -225,4 +225,4 @@ retryWrapper(someAsyncFunction, {
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:78](https://bitbucket.org/aligent/microservices-utilities/src/e6a71ba/src/retryWrapper/retryWrapper.ts#lines-78)
+[retryWrapper/retryWrapper.ts:78](https://bitbucket.org/aligent/microservices-utilities/src/9e92208/src/retryWrapper/retryWrapper.ts#lines-78)

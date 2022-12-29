@@ -31,7 +31,7 @@ A list of keys to keys, with an optional parser function
 
 #### Defined in
 
-[remap/remap.ts:15](https://bitbucket.org/aligent/microservices-utilities/src/a0a85a2/src/remap/remap.ts#lines-15)
+[remap/remap.ts:15](https://bitbucket.org/aligent/microservices-utilities/src/e6a71ba/src/remap/remap.ts#lines-15)
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 #### Defined in
 
-[remap/remap.ts:75](https://bitbucket.org/aligent/microservices-utilities/src/a0a85a2/src/remap/remap.ts#lines-75)
+[remap/remap.ts:75](https://bitbucket.org/aligent/microservices-utilities/src/e6a71ba/src/remap/remap.ts#lines-75)
 
 ## Functions
 
@@ -83,7 +83,7 @@ chunkBy([1, 2, 3, 4, 5, 6, 7], 2) // [[1, 2], [3, 4], [5, 6], [7]]
 
 #### Defined in
 
-[chunkBy/chunkBy.ts:10](https://bitbucket.org/aligent/microservices-utilities/src/a0a85a2/src/chunkBy/chunkBy.ts#lines-10)
+[chunkBy/chunkBy.ts:10](https://bitbucket.org/aligent/microservices-utilities/src/e6a71ba/src/chunkBy/chunkBy.ts#lines-10)
 
 ___
 
@@ -105,7 +105,7 @@ Fetch one SSM parameter
 
 #### Defined in
 
-[fetchSsmParams/fetchSsmParams.ts:9](https://bitbucket.org/aligent/microservices-utilities/src/a0a85a2/src/fetchSsmParams/fetchSsmParams.ts#lines-9)
+[fetchSsmParams/fetchSsmParams.ts:9](https://bitbucket.org/aligent/microservices-utilities/src/e6a71ba/src/fetchSsmParams/fetchSsmParams.ts#lines-9)
 
 ▸ **fetchSsmParams**(`...params`): `Promise`<`SSM.ParameterList`\>
 
@@ -123,7 +123,7 @@ Fetch a list of SSM parameters
 
 #### Defined in
 
-[fetchSsmParams/fetchSsmParams.ts:15](https://bitbucket.org/aligent/microservices-utilities/src/a0a85a2/src/fetchSsmParams/fetchSsmParams.ts#lines-15)
+[fetchSsmParams/fetchSsmParams.ts:15](https://bitbucket.org/aligent/microservices-utilities/src/e6a71ba/src/fetchSsmParams/fetchSsmParams.ts#lines-15)
 
 ___
 
@@ -146,7 +146,7 @@ Convert a date into a different timezone
 
 #### Defined in
 
-[getDateByTimezone/getDateByTimezone.ts:6](https://bitbucket.org/aligent/microservices-utilities/src/a0a85a2/src/getDateByTimezone/getDateByTimezone.ts#lines-6)
+[getDateByTimezone/getDateByTimezone.ts:6](https://bitbucket.org/aligent/microservices-utilities/src/e6a71ba/src/getDateByTimezone/getDateByTimezone.ts#lines-6)
 
 ___
 
@@ -187,7 +187,7 @@ remap(obj, map); // { baz: 'hi', qux: [8] }
 
 #### Defined in
 
-[remap/remap.ts:94](https://bitbucket.org/aligent/microservices-utilities/src/a0a85a2/src/remap/remap.ts#lines-94)
+[remap/remap.ts:94](https://bitbucket.org/aligent/microservices-utilities/src/e6a71ba/src/remap/remap.ts#lines-94)
 
 ___
 
@@ -225,4 +225,4 @@ retryWrapper(someAsyncFunction, {
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:77](https://bitbucket.org/aligent/microservices-utilities/src/a0a85a2/src/retryWrapper/retryWrapper.ts#lines-77)
+[retryWrapper/retryWrapper.ts:78](https://bitbucket.org/aligent/microservices-utilities/src/e6a71ba/src/retryWrapper/retryWrapper.ts#lines-78)

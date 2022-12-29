@@ -5,6 +5,10 @@ aligent-microservices-utilities / [Exports](modules.md)
 This library includes utility functions to simplify & standardise common 
 MicroServices tasks.
 
+## Documentation
+
+Documentation on each function can be found [here](./docs/modules.md)
+
 ## Build
 
 This library is written in typescript and can be built using the NPM script:

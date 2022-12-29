@@ -19,6 +19,7 @@ interface RetryConfig {
    * A callback to run before each retry
    * @param retries the number of retries so far (will start at 1)
    * @param error the error from the last attempt
+   * @param config the configuration supplied to the retryWrapper
    */
   onRetry?: (retries: number, error: Error, config: RetryConfig) => void;
 }

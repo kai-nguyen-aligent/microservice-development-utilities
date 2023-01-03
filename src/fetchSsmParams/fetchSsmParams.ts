@@ -6,7 +6,8 @@ const ssm = new SSM();
  * Fetch one SSM parameter
  * @param param key of the parameter to fetch
  */
-async function fetchSsmParams(param: string): Promise<SSM.Parameter>;
+async function fetchSsmParams(param: string):
+  Promise<SSM.Parameter>;
 
 /**
  * Fetch a list of SSM parameters
@@ -39,7 +40,9 @@ async function fetchSsmParams(...params: string[]) {
   })
     .promise();
 
-  return result.Parameters;
+  return params.map(paramName => {
+    return result.Parameters.find(param => param.Name === paramName);
+  });
 }
 
 export default fetchSsmParams;

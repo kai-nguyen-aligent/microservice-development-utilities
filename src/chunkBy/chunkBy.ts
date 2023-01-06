@@ -8,6 +8,10 @@
  * ```
  */
 function chunkBy<ArrayItem>(source: ArrayItem[], chunkSize: number) {
+  if (chunkSize <= 0) {
+    throw new Error(`Cannot create chunks of size ${chunkSize} (0 or less)`);
+  }
+
   const numberOfChunks = Math.ceil(source.length / chunkSize);
   return Array.from(new Array(numberOfChunks), (_, i) => {
     return source.slice(i * chunkSize, (i + 1) * chunkSize);

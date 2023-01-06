@@ -3,6 +3,7 @@ import remap, { Remap, ObjectMap } from './remap/remap';
 import retryWrapper, { RetryConfig } from './retryWrapper/retryWrapper';
 import getDateByTimezone from './getDateByTimezone/getDateByTimezone';
 import fetchSsmParams from './fetchSsmParams/fetchSsmParams';
+import S3Dao from './s3/s3';
 
 export {
   chunkBy,
@@ -12,5 +13,6 @@ export {
   retryWrapper,
   RetryConfig,
   getDateByTimezone,
-  fetchSsmParams
+  fetchSsmParams,
+  S3Dao
 };

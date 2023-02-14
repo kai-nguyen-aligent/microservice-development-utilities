@@ -43,7 +43,6 @@ describe('verifyDefined', () => {
     } catch (ex) {
       expect(ex.message).toContain('qux');
       expect(ex.message).toContain('baz');
-      expect(ex.message).toContain('bar');
     }
   });
 

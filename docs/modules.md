@@ -4,6 +4,10 @@
 
 ## Table of contents
 
+### Classes
+
+- [S3Dao](classes/S3Dao.md)
+
 ### Interfaces
 
 - [RetryConfig](interfaces/RetryConfig.md)
@@ -16,8 +20,8 @@
 ### Functions
 
 - [chunkBy](modules.md#chunkby)
+- [ensurePropertiesDefined](modules.md#ensurepropertiesdefined)
 - [fetchSsmParams](modules.md#fetchssmparams)
-- [getDateByTimezone](modules.md#getdatebytimezone)
 - [remap](modules.md#remap-1)
 - [retryWrapper](modules.md#retrywrapper)
 
@@ -31,7 +35,7 @@ A list of keys to keys, with an optional parser function
 
 #### Defined in
 
-[remap/remap.ts:15](https://bitbucket.org/aligent/microservices-utilities/src/9e92208/src/remap/remap.ts#lines-15)
+remap/remap.ts:15
 
 ___
 
@@ -48,7 +52,7 @@ ___
 
 #### Defined in
 
-[remap/remap.ts:75](https://bitbucket.org/aligent/microservices-utilities/src/9e92208/src/remap/remap.ts#lines-75)
+remap/remap.ts:75
 
 ## Functions
 
@@ -83,7 +87,35 @@ chunkBy([1, 2, 3, 4, 5, 6, 7], 2) // [[1, 2], [3, 4], [5, 6], [7]]
 
 #### Defined in
 
-[chunkBy/chunkBy.ts:10](https://bitbucket.org/aligent/microservices-utilities/src/9e92208/src/chunkBy/chunkBy.ts#lines-10)
+chunkBy/chunkBy.ts:10
+
+___
+
+### <a id="ensurepropertiesdefined" name="ensurepropertiesdefined"></a> ensurePropertiesDefined
+
+▸ **ensurePropertiesDefined**<`T`, `K`\>(`obj`, `...keys`): `Required`<`Pick`<`T`, `K`\>\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `Object` |
+| `K` | extends `string` \| `number` \| `symbol` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `obj` | `T` |
+| `...keys` | `K`[] |
+
+#### Returns
+
+`Required`<`Pick`<`T`, `K`\>\>
+
+#### Defined in
+
+ensurePropertiesDefined/ensurePropertiesDefined.ts:1
 
 ___
 
@@ -105,7 +137,7 @@ Fetch one SSM parameter
 
 #### Defined in
 
-[fetchSsmParams/fetchSsmParams.ts:9](https://bitbucket.org/aligent/microservices-utilities/src/9e92208/src/fetchSsmParams/fetchSsmParams.ts#lines-9)
+fetchSsmParams/fetchSsmParams.ts:9
 
 ▸ **fetchSsmParams**(`...params`): `Promise`<`SSM.ParameterList`\>
 
@@ -123,30 +155,7 @@ Fetch a list of SSM parameters
 
 #### Defined in
 
-[fetchSsmParams/fetchSsmParams.ts:15](https://bitbucket.org/aligent/microservices-utilities/src/9e92208/src/fetchSsmParams/fetchSsmParams.ts#lines-15)
-
-___
-
-### <a id="getdatebytimezone" name="getdatebytimezone"></a> getDateByTimezone
-
-▸ **getDateByTimezone**(`date`, `timezone`): `Date`
-
-Convert a date into a different timezone
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `date` | `string` \| `number` \| `Date` | the date to convert (in UTC) |
-| `timezone` | `string` | the timezone to convert the date into |
-
-#### Returns
-
-`Date`
-
-#### Defined in
-
-[getDateByTimezone/getDateByTimezone.ts:6](https://bitbucket.org/aligent/microservices-utilities/src/9e92208/src/getDateByTimezone/getDateByTimezone.ts#lines-6)
+fetchSsmParams/fetchSsmParams.ts:16
 
 ___
 
@@ -187,7 +196,7 @@ remap(obj, map); // { baz: 'hi', qux: [8] }
 
 #### Defined in
 
-[remap/remap.ts:94](https://bitbucket.org/aligent/microservices-utilities/src/9e92208/src/remap/remap.ts#lines-94)
+remap/remap.ts:94
 
 ___
 
@@ -225,4 +234,4 @@ retryWrapper(someAsyncFunction, {
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:78](https://bitbucket.org/aligent/microservices-utilities/src/9e92208/src/retryWrapper/retryWrapper.ts#lines-78)
+retryWrapper/retryWrapper.ts:78

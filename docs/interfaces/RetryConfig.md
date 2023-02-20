@@ -1,4 +1,4 @@
-[aligent-microservices-utilities](../README.md) / [Exports](../modules.md) / RetryConfig
+[aligent-microservices-utilities](../modules.md) / RetryConfig
 
 # Interface: RetryConfig
 
@@ -27,7 +27,7 @@ The amount to increase the delay by each retry (in ms)
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:17](https://bitbucket.org/aligent/microservices-utilities/src/1988932/src/retryWrapper/retryWrapper.ts#lines-17)
+[retryWrapper/retryWrapper.ts:17](https://bitbucket.org/aligent/microservices-utilities/src/e078ee5/src/retryWrapper/retryWrapper.ts#lines-17)
 
 ___
 
@@ -43,7 +43,7 @@ The base delay between retries (in ms)
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:12](https://bitbucket.org/aligent/microservices-utilities/src/1988932/src/retryWrapper/retryWrapper.ts#lines-12)
+[retryWrapper/retryWrapper.ts:12](https://bitbucket.org/aligent/microservices-utilities/src/e078ee5/src/retryWrapper/retryWrapper.ts#lines-12)
 
 ___
 
@@ -71,7 +71,7 @@ A callback to run before each retry
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:24](https://bitbucket.org/aligent/microservices-utilities/src/1988932/src/retryWrapper/retryWrapper.ts#lines-24)
+[retryWrapper/retryWrapper.ts:24](https://bitbucket.org/aligent/microservices-utilities/src/e078ee5/src/retryWrapper/retryWrapper.ts#lines-24)
 
 ___
 
@@ -87,4 +87,4 @@ The number of retries to attempt after the first run
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:7](https://bitbucket.org/aligent/microservices-utilities/src/1988932/src/retryWrapper/retryWrapper.ts#lines-7)
+[retryWrapper/retryWrapper.ts:7](https://bitbucket.org/aligent/microservices-utilities/src/e078ee5/src/retryWrapper/retryWrapper.ts#lines-7)

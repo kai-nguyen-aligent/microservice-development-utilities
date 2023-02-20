@@ -10,7 +10,7 @@
     "test": "npm run lint && npm run test:types && npm run test:jest",
     "test:jest": "jest src/",
     "test:types": "tsc --noEmit",
-    "docs": "typedoc --plugin typedoc-plugin-markdown --namedAnchors true --githubPages false --out docs src/index.ts"
+    "docs": "typedoc --readme none --githubPages false --plugin typedoc-plugin-markdown --entryDocument modules.md --namedAnchors true --out docs src/index.ts"
   },
   "repository": {
     "type": "git",

@@ -16,6 +16,28 @@ type ObjectMap = readonly ((
   readonly [string, string, ((...args: any[]) => any)?]
 ))[];
 
+/**
+ * Given a Key, a base Object and an ObjectMap, this will return the
+ * type of the property referencable by the Key on the base Object, or in
+ * the case where the supplied ObjectMap has a transformer function, it will
+ * return the return type of that function instead.
+ *
+ * @example without a transformer function
+ * ```
+ * const map = [ ['foo', 'bar'] ] as const;
+ * 
+ * type Foo = GetKeyType<'foo', { foo: number }, (typeof map)[number]>;
+ * //   ^ Foo = number
+ * ```
+ *
+ * @example with a transformer function
+ * ```
+ * const map = [ ['foo', 'bar', String] ] as const;
+ * 
+ * type Foo = GetKeyType<'foo', { foo: number }, (typeof map)[number]>;
+ * //   ^ Foo = string
+ * ```
+ */
 type GetKeyType<
     Key extends string,
     O extends { [key: string]: any },
@@ -30,7 +52,6 @@ type GetKeyType<
         : Key extends `${infer K}.${infer Rest}`
             ? GetKeyType<Rest, O[K], M>
             : O[Key];
-
 
 type OverrideIndex<
     M extends ObjectMap[number],
@@ -47,25 +68,62 @@ type ConstructTypeFromPropertiesInternal<
               > }
             : { [key in M[1]]: GetKeyType<M[0], O, M> };
 
+/**
+ * Utility type to get the length of a tuple type
+ * @example
+ * ```
+ * type Foo = Length<[null, null]>;
+ * //   ^ Foo = 2
+ * ```
+ */
 type Length<T extends any[] | readonly any[]> =
     T extends { length: infer L } ? L : never;
 
+/**
+ * Utility type to return a tuple type of a specified length
+ * @example
+ * ```
+ * type Foo = BuildTuple<3>;
+ * //   ^ Foo = [any, any, any]
+ * ```
+ */
 type BuildTuple<L extends number, T extends any[] = []> = 
     T extends { length: L } ? T : BuildTuple<L, [...T, any]>;
 
+/**
+ * Utility type which adds two numbers together
+ * @example
+ * ```
+ * type Foo = Add<7, 3>;
+ * //   ^ Foo = 10
+ * ```
+ */
 type Add<A extends number, B extends number> = 
     Length<[...BuildTuple<A>, ...BuildTuple<B>]>;
 
 /**
  * Given an object, and an array which remaps the keys of that object,
  * return an object with the new structure
+ * @example
+ * ```
+ *
+ * type Foo = ConstructTypeFromProperties<
+ *   [ ['foo.bar', 'foo'], ['baz', 'bar'] ],
+ *   { foo: { bar: number }, baz: string; }
+ * >
+ * // Foo = {
+ * //    foo: number;
+ * // } & {
+ * //    bar: string;
+ * // }
+ * ```
  */
 type ConstructTypeFromProperties<
     M extends ObjectMap,
     O extends { [key: string]: any },
     L extends number = 0
 > =
-    L extends Length<M>
+    L extends Length<M> // This is basically the equivalent of an M.map() but in types
         ? unknown
         : Add<L, 1> extends number
             ? ConstructTypeFromPropertiesInternal<M[L], O>

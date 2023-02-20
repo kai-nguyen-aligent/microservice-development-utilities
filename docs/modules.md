@@ -35,7 +35,7 @@ A list of keys to keys, with an optional parser function
 
 #### Defined in
 
-[remap/remap.ts:15](https://bitbucket.org/aligent/microservices-utilities/src/6937eb3/src/remap/remap.ts#lines-15)
+[remap/remap.ts:15](https://bitbucket.org/aligent/microservices-utilities/src/80fbf78/src/remap/remap.ts#lines-15)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[remap/remap.ts:75](https://bitbucket.org/aligent/microservices-utilities/src/6937eb3/src/remap/remap.ts#lines-75)
+[remap/remap.ts:133](https://bitbucket.org/aligent/microservices-utilities/src/80fbf78/src/remap/remap.ts#lines-133)
 
 ## Functions
 
@@ -87,7 +87,7 @@ chunkBy([1, 2, 3, 4, 5, 6, 7], 2) // [[1, 2], [3, 4], [5, 6], [7]]
 
 #### Defined in
 
-[chunkBy/chunkBy.ts:10](https://bitbucket.org/aligent/microservices-utilities/src/6937eb3/src/chunkBy/chunkBy.ts#lines-10)
+[chunkBy/chunkBy.ts:10](https://bitbucket.org/aligent/microservices-utilities/src/80fbf78/src/chunkBy/chunkBy.ts#lines-10)
 
 ___
 
@@ -115,7 +115,7 @@ ___
 
 #### Defined in
 
-[ensurePropertiesDefined/ensurePropertiesDefined.ts:1](https://bitbucket.org/aligent/microservices-utilities/src/6937eb3/src/ensurePropertiesDefined/ensurePropertiesDefined.ts#lines-1)
+[ensurePropertiesDefined/ensurePropertiesDefined.ts:1](https://bitbucket.org/aligent/microservices-utilities/src/80fbf78/src/ensurePropertiesDefined/ensurePropertiesDefined.ts#lines-1)
 
 ___
 
@@ -137,7 +137,7 @@ Fetch one SSM parameter
 
 #### Defined in
 
-[fetchSsmParams/fetchSsmParams.ts:9](https://bitbucket.org/aligent/microservices-utilities/src/6937eb3/src/fetchSsmParams/fetchSsmParams.ts#lines-9)
+[fetchSsmParams/fetchSsmParams.ts:9](https://bitbucket.org/aligent/microservices-utilities/src/80fbf78/src/fetchSsmParams/fetchSsmParams.ts#lines-9)
 
 ▸ **fetchSsmParams**(`...params`): `Promise`<`SSM.ParameterList`\>
 
@@ -155,7 +155,7 @@ Fetch a list of SSM parameters
 
 #### Defined in
 
-[fetchSsmParams/fetchSsmParams.ts:16](https://bitbucket.org/aligent/microservices-utilities/src/6937eb3/src/fetchSsmParams/fetchSsmParams.ts#lines-16)
+[fetchSsmParams/fetchSsmParams.ts:16](https://bitbucket.org/aligent/microservices-utilities/src/80fbf78/src/fetchSsmParams/fetchSsmParams.ts#lines-16)
 
 ___
 
@@ -196,7 +196,7 @@ remap(obj, map); // { baz: 'hi', qux: [8] }
 
 #### Defined in
 
-[remap/remap.ts:94](https://bitbucket.org/aligent/microservices-utilities/src/6937eb3/src/remap/remap.ts#lines-94)
+[remap/remap.ts:152](https://bitbucket.org/aligent/microservices-utilities/src/80fbf78/src/remap/remap.ts#lines-152)
 
 ___
 
@@ -234,4 +234,4 @@ retryWrapper(someAsyncFunction, {
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:78](https://bitbucket.org/aligent/microservices-utilities/src/6937eb3/src/retryWrapper/retryWrapper.ts#lines-78)
+[retryWrapper/retryWrapper.ts:78](https://bitbucket.org/aligent/microservices-utilities/src/80fbf78/src/retryWrapper/retryWrapper.ts#lines-78)

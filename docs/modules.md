@@ -35,7 +35,7 @@ A list of keys to keys, with an optional parser function
 
 #### Defined in
 
-[remap/remap.ts:15](https://bitbucket.org/aligent/microservices-utilities/src/e078ee5/src/remap/remap.ts#lines-15)
+[remap/remap.ts:15](https://bitbucket.org/aligent/microservices-utilities/src/be449e5/src/remap/remap.ts#lines-15)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[remap/remap.ts:133](https://bitbucket.org/aligent/microservices-utilities/src/e078ee5/src/remap/remap.ts#lines-133)
+[remap/remap.ts:133](https://bitbucket.org/aligent/microservices-utilities/src/be449e5/src/remap/remap.ts#lines-133)
 
 ## Functions
 
@@ -87,13 +87,38 @@ chunkBy([1, 2, 3, 4, 5, 6, 7], 2) // [[1, 2], [3, 4], [5, 6], [7]]
 
 #### Defined in
 
-[chunkBy/chunkBy.ts:10](https://bitbucket.org/aligent/microservices-utilities/src/e078ee5/src/chunkBy/chunkBy.ts#lines-10)
+[chunkBy/chunkBy.ts:10](https://bitbucket.org/aligent/microservices-utilities/src/be449e5/src/chunkBy/chunkBy.ts#lines-10)
 
 ___
 
 ### <a id="ensurepropertiesdefined" name="ensurepropertiesdefined"></a> ensurePropertiesDefined
 
-▸ **ensurePropertiesDefined**<`T`, `K`\>(`obj`, `...keys`): `Required`<`Pick`<`T`, `K`\>\>
+▸ **ensurePropertiesDefined**<`T`, `K`\>(`obj`, `...keys`): `SimplifyIntersection`<`Required`<`Pick`<`T`, `K`\>\> & `Omit`<`T`, `K`\>\>
+
+Ensure that the given properties are defined on the object.
+
+**`Example`**
+
+when a key is defined
+```ts
+type Foo = { a?: number; b?: number };
+const foo: Foo = { a: 1, b: 2 };
+const bar = ensurePropertiesDefined(foo, 'a');
+//    ^? const bar: {
+//         a: number;
+//         b?: number;
+//       }
+```
+
+**`Example`**
+
+when a key is not defined
+```ts
+type Foo = { a?: number; b?: number };
+const foo: Foo = {};
+const bar = ensurePropertiesDefined(foo, 'a', 'b');
+// Error: Keys a, b were not defined on the object
+```
 
 #### Type parameters
 
@@ -104,18 +129,20 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `obj` | `T` |
-| `...keys` | `K`[] |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | `T` | The object to check. |
+| `...keys` | `K`[] | The keys to check. |
 
 #### Returns
 
-`Required`<`Pick`<`T`, `K`\>\>
+`SimplifyIntersection`<`Required`<`Pick`<`T`, `K`\>\> & `Omit`<`T`, `K`\>\>
+
+the object with the correct type.
 
 #### Defined in
 
-[ensurePropertiesDefined/ensurePropertiesDefined.ts:1](https://bitbucket.org/aligent/microservices-utilities/src/e078ee5/src/ensurePropertiesDefined/ensurePropertiesDefined.ts#lines-1)
+[ensurePropertiesDefined/ensurePropertiesDefined.ts:27](https://bitbucket.org/aligent/microservices-utilities/src/be449e5/src/ensurePropertiesDefined/ensurePropertiesDefined.ts#lines-27)
 
 ___
 
@@ -137,7 +164,7 @@ Fetch one SSM parameter
 
 #### Defined in
 
-[fetchSsmParams/fetchSsmParams.ts:9](https://bitbucket.org/aligent/microservices-utilities/src/e078ee5/src/fetchSsmParams/fetchSsmParams.ts#lines-9)
+[fetchSsmParams/fetchSsmParams.ts:9](https://bitbucket.org/aligent/microservices-utilities/src/be449e5/src/fetchSsmParams/fetchSsmParams.ts#lines-9)
 
 ▸ **fetchSsmParams**(`...params`): `Promise`<`SSM.ParameterList`\>
 
@@ -155,7 +182,7 @@ Fetch a list of SSM parameters
 
 #### Defined in
 
-[fetchSsmParams/fetchSsmParams.ts:16](https://bitbucket.org/aligent/microservices-utilities/src/e078ee5/src/fetchSsmParams/fetchSsmParams.ts#lines-16)
+[fetchSsmParams/fetchSsmParams.ts:16](https://bitbucket.org/aligent/microservices-utilities/src/be449e5/src/fetchSsmParams/fetchSsmParams.ts#lines-16)
 
 ___
 
@@ -196,7 +223,7 @@ remap(obj, map); // { baz: 'hi', qux: [8] }
 
 #### Defined in
 
-[remap/remap.ts:152](https://bitbucket.org/aligent/microservices-utilities/src/e078ee5/src/remap/remap.ts#lines-152)
+[remap/remap.ts:152](https://bitbucket.org/aligent/microservices-utilities/src/be449e5/src/remap/remap.ts#lines-152)
 
 ___
 
@@ -234,4 +261,4 @@ retryWrapper(someAsyncFunction, {
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:78](https://bitbucket.org/aligent/microservices-utilities/src/e078ee5/src/retryWrapper/retryWrapper.ts#lines-78)
+[retryWrapper/retryWrapper.ts:78](https://bitbucket.org/aligent/microservices-utilities/src/be449e5/src/retryWrapper/retryWrapper.ts#lines-78)

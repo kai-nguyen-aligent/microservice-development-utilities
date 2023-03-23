@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 /** Turn a type like { foo: number } & { bar: string } into { foo: number; bar: string; } */
-type SimplifyIntersection<
+export type SimplifyIntersection<
     A,
 > = A extends object
     ? {

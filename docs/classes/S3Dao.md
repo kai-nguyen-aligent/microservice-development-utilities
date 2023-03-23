@@ -37,7 +37,7 @@ A data access object for an S3 bucket
 
 #### Defined in
 
-[s3/s3.ts:14](https://bitbucket.org/aligent/microservices-utilities/src/96c029f/src/s3/s3.ts#lines-14)
+[s3/s3.ts:14](https://bitbucket.org/aligent/microservices-utilities/src/8889d92/src/s3/s3.ts#lines-14)
 
 ## Properties
 
@@ -47,7 +47,7 @@ A data access object for an S3 bucket
 
 #### Defined in
 
-[s3/s3.ts:9](https://bitbucket.org/aligent/microservices-utilities/src/96c029f/src/s3/s3.ts#lines-9)
+[s3/s3.ts:9](https://bitbucket.org/aligent/microservices-utilities/src/8889d92/src/s3/s3.ts#lines-9)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[s3/s3.ts:8](https://bitbucket.org/aligent/microservices-utilities/src/96c029f/src/s3/s3.ts#lines-8)
+[s3/s3.ts:8](https://bitbucket.org/aligent/microservices-utilities/src/8889d92/src/s3/s3.ts#lines-8)
 
 ## Methods
 
@@ -79,7 +79,7 @@ Delete an object from the S3 bucket
 
 #### Defined in
 
-[s3/s3.ts:90](https://bitbucket.org/aligent/microservices-utilities/src/96c029f/src/s3/s3.ts#lines-90)
+[s3/s3.ts:90](https://bitbucket.org/aligent/microservices-utilities/src/8889d92/src/s3/s3.ts#lines-90)
 
 ___
 
@@ -107,7 +107,7 @@ Generator to fetch chunked data, chunk by chunk
 
 #### Defined in
 
-[s3/s3.ts:70](https://bitbucket.org/aligent/microservices-utilities/src/96c029f/src/s3/s3.ts#lines-70)
+[s3/s3.ts:70](https://bitbucket.org/aligent/microservices-utilities/src/8889d92/src/s3/s3.ts#lines-70)
 
 ___
 
@@ -137,7 +137,7 @@ the body of the object
 
 #### Defined in
 
-[s3/s3.ts:61](https://bitbucket.org/aligent/microservices-utilities/src/96c029f/src/s3/s3.ts#lines-61)
+[s3/s3.ts:61](https://bitbucket.org/aligent/microservices-utilities/src/8889d92/src/s3/s3.ts#lines-61)
 
 ___
 
@@ -168,7 +168,7 @@ an array of objects which can be used to fetch the chunks
 
 #### Defined in
 
-[s3/s3.ts:51](https://bitbucket.org/aligent/microservices-utilities/src/96c029f/src/s3/s3.ts#lines-51)
+[s3/s3.ts:51](https://bitbucket.org/aligent/microservices-utilities/src/8889d92/src/s3/s3.ts#lines-51)
 
 ___
 
@@ -203,4 +203,4 @@ an object which can be used to fetch the data
 
 #### Defined in
 
-[s3/s3.ts:25](https://bitbucket.org/aligent/microservices-utilities/src/96c029f/src/s3/s3.ts#lines-25)
+[s3/s3.ts:25](https://bitbucket.org/aligent/microservices-utilities/src/8889d92/src/s3/s3.ts#lines-25)

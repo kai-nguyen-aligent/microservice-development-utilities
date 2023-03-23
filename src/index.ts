@@ -3,8 +3,7 @@ import remap, { Remap, ObjectMap } from './remap/remap';
 import retryWrapper, { RetryConfig } from './retryWrapper/retryWrapper';
 import fetchSsmParams from './fetchSsmParams/fetchSsmParams';
 import S3Dao from './s3/s3';
-// eslint-disable-next-line max-len
-import ensurePropertiesDefined from './ensurePropertiesDefined/ensurePropertiesDefined';
+import hasDefinedProperties from './hasPropertiesDefined/hasPropertiesDefined';
 
 export {
   chunkBy,
@@ -15,5 +14,5 @@ export {
   RetryConfig,
   fetchSsmParams,
   S3Dao,
-  ensurePropertiesDefined
+  hasDefinedProperties as ensurePropertiesDefined
 };

@@ -140,13 +140,33 @@ type Remap<
  * Map one object's values to another structure
  * @param object the object to map from
  * @param map the keys for the mapping
- * @example ```ts
+ * @returns the remapped object
+ *
+ * @example without a transformer function
+ * ```ts
+ * const map = [
+ *   ['foo', 'baz'],
+ *   ['bar', 'qux.0']
+ * ] as const;
+ * const obj = { foo: 'hi', bar: 7 }
+ * remap(obj, map); // { baz: 'hi', qux: [7] }
+ * ```
+ * @example with a transformer function
+ * ```ts
  * const map = [
  *  ['foo', 'baz'],
  *  ['bar', 'qux.0', (x: number) => x + 1]
  * ] as const;
  * const obj = { foo: 'hi', bar: 7 }
  * remap(obj, map); // { baz: 'hi', qux: [8] }
+ * ```
+ * @example with an empty initial key
+ * ```ts
+ * const map = [
+ *   ['', 'baz', (x: { foo: number, bar: number }) => x.foo + x.bar]
+ * ]
+ * const obj = { foo: 3, bar: 7 }
+ * remap(obj, map); // { baz: 10 }
  * ```
  */
 function remap<

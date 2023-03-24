@@ -11,7 +11,7 @@ export type SimplifyIntersection<
     }
     : A;
 
-/** A list of keys to keys, with an optional parser function */
+/** A list of keys to keys, with an optional transformer function */
 type ObjectMap = readonly ((
   readonly [string, string, ((...args: any[]) => any)?]
 ))[];
@@ -43,29 +43,52 @@ type GetKeyType<
     O extends { [key: string]: any },
     M extends ObjectMap[number]
 > =
+    // If the ObjectMap has a transformer function, use that instead of the
+    // type of the property on the base object
     M extends readonly [string, string, ((...args: any[]) => (infer U))]
         ? unknown extends U
+            // If the key is a nested key, recurse into the base object
+            // Otherwise, use the type of the property on the base object
             ? Key extends `${infer K}.${infer Rest}`
                 ? GetKeyType<Rest, O[K], M>
                 : O[Key]
             : U
+        // Otherwise, use the type of the property on the base object
         : Key extends `${infer K}.${infer Rest}`
             ? GetKeyType<Rest, O[K], M>
             : O[Key];
 
+/**
+* Given an ObjectMap, return a new ObjectMap with the first index of each
+* tuple replaced with the value of the second index
+*/
 type OverrideIndex<
     M extends ObjectMap[number],
     V extends string
 > = readonly [M[0], V, M[2]];
 
+/**
+ * Given a key and a base object, return the type of the property referencable
+ * by the key on the base object
+ * @example
+ * ```
+ * type Foo = ConstructTypeFromPropertiesInternal<
+ *  ['foo.bar', 'foo'],
+ *  { foo: { bar: number } }
+ *  >;
+ *  //   ^ Foo = { foo: number }
+ *  ```
+ */
 type ConstructTypeFromPropertiesInternal<
     M extends ObjectMap[number],
     O extends { [key: string]: any }
 > =
+    // If the key is a nested key, recurse into the base object
     M[1] extends `${infer P}.${infer Rest}`
             ? { [key in P]: ConstructTypeFromPropertiesInternal<
                 OverrideIndex<M, Rest>, O
               > }
+            // Otherwise, use the type of the property on the base object
             : { [key in M[1]]: GetKeyType<M[0], O, M> };
 
 /**
@@ -123,8 +146,11 @@ type ConstructTypeFromProperties<
     O extends { [key: string]: any },
     L extends number = 0
 > =
-    L extends Length<M> // This is basically the equivalent of an M.map() but in types
+    // If the length of M is equal to L, resolve to unknown
+    L extends Length<M>
         ? unknown
+        // Otherwise, if the length of M is greater than L, recurse
+        // Otherwise, resolve to never
         : Add<L, 1> extends number
             ? ConstructTypeFromPropertiesInternal<M[L], O>
               & ConstructTypeFromProperties<M, O, Add<L, 1>>

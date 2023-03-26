@@ -14,5 +14,5 @@ export {
   RetryConfig,
   fetchSsmParams,
   S3Dao,
-  hasDefinedProperties as ensurePropertiesDefined
+  hasDefinedProperties
 };

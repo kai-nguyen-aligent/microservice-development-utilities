@@ -1,0 +1,18 @@
+image: node:16.11-alpine3.14
+
+definitions:
+  services:
+    docker:
+      memory: 3072
+  steps:
+    - step: &test
+        name: Test
+        script:
+          - npm ci
+          - npm run lint
+          - npm run test
+
+pipelines:
+  pull-requests:
+    "**":
+      - step: *test

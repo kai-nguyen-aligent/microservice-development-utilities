@@ -1,4 +1,4 @@
-image: node:16.11-alpine3.14
+image: node:16.11.1-buster
 
 definitions:
   services:

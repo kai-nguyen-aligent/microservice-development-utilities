@@ -1,5 +1,5 @@
 {
-  "name": "aligent-microservices-utilities",
+  "name": "microservice-util-lib",
   "version": "1.0.0",
   "description": "A set of utility functions for Aligent Microservices",
   "main": "dist/index.js",
@@ -18,10 +18,6 @@
   },
   "author": "Aligent",
   "license": "ISC",
-  "bugs": {
-    "url": "https://bitbucket.org/aligent/microservices-utilities/issues"
-  },
-  "homepage": "https://bitbucket.org/aligent/microservices-utilities#readme",
   "devDependencies": {
     "@types/jest": "^29.2.4",
     "@types/lodash": "^4.14.191",

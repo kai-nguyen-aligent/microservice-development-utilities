@@ -12,7 +12,21 @@ definitions:
           - npm run lint
           - npm run test
 
+    - step: &publish
+        name: Publish 
+        script:
+          - VERSION=$(echo $BITBUCKET_TAG | sed 's/^.*[A-Za-z]-//g')
+          - npm version $VERSION --allow-same-version
+          - npm ci
+          - git config --global user.name "Automated NPM Release"
+          - git config --global user.email "sysadmin+npm-deploy@aligent.com.au"
+          - npm run build
+          - npm publish --access public
+
 pipelines:
   pull-requests:
     "**":
       - step: *test
+  tags:
+    release-*:
+      - step: *publish

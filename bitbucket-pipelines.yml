@@ -20,8 +20,11 @@ definitions:
           - npm ci
           - git config --global user.name "Automated NPM Release"
           - git config --global user.email "sysadmin+npm-deploy@aligent.com.au"
+          - git push
           - npm run build
-          - npm publish --access public
+          - pipe: atlassian/npm-publish:0.3.3
+            variables:
+              NPM_TOKEN: $NPM_TOKEN
 
 pipelines:
   pull-requests:

@@ -4,9 +4,6 @@ clone:
   depth: full
 
 definitions:
-  services:
-    docker:
-      memory: 3072
   steps:
     - step: &test
         name: Test
@@ -22,7 +19,6 @@ definitions:
           - git checkout main
           - VERSION=$(echo $BITBUCKET_TAG | sed 's/^.*[A-Za-z]-//g')
           - npm version $VERSION --allow-same-version
-          - npm ci
           - git config --global user.name "Automated NPM Release"
           - git config --global user.email "devops+npm-deploy@aligent.com.au"
           - git push origin main

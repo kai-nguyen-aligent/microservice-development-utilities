@@ -19,13 +19,13 @@ definitions:
         name: Publish 
         script:
           - git fetch
-          - git checkout origin/main
+          - git checkout main
           - VERSION=$(echo $BITBUCKET_TAG | sed 's/^.*[A-Za-z]-//g')
           - npm version $VERSION --allow-same-version
           - npm ci
           - git config --global user.name "Automated NPM Release"
           - git config --global user.email "devops+npm-deploy@aligent.com.au"
-          - git push
+          - git push origin main
           - git tag -a version-${VERSION}
           - git push --delete origin release-${VERSION}
           - git push --tags

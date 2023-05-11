@@ -1,5 +1,8 @@
 image: node:16.11.1-buster
 
+clone:
+  depth: full
+
 definitions:
   services:
     docker:
@@ -12,15 +15,22 @@ definitions:
           - npm run lint
           - npm run test
 
-    - step: &publish
+    - step: &release
         name: Publish 
         script:
           - VERSION=$(echo $BITBUCKET_TAG | sed 's/^.*[A-Za-z]-//g')
           - npm version $VERSION --allow-same-version
           - npm ci
           - git config --global user.name "Automated NPM Release"
-          - git config --global user.email "sysadmin+npm-deploy@aligent.com.au"
+          - git config --global user.email "devops+npm-deploy@aligent.com.au"
           - git push
+          - git tag -a version-${VERSION}
+          - git push --delete origin release-${VERSION}
+          - git push --tags
+
+    - step: &publish
+        name: Publish 
+        script:
           - npm run build
           - pipe: atlassian/npm-publish:0.3.3
             variables:
@@ -32,4 +42,6 @@ pipelines:
       - step: *test
   tags:
     release-*:
+      - step: *release
+    version-*:
       - step: *publish

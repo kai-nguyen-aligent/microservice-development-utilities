@@ -26,7 +26,7 @@ definitions:
           - git config --global user.name "Automated NPM Release"
           - git config --global user.email "devops+npm-deploy@aligent.com.au"
           - git push origin main
-          - git tag -a version-${VERSION}
+          - git tag -f -m 'Version ${VERSION}' -a version-${VERSION}
           - git push --delete origin release-${VERSION}
           - git push --tags
 

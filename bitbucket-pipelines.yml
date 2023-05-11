@@ -18,6 +18,8 @@ definitions:
     - step: &release
         name: Publish 
         script:
+          - git fetch
+          - git checkout origin/main
           - VERSION=$(echo $BITBUCKET_TAG | sed 's/^.*[A-Za-z]-//g')
           - npm version $VERSION --allow-same-version
           - npm ci

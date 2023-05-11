@@ -28,11 +28,13 @@ definitions:
           - git push origin main
           - git tag -f -m 'Version ${VERSION}' -a version-${VERSION}
           - git push --delete origin release-${VERSION}
+          - git tag -d release-${VERSION}
           - git push --tags
 
     - step: &publish
         name: Publish 
         script:
+          - npm ci
           - npm run build
           - pipe: atlassian/npm-publish:0.3.3
             variables:

@@ -1,6 +1,6 @@
 {
   "name": "@aligent/microservice-util-lib",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A set of utility functions for Aligent Microservices",
   "main": "dist/index.js",
   "scripts": {
@@ -38,7 +38,7 @@
     "lodash": "^4.17.21",
     "object-hash": "^3.0.0"
   },
-  "files":[
+  "files": [
     "dist"
   ]
 }

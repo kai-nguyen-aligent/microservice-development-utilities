@@ -13,7 +13,7 @@ definitions:
           - npm run test
 
     - step: &release
-        name: Publish 
+        name: Publish
         script:
           - git fetch
           - git checkout main
@@ -27,13 +27,14 @@ definitions:
           - git push --tags
 
     - step: &publish
-        name: Publish 
+        name: Publish
         script:
           - npm ci
           - npm run build
           - pipe: atlassian/npm-publish:0.3.3
             variables:
               NPM_TOKEN: $NPM_TOKEN
+              EXTRA_ARGS: "--access public"
 
 pipelines:
   pull-requests:

@@ -1,10 +1,10 @@
 {
   "name": "@aligent/microservice-util-lib",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A set of utility functions for Aligent Microservices",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run docs",
     "lint": "eslint src/*.ts src/**/*.ts",
     "lint:fix": "eslint --fix src/*.ts src/**/*.ts",
     "test": "npm run lint && npm run test:types && npm run test:jest",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/aligent/microservices-utilities.git"
+    "url": "git+ssh://git@bitbucket.org/aligent/microservices-util-lib.git"
   },
   "author": "Aligent",
   "license": "ISC",
@@ -39,6 +39,7 @@
     "object-hash": "^3.0.0"
   },
   "files": [
-    "dist"
+    "dist",
+    "docs"
   ]
 }

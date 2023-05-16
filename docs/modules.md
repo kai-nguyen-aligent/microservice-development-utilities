@@ -35,7 +35,7 @@ A list of keys to keys, with an optional transformer function
 
 #### Defined in
 
-[remap/remap.ts:15](https://bitbucket.org/aligent/microservice-util-lib/src/57f251a/src/remap/remap.ts#lines-15)
+[remap/remap.ts:15](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/remap/remap.ts#lines-15)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[remap/remap.ts:159](https://bitbucket.org/aligent/microservice-util-lib/src/57f251a/src/remap/remap.ts#lines-159)
+[remap/remap.ts:159](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/remap/remap.ts#lines-159)
 
 ## Functions
 
@@ -87,13 +87,13 @@ chunkBy([1, 2, 3, 4, 5, 6, 7], 2) // [[1, 2], [3, 4], [5, 6], [7]]
 
 #### Defined in
 
-[chunkBy/chunkBy.ts:10](https://bitbucket.org/aligent/microservice-util-lib/src/57f251a/src/chunkBy/chunkBy.ts#lines-10)
+[chunkBy/chunkBy.ts:10](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/chunkBy/chunkBy.ts#lines-10)
 
 ___
 
 ### <a id="fetchssmparams" name="fetchssmparams"></a> fetchSsmParams
 
-▸ **fetchSsmParams**(`param`): `Promise`<`SSM.Parameter`\>
+▸ **fetchSsmParams**(`param`): `Promise`<`Parameter`\>
 
 Fetch one SSM parameter
 
@@ -105,13 +105,13 @@ Fetch one SSM parameter
 
 #### Returns
 
-`Promise`<`SSM.Parameter`\>
+`Promise`<`Parameter`\>
 
 #### Defined in
 
-[fetchSsmParams/fetchSsmParams.ts:9](https://bitbucket.org/aligent/microservice-util-lib/src/57f251a/src/fetchSsmParams/fetchSsmParams.ts#lines-9)
+[fetchSsmParams/fetchSsmParams.ts:14](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/fetchSsmParams/fetchSsmParams.ts#lines-14)
 
-▸ **fetchSsmParams**(`...params`): `Promise`<`SSM.ParameterList`\>
+▸ **fetchSsmParams**(`...params`): `Promise`<`Parameter`[]\>
 
 Fetch a list of SSM parameters
 
@@ -123,11 +123,11 @@ Fetch a list of SSM parameters
 
 #### Returns
 
-`Promise`<`SSM.ParameterList`\>
+`Promise`<`Parameter`[]\>
 
 #### Defined in
 
-[fetchSsmParams/fetchSsmParams.ts:16](https://bitbucket.org/aligent/microservice-util-lib/src/57f251a/src/fetchSsmParams/fetchSsmParams.ts#lines-16)
+[fetchSsmParams/fetchSsmParams.ts:21](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/fetchSsmParams/fetchSsmParams.ts#lines-21)
 
 ___
 
@@ -173,7 +173,7 @@ obj is SimplifyIntersection<Required<Pick<T, K\>\> & Omit<T, K\>\>
 
 #### Defined in
 
-[hasPropertiesDefined/hasPropertiesDefined.ts:22](https://bitbucket.org/aligent/microservice-util-lib/src/57f251a/src/hasPropertiesDefined/hasPropertiesDefined.ts#lines-22)
+[hasPropertiesDefined/hasPropertiesDefined.ts:22](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/hasPropertiesDefined/hasPropertiesDefined.ts#lines-22)
 
 ___
 
@@ -240,7 +240,7 @@ the remapped object
 
 #### Defined in
 
-[remap/remap.ts:198](https://bitbucket.org/aligent/microservice-util-lib/src/57f251a/src/remap/remap.ts#lines-198)
+[remap/remap.ts:198](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/remap/remap.ts#lines-198)
 
 ___
 
@@ -278,4 +278,4 @@ retryWrapper(someAsyncFunction, {
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:78](https://bitbucket.org/aligent/microservice-util-lib/src/57f251a/src/retryWrapper/retryWrapper.ts#lines-78)
+[retryWrapper/retryWrapper.ts:78](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/retryWrapper/retryWrapper.ts#lines-78)

@@ -1,24 +1,18 @@
 import fetchSsmParams from './fetchSsmParams';
+import { mockClient } from 'aws-sdk-client-mock';
+import {
+  GetParameterCommand,
+  GetParametersCommand,
+  SSMClient
+} from '@aws-sdk/client-ssm';
+import 'aws-sdk-client-mock-jest';
 
-const getParam = jest.fn();
-const getParams = jest.fn();
-
-jest.mock('aws-sdk', () => {
-  return {
-    SSM: jest.fn().mockImplementation(() => {
-      return {
-        getParameter: () => ({ promise: getParam }),
-        getParameters: () => ({ promise: getParams })
-      };
-    })
-  };
-});
+const ssmMock = mockClient(SSMClient);
 
 describe('fetchSsmParams', () => {
 
   afterEach(() => {
-    getParam.mockReset();
-    getParams.mockReset();
+    ssmMock.reset();
   });
 
   it('should error when no params are passed', async () => {
@@ -34,8 +28,8 @@ describe('fetchSsmParams', () => {
       await fetchSsmParams('');
     // eslint-disable-next-line no-empty
     } catch {}
-    expect(getParam).toHaveBeenCalledTimes(1);
-    expect(getParams).toHaveBeenCalledTimes(0);
+    expect(ssmMock).toHaveReceivedCommandTimes(GetParameterCommand, 1);
+    expect(ssmMock).toHaveReceivedCommandTimes(GetParametersCommand, 0);
   });
 
   it('should fetch a multiple parameters if more than one is supplied', 
@@ -44,8 +38,8 @@ describe('fetchSsmParams', () => {
         await fetchSsmParams('', '', '');
       // eslint-disable-next-line no-empty
       } catch {}
-      expect(getParam).toHaveBeenCalledTimes(0);
-      expect(getParams).toHaveBeenCalledTimes(1);
+      expect(ssmMock).toHaveReceivedCommandTimes(GetParameterCommand, 0);
+      expect(ssmMock).toHaveReceivedCommandTimes(GetParametersCommand, 1);
     });
 });
 

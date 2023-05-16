@@ -5,7 +5,7 @@ MicroServices tasks.
 
 ## Documentation
 
-Documentation on each function can be found [here](./docs/modules.md)
+Documentation on each function can be found [here](docs/modules.md)
 
 ## Build
 

@@ -66,7 +66,8 @@ class S3Dao {
    */
   public async fetchData<T>(objectDetails: GetObjectCommandInput): Promise<T> {
     const data = await this.s3.send(new GetObjectCommand(objectDetails));
-    return JSON.parse(data.Body.toString());
+    const body = await data.Body.transformToString();
+    return JSON.parse(body);
   }
 
   /**

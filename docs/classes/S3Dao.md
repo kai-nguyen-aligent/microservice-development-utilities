@@ -37,7 +37,7 @@ A data access object for an S3 bucket
 
 #### Defined in
 
-[s3/s3.ts:14](https://bitbucket.org/aligent/microservice-util-lib/src/57f251a/src/s3/s3.ts#lines-14)
+[s3/s3.ts:19](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/s3/s3.ts#lines-19)
 
 ## Properties
 
@@ -47,23 +47,23 @@ A data access object for an S3 bucket
 
 #### Defined in
 
-[s3/s3.ts:9](https://bitbucket.org/aligent/microservice-util-lib/src/57f251a/src/s3/s3.ts#lines-9)
+[s3/s3.ts:14](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/s3/s3.ts#lines-14)
 
 ___
 
 ### <a id="s3" name="s3"></a> s3
 
-• `Private` **s3**: `S3`
+• `Private` **s3**: `S3Client`
 
 #### Defined in
 
-[s3/s3.ts:8](https://bitbucket.org/aligent/microservice-util-lib/src/57f251a/src/s3/s3.ts#lines-8)
+[s3/s3.ts:13](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/s3/s3.ts#lines-13)
 
 ## Methods
 
 ### <a id="deletedata" name="deletedata"></a> deleteData
 
-▸ **deleteData**(`objectDetails`): `Promise`<`PromiseResult`<`DeleteObjectOutput`, `AWSError`\>\>
+▸ **deleteData**(`objectDetails`): `Promise`<`DeleteObjectCommandOutput`\>
 
 Delete an object from the S3 bucket
 
@@ -71,21 +71,21 @@ Delete an object from the S3 bucket
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `objectDetails` | `GetObjectRequest` | the object to delete |
+| `objectDetails` | `GetObjectCommandInput` | the object to delete |
 
 #### Returns
 
-`Promise`<`PromiseResult`<`DeleteObjectOutput`, `AWSError`\>\>
+`Promise`<`DeleteObjectCommandOutput`\>
 
 #### Defined in
 
-[s3/s3.ts:90](https://bitbucket.org/aligent/microservice-util-lib/src/57f251a/src/s3/s3.ts#lines-90)
+[s3/s3.ts:97](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/s3/s3.ts#lines-97)
 
 ___
 
 ### <a id="fetchchunks" name="fetchchunks"></a> fetchChunks
 
-▸ **fetchChunks**<`T`\>(`chunks`): `AsyncGenerator`<{ `chunk`: `T` ; `s3Object`: `GetObjectRequest`  }, { `chunk`: `T` ; `s3Object`: `GetObjectRequest`  }, `unknown`\>
+▸ **fetchChunks**<`T`\>(`chunks`): `AsyncGenerator`<{ `chunk`: `T` ; `s3Object`: `GetObjectCommandInput`  }, { `chunk`: `T` ; `s3Object`: `GetObjectCommandInput`  }, `unknown`\>
 
 Generator to fetch chunked data, chunk by chunk
 
@@ -99,15 +99,15 @@ Generator to fetch chunked data, chunk by chunk
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `chunks` | `GetObjectRequest`[] | the list of object chunks |
+| `chunks` | `GetObjectCommandInput`[] | the list of object chunks |
 
 #### Returns
 
-`AsyncGenerator`<{ `chunk`: `T` ; `s3Object`: `GetObjectRequest`  }, { `chunk`: `T` ; `s3Object`: `GetObjectRequest`  }, `unknown`\>
+`AsyncGenerator`<{ `chunk`: `T` ; `s3Object`: `GetObjectCommandInput`  }, { `chunk`: `T` ; `s3Object`: `GetObjectCommandInput`  }, `unknown`\>
 
 #### Defined in
 
-[s3/s3.ts:70](https://bitbucket.org/aligent/microservice-util-lib/src/57f251a/src/s3/s3.ts#lines-70)
+[s3/s3.ts:77](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/s3/s3.ts#lines-77)
 
 ___
 
@@ -127,7 +127,7 @@ Fetch an object from the S3 bucket
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `objectDetails` | `GetObjectRequest` | the object which describes the location of the object |
+| `objectDetails` | `GetObjectCommandInput` | the object which describes the location of the object |
 
 #### Returns
 
@@ -137,13 +137,13 @@ the body of the object
 
 #### Defined in
 
-[s3/s3.ts:61](https://bitbucket.org/aligent/microservice-util-lib/src/57f251a/src/s3/s3.ts#lines-61)
+[s3/s3.ts:67](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/s3/s3.ts#lines-67)
 
 ___
 
 ### <a id="storechunked" name="storechunked"></a> storeChunked
 
-▸ **storeChunked**<`T`\>(`data`, `chunkSize`): `Promise`<`GetObjectRequest`[]\>
+▸ **storeChunked**<`T`\>(`data`, `chunkSize`): `Promise`<`GetObjectCommandInput`[]\>
 
 Store an array of object as individual chunks in S3
 
@@ -162,19 +162,19 @@ Store an array of object as individual chunks in S3
 
 #### Returns
 
-`Promise`<`GetObjectRequest`[]\>
+`Promise`<`GetObjectCommandInput`[]\>
 
 an array of objects which can be used to fetch the chunks
 
 #### Defined in
 
-[s3/s3.ts:51](https://bitbucket.org/aligent/microservice-util-lib/src/57f251a/src/s3/s3.ts#lines-51)
+[s3/s3.ts:57](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/s3/s3.ts#lines-57)
 
 ___
 
 ### <a id="storedata" name="storedata"></a> storeData
 
-▸ **storeData**<`T`\>(`data`, `name?`): `Promise`<`GetObjectRequest`\>
+▸ **storeData**<`T`\>(`data`, `name?`): `Promise`<`GetObjectCommandInput`\>
 
 Store data in an S3 bucket
 
@@ -197,10 +197,10 @@ the hash of the data
 
 #### Returns
 
-`Promise`<`GetObjectRequest`\>
+`Promise`<`GetObjectCommandInput`\>
 
 an object which can be used to fetch the data
 
 #### Defined in
 
-[s3/s3.ts:25](https://bitbucket.org/aligent/microservice-util-lib/src/57f251a/src/s3/s3.ts#lines-25)
+[s3/s3.ts:30](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/s3/s3.ts#lines-30)

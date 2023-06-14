@@ -9,8 +9,10 @@ describe('getAWsIdFromArn', () => {
     ).toEqual('this-is-the-id');
   });
 
-  it('should return an empty string when given an empty ARN', () => {
-    expect(getAwsIdFromArn('')).toEqual('');
+  it('should throw an error when an empty string is given', () => {
+    expect(() => {
+      getAwsIdFromArn('');
+    }).toThrowError('Received an empty resourceArn, unable to get an ID.');
   });
 
   it('returns the provided string where it is assumed to be already a short ID', () => {

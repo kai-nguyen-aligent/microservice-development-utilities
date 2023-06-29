@@ -83,11 +83,10 @@ class S3Dao {
         s3Object: chunks[i]
       };
 
-      if (i === chunks.length - 1) {
-        return response;
-      }
       yield response;
     }
+
+    return null as T;
   }
 
   /**

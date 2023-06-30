@@ -8,7 +8,9 @@ jspm_packages
 # ESBuild directories
 .build
 
+# IDE folders
 vscode
+.vscode
 
 # Localstack directories
 .localstack

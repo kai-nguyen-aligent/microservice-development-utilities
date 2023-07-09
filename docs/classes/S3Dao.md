@@ -37,7 +37,7 @@ A data access object for an S3 bucket
 
 #### Defined in
 
-[s3/s3.ts:19](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/s3/s3.ts#lines-19)
+[s3/s3.ts:19](https://bitbucket.org/aligent/microservice-util-lib/src/0dfe425/src/s3/s3.ts#lines-19)
 
 ## Properties
 
@@ -47,7 +47,7 @@ A data access object for an S3 bucket
 
 #### Defined in
 
-[s3/s3.ts:14](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/s3/s3.ts#lines-14)
+[s3/s3.ts:14](https://bitbucket.org/aligent/microservice-util-lib/src/0dfe425/src/s3/s3.ts#lines-14)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[s3/s3.ts:13](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/s3/s3.ts#lines-13)
+[s3/s3.ts:13](https://bitbucket.org/aligent/microservice-util-lib/src/0dfe425/src/s3/s3.ts#lines-13)
 
 ## Methods
 
@@ -79,13 +79,13 @@ Delete an object from the S3 bucket
 
 #### Defined in
 
-[s3/s3.ts:97](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/s3/s3.ts#lines-97)
+[s3/s3.ts:96](https://bitbucket.org/aligent/microservice-util-lib/src/0dfe425/src/s3/s3.ts#lines-96)
 
 ___
 
 ### <a id="fetchchunks" name="fetchchunks"></a> fetchChunks
 
-▸ **fetchChunks**<`T`\>(`chunks`): `AsyncGenerator`<{ `chunk`: `T` ; `s3Object`: `GetObjectCommandInput`  }, { `chunk`: `T` ; `s3Object`: `GetObjectCommandInput`  }, `unknown`\>
+▸ **fetchChunks**<`T`\>(`chunks`): `AsyncGenerator`<{ `chunk`: `T` ; `s3Object`: `GetObjectCommandInput`  }, `Awaited`<`T`\>, `unknown`\>
 
 Generator to fetch chunked data, chunk by chunk
 
@@ -103,11 +103,11 @@ Generator to fetch chunked data, chunk by chunk
 
 #### Returns
 
-`AsyncGenerator`<{ `chunk`: `T` ; `s3Object`: `GetObjectCommandInput`  }, { `chunk`: `T` ; `s3Object`: `GetObjectCommandInput`  }, `unknown`\>
+`AsyncGenerator`<{ `chunk`: `T` ; `s3Object`: `GetObjectCommandInput`  }, `Awaited`<`T`\>, `unknown`\>
 
 #### Defined in
 
-[s3/s3.ts:77](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/s3/s3.ts#lines-77)
+[s3/s3.ts:77](https://bitbucket.org/aligent/microservice-util-lib/src/0dfe425/src/s3/s3.ts#lines-77)
 
 ___
 
@@ -137,7 +137,7 @@ the body of the object
 
 #### Defined in
 
-[s3/s3.ts:67](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/s3/s3.ts#lines-67)
+[s3/s3.ts:67](https://bitbucket.org/aligent/microservice-util-lib/src/0dfe425/src/s3/s3.ts#lines-67)
 
 ___
 
@@ -168,7 +168,7 @@ an array of objects which can be used to fetch the chunks
 
 #### Defined in
 
-[s3/s3.ts:57](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/s3/s3.ts#lines-57)
+[s3/s3.ts:57](https://bitbucket.org/aligent/microservice-util-lib/src/0dfe425/src/s3/s3.ts#lines-57)
 
 ___
 
@@ -203,4 +203,4 @@ an object which can be used to fetch the data
 
 #### Defined in
 
-[s3/s3.ts:30](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/s3/s3.ts#lines-30)
+[s3/s3.ts:30](https://bitbucket.org/aligent/microservice-util-lib/src/0dfe425/src/s3/s3.ts#lines-30)

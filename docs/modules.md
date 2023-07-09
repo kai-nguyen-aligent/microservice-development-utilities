@@ -21,6 +21,7 @@
 
 - [chunkBy](modules.md#chunkby)
 - [fetchSsmParams](modules.md#fetchssmparams)
+- [getAwsIdFromArn](modules.md#getawsidfromarn)
 - [hasDefinedProperties](modules.md#hasdefinedproperties)
 - [remap](modules.md#remap-1)
 - [retryWrapper](modules.md#retrywrapper)
@@ -35,7 +36,7 @@ A list of keys to keys, with an optional transformer function
 
 #### Defined in
 
-[remap/remap.ts:15](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/remap/remap.ts#lines-15)
+[remap/remap.ts:15](https://bitbucket.org/aligent/microservice-util-lib/src/0dfe425/src/remap/remap.ts#lines-15)
 
 ___
 
@@ -52,7 +53,7 @@ ___
 
 #### Defined in
 
-[remap/remap.ts:159](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/remap/remap.ts#lines-159)
+[remap/remap.ts:159](https://bitbucket.org/aligent/microservice-util-lib/src/0dfe425/src/remap/remap.ts#lines-159)
 
 ## Functions
 
@@ -87,7 +88,7 @@ chunkBy([1, 2, 3, 4, 5, 6, 7], 2) // [[1, 2], [3, 4], [5, 6], [7]]
 
 #### Defined in
 
-[chunkBy/chunkBy.ts:10](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/chunkBy/chunkBy.ts#lines-10)
+[chunkBy/chunkBy.ts:10](https://bitbucket.org/aligent/microservice-util-lib/src/0dfe425/src/chunkBy/chunkBy.ts#lines-10)
 
 ___
 
@@ -109,7 +110,7 @@ Fetch one SSM parameter
 
 #### Defined in
 
-[fetchSsmParams/fetchSsmParams.ts:14](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/fetchSsmParams/fetchSsmParams.ts#lines-14)
+[fetchSsmParams/fetchSsmParams.ts:14](https://bitbucket.org/aligent/microservice-util-lib/src/0dfe425/src/fetchSsmParams/fetchSsmParams.ts#lines-14)
 
 ▸ **fetchSsmParams**(`...params`): `Promise`<`Parameter`[]\>
 
@@ -127,7 +128,41 @@ Fetch a list of SSM parameters
 
 #### Defined in
 
-[fetchSsmParams/fetchSsmParams.ts:21](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/fetchSsmParams/fetchSsmParams.ts#lines-21)
+[fetchSsmParams/fetchSsmParams.ts:21](https://bitbucket.org/aligent/microservice-util-lib/src/0dfe425/src/fetchSsmParams/fetchSsmParams.ts#lines-21)
+
+___
+
+### <a id="getawsidfromarn" name="getawsidfromarn"></a> getAwsIdFromArn
+
+▸ **getAwsIdFromArn**(`resourceArn`): `string`
+
+Get the AWS ID from its resource ARN
+
+**`Throws`**
+
+when the provided ARN is empty
+
+**`Example`**
+
+```ts
+getAwsIdFromArn('arn:aws:states:ap-southeast-2:123123123:execution:prj-int-entity-ac-dc-dev-machine-name:this-is-the-id')
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `resourceArn` | `string` | the ARN of the AWS resource |
+
+#### Returns
+
+`string`
+
+the ID (if present in the ARN) of the AWS resource/execution
+
+#### Defined in
+
+[getAwsIdFromArn/getAwsIdFromArn.ts:11](https://bitbucket.org/aligent/microservice-util-lib/src/0dfe425/src/getAwsIdFromArn/getAwsIdFromArn.ts#lines-11)
 
 ___
 
@@ -173,7 +208,7 @@ obj is SimplifyIntersection<Required<Pick<T, K\>\> & Omit<T, K\>\>
 
 #### Defined in
 
-[hasPropertiesDefined/hasPropertiesDefined.ts:22](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/hasPropertiesDefined/hasPropertiesDefined.ts#lines-22)
+[hasPropertiesDefined/hasPropertiesDefined.ts:22](https://bitbucket.org/aligent/microservice-util-lib/src/0dfe425/src/hasPropertiesDefined/hasPropertiesDefined.ts#lines-22)
 
 ___
 
@@ -240,7 +275,7 @@ the remapped object
 
 #### Defined in
 
-[remap/remap.ts:198](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/remap/remap.ts#lines-198)
+[remap/remap.ts:198](https://bitbucket.org/aligent/microservice-util-lib/src/0dfe425/src/remap/remap.ts#lines-198)
 
 ___
 
@@ -278,4 +313,4 @@ retryWrapper(someAsyncFunction, {
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:78](https://bitbucket.org/aligent/microservice-util-lib/src/0ce86d9/src/retryWrapper/retryWrapper.ts#lines-78)
+[retryWrapper/retryWrapper.ts:78](https://bitbucket.org/aligent/microservice-util-lib/src/0dfe425/src/retryWrapper/retryWrapper.ts#lines-78)

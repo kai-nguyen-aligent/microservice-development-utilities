@@ -20,7 +20,7 @@ module.exports = {
     'quotes': ['error', 'single'],
     'brace-style': ['error', '1tbs', { 'allowSingleLine': true }],
     'indent': ['error', 2],
-    'max-len': ['warn', { code: 80, ignoreComments: true }],
+    'max-len': ['warn', { code: 80, ignoreComments: true, ignoreStrings: true }],
     'semi': ['warn', 'always']
   }
 };

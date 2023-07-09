@@ -15,7 +15,8 @@ describe('getAWsIdFromArn', () => {
     }).toThrowError('Received an empty resourceArn, unable to get an ID.');
   });
 
-  it('returns the provided string where it is assumed to be already a short ID', () => {
-    expect(getAwsIdFromArn('my-execution')).toEqual('my-execution');
-  });
+  it('returns the provided string where it is assumed to be already a short ID',
+    () => {
+      expect(getAwsIdFromArn('my-execution')).toEqual('my-execution');
+    });
 });

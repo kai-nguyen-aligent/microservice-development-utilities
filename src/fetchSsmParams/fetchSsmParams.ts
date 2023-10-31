@@ -12,14 +12,14 @@ const ssm = new SSMClient({});
  * @param param key of the parameter to fetch
  */
 async function fetchSsmParams(param: string):
-  Promise<Parameter>;
+  Promise<Parameter | undefined>;
 
 /**
  * Fetch a list of SSM parameters
  * @param params list of parameter keys to fetch
  */
 async function fetchSsmParams(...params: string[]):
-  Promise<Parameter[]>;
+  Promise<Parameter[] | undefined[]>;
 
 /**
  * Fetch SSM Parameters

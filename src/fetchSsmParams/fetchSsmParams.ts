@@ -19,7 +19,7 @@ async function fetchSsmParams(param: string):
  * @param params list of parameter keys to fetch
  */
 async function fetchSsmParams(...params: string[]):
-  Promise<Parameter[] | undefined[]>;
+    Promise<(Parameter | undefined)[]>;
 
 /**
  * Fetch SSM Parameters
@@ -45,7 +45,7 @@ async function fetchSsmParams(...params: string[]) {
   }));
 
   return params.map(paramName => {
-    return result.Parameters.find(param => param.Name === paramName);
+    return result.Parameters?.find(param => param.Name === paramName);
   });
 }
 

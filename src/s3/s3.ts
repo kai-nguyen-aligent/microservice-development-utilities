@@ -66,6 +66,11 @@ class S3Dao {
    */
   public async fetchData<T>(objectDetails: GetObjectCommandInput): Promise<T> {
     const data = await this.s3.send(new GetObjectCommand(objectDetails));
+
+    if (typeof data.Body === 'undefined') {
+      throw new Error('body is undefined');
+    }
+
     const body = await data.Body.transformToString();
     return JSON.parse(body);
   }

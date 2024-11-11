@@ -2,12 +2,6 @@
 node_modules
 jspm_packages
 
-# Serverless directories
-.serverless
-
-# ESBuild directories
-.build
-
 # IDE folders
 vscode
 .vscode
@@ -15,11 +9,13 @@ vscode
 # Localstack directories
 .localstack
 
-# Jest coverage output
-coverage
-
-# Environment Variables
-config.json
-config.*.json
+# Coverage output
+**/coverage
 
 dist/
+
+# Nx cache
+.nx/cache
+.nx/workspace-data
+
+vite.config.*.timestamp*

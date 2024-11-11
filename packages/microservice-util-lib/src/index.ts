@@ -7,14 +7,14 @@ import hasDefinedProperties from './hasPropertiesDefined/hasPropertiesDefined';
 import getAwsIdFromArn from './getAwsIdFromArn/getAwsIdFromArn';
 
 export {
-  chunkBy,
-  remap,
-  Remap,
-  ObjectMap,
-  retryWrapper,
-  RetryConfig,
-  fetchSsmParams,
-  S3Dao,
-  hasDefinedProperties,
-  getAwsIdFromArn
+    chunkBy,
+    remap,
+    Remap,
+    ObjectMap,
+    retryWrapper,
+    RetryConfig,
+    fetchSsmParams,
+    S3Dao,
+    hasDefinedProperties,
+    getAwsIdFromArn,
 };

@@ -1,4 +1,5 @@
 {
+  "extends": "@aligent/ts-code-standards/tsconfigs-base",
   "compileOnSave": false,
   "compilerOptions": {
     "rootDir": ".",

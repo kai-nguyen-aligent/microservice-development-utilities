@@ -17,7 +17,7 @@
             "options": {
                 "cwd": "{projectRoot}",
                 "color": true,
-                "command": "typedoc --readme none --githubPages false --plugin typedoc-plugin-markdown --entryDocument modules.md --namedAnchors true --out docs src/index.ts"
+                "command": "typedoc --options ./typedoc.config.mjs"
             }
         }
     },

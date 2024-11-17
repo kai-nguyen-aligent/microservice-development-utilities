@@ -1,90 +1,101 @@
+[**@aligent/microservice-util-lib**](../modules.md) • **Docs**
+
+***
+
 [@aligent/microservice-util-lib](../modules.md) / RetryConfig
 
 # Interface: RetryConfig
 
 Configuration for the retryWrapper
 
-## Table of contents
-
-### Properties
-
-- [backoffAmount](RetryConfig.md#backoffamount)
-- [delay](RetryConfig.md#delay)
-- [onRetry](RetryConfig.md#onretry)
-- [retries](RetryConfig.md#retries)
-
 ## Properties
 
-### <a id="backoffamount" name="backoffamount"></a> backoffAmount
+<a id="backoffamount" name="backoffamount"></a>
 
-• `Optional` **backoffAmount**: `number`
+### backoffAmount?
+
+> `optional` **backoffAmount**: `number`
 
 The amount to increase the delay by each retry (in ms)
 
-**`Default`**
+#### Default
 
+```ts
 0
+```
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:17](https://bitbucket.org/aligent/microservice-util-lib/src/0dfe425/src/retryWrapper/retryWrapper.ts#lines-17)
+[retryWrapper/retryWrapper.ts:17](https://github.com/aligent/microservice-development-utilities/blob/aa4b5d2c0fc3925dee03a46aa2f9ce02720aa69b/packages/microservice-util-lib/src/retryWrapper/retryWrapper.ts#L17)
 
-___
+***
 
-### <a id="delay" name="delay"></a> delay
+<a id="delay" name="delay"></a>
 
-• `Optional` **delay**: `number`
+### delay?
+
+> `optional` **delay**: `number`
 
 The base delay between retries (in ms)
 
-**`Default`**
+#### Default
 
+```ts
 0
+```
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:12](https://bitbucket.org/aligent/microservice-util-lib/src/0dfe425/src/retryWrapper/retryWrapper.ts#lines-12)
+[retryWrapper/retryWrapper.ts:12](https://github.com/aligent/microservice-development-utilities/blob/aa4b5d2c0fc3925dee03a46aa2f9ce02720aa69b/packages/microservice-util-lib/src/retryWrapper/retryWrapper.ts#L12)
 
-___
+***
 
-### <a id="onretry" name="onretry"></a> onRetry
+<a id="onretry" name="onretry"></a>
 
-• `Optional` **onRetry**: (`retries`: `number`, `error`: `Error`, `config`: [`RetryConfig`](RetryConfig.md)) => `void`
+### onRetry()?
 
-#### Type declaration
-
-▸ (`retries`, `error`, `config`): `void`
+> `optional` **onRetry**: (`retries`, `error`, `config`) => `void`
 
 A callback to run before each retry
 
-##### Parameters
+#### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `retries` | `number` | the number of retries so far (will start at 1) |
-| `error` | `Error` | the error from the last attempt |
-| `config` | [`RetryConfig`](RetryConfig.md) | the configuration supplied to the retryWrapper |
+• **retries**: `number`
 
-##### Returns
+the number of retries so far (will start at 1)
+
+• **error**: `Error`
+
+the error from the last attempt
+
+• **config**: [`RetryConfig`](RetryConfig.md)
+
+the configuration supplied to the retryWrapper
+
+#### Returns
 
 `void`
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:24](https://bitbucket.org/aligent/microservice-util-lib/src/0dfe425/src/retryWrapper/retryWrapper.ts#lines-24)
+[retryWrapper/retryWrapper.ts:24](https://github.com/aligent/microservice-development-utilities/blob/aa4b5d2c0fc3925dee03a46aa2f9ce02720aa69b/packages/microservice-util-lib/src/retryWrapper/retryWrapper.ts#L24)
 
-___
+***
 
-### <a id="retries" name="retries"></a> retries
+<a id="retries" name="retries"></a>
 
-• `Optional` **retries**: `number`
+### retries?
+
+> `optional` **retries**: `number`
 
 The number of retries to attempt after the first run
 
-**`Default`**
+#### Default
 
+```ts
 1
+```
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:7](https://bitbucket.org/aligent/microservice-util-lib/src/0dfe425/src/retryWrapper/retryWrapper.ts#lines-7)
+[retryWrapper/retryWrapper.ts:7](https://github.com/aligent/microservice-development-utilities/blob/aa4b5d2c0fc3925dee03a46aa2f9ce02720aa69b/packages/microservice-util-lib/src/retryWrapper/retryWrapper.ts#L7)

@@ -2,8 +2,6 @@
   "extends": "@aligent/ts-code-standards/tsconfigs-base",
   "compileOnSave": false,
   "compilerOptions": {
-    "rootDir": ".",
-    "baseUrl": ".",
     "exactOptionalPropertyTypes": false,
     "noUncheckedSideEffectImports": true,
     "types": [

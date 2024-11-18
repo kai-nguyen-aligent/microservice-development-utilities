@@ -60,7 +60,7 @@
         "options": {
           "commands": [
             "verdaccio --listen 4873 --config .verdaccio/config.yml",
-            "npm set registry http://localhost:4873/ --location project"
+            "npm set registry http://localhost:4873/"
           ]
         }
       },
@@ -68,8 +68,8 @@
         "executor": "nx:run-commands",
         "options": {
           "commands": [
-            "kill $(lsof -t -i:4873)",
-            "npm set registry https://registry.npmjs.org/ --location project"
+            "npm set registry https://registry.npmjs.org/",
+            "kill $(lsof -t -i:4873)"
           ]
         }
       }

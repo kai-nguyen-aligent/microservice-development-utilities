@@ -1,6 +1,6 @@
 [**@aligent/microservice-util-lib**](../modules.md) • **Docs**
 
-***
+---
 
 [@aligent/microservice-util-lib](../modules.md) / ObjectMap
 

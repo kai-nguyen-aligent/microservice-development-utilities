@@ -1,6 +1,6 @@
 [**@aligent/microservice-util-lib**](../modules.md) • **Docs**
 
-***
+---
 
 [@aligent/microservice-util-lib](../modules.md) / hasDefinedProperties
 
@@ -12,9 +12,9 @@ Ensure that the given properties are defined on the object.
 
 ## Type Parameters
 
-• **T** *extends* `object`
+• **T** _extends_ `object`
 
-• **K** *extends* `string` \| `number` \| `symbol`
+• **K** _extends_ `string` \| `number` \| `symbol`
 
 ## Parameters
 
@@ -39,10 +39,10 @@ type Foo = { a?: number; b?: number };
 const foo: Foo = { a: 1, b: 2 };
 if (hasDefinedProperties(foo, 'a')) {
   console.log(foo);
- //          ^? const bar: {
- //               a: number;
- //               b?: number;
- //             }
+  //          ^? const bar: {
+  //               a: number;
+  //               b?: number;
+  //             }
 }
 ```
 

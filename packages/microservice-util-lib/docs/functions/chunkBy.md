@@ -1,6 +1,6 @@
 [**@aligent/microservice-util-lib**](../modules.md) • **Docs**
 
-***
+---
 
 [@aligent/microservice-util-lib](../modules.md) / chunkBy
 
@@ -31,7 +31,7 @@ the size of each chunk. (The final chunk will be whatever is remaining)
 ## Example
 
 ```ts
-chunkBy([1, 2, 3, 4, 5, 6, 7], 2) // [[1, 2], [3, 4], [5, 6], [7]]
+chunkBy([1, 2, 3, 4, 5, 6, 7], 2); // [[1, 2], [3, 4], [5, 6], [7]]
 ```
 
 ## Defined in

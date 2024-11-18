@@ -1,6 +1,6 @@
 [**@aligent/microservice-util-lib**](../modules.md) • **Docs**
 
-***
+---
 
 [@aligent/microservice-util-lib](../modules.md) / Remap
 
@@ -10,9 +10,9 @@
 
 ## Type Parameters
 
-• **MapArray** *extends* [`ObjectMap`](ObjectMap.md)
+• **MapArray** _extends_ [`ObjectMap`](ObjectMap.md)
 
-• **Original** *extends* `object`
+• **Original** _extends_ `object`
 
 ## Defined in
 

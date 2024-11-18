@@ -1,6 +1,6 @@
 [**@aligent/microservice-util-lib**](../modules.md) • **Docs**
 
-***
+---
 
 [@aligent/microservice-util-lib](../modules.md) / retryWrapper
 
@@ -33,7 +33,7 @@ the configuration for retries
 ```ts
 retryWrapper(someAsyncFunction, {
   retries: 3,
-  onRetry: (_, error) => console.error(error)
+  onRetry: (_, error) => console.error(error),
 });
 ```
 

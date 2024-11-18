@@ -1,6 +1,6 @@
 **@aligent/microservice-util-lib** • **Docs**
 
-***
+---
 
 # @aligent/microservice-util-lib
 

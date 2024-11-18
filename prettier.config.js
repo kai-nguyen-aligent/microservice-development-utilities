@@ -1,6 +1,3 @@
-module.exports = {
-    arrowParens: 'avoid',
-    singleQuote: true,
-    trailingComma: 'es5',
-    // plugins: [],
-}
+const { prettierConfig } = require('@aligent/ts-code-standards');
+
+module.exports = prettierConfig;

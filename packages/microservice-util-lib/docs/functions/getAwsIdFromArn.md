@@ -1,6 +1,6 @@
 [**@aligent/microservice-util-lib**](../modules.md) • **Docs**
 
-***
+---
 
 [@aligent/microservice-util-lib](../modules.md) / getAwsIdFromArn
 
@@ -29,7 +29,9 @@ when the provided ARN is empty
 ## Example
 
 ```ts
-getAwsIdFromArn('arn:aws:states:ap-southeast-2:123123123:execution:prj-int-entity-ac-dc-dev-machine-name:this-is-the-id')
+getAwsIdFromArn(
+  'arn:aws:states:ap-southeast-2:123123123:execution:prj-int-entity-ac-dc-dev-machine-name:this-is-the-id'
+);
 ```
 
 ## Defined in

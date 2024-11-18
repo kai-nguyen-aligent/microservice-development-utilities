@@ -9,7 +9,7 @@
             "options": {
                 "cwd": "{projectRoot}",
                 "color": true,
-                "command": "tsc -p tsconfig.lib.json"
+                "commands": ["typedoc --options ./typedoc.config.mjs", "tsc -p tsconfig.lib.json"]
             }
         },
         "typedoc": {

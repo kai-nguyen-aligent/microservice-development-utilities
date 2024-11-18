@@ -1,6 +1,6 @@
 [**@aligent/microservice-util-lib**](../modules.md) • **Docs**
 
-***
+---
 
 [@aligent/microservice-util-lib](../modules.md) / S3Dao
 
@@ -54,7 +54,7 @@ the object to delete
 
 [s3/s3.ts:100](https://github.com/aligent/microservice-development-utilities/blob/6029aa3ed377277764d6a6f496cad1ea8d56a51e/packages/microservice-util-lib/src/s3/s3.ts#L100)
 
-***
+---
 
 <a id="fetchchunks" name="fetchchunks"></a>
 
@@ -90,7 +90,7 @@ the list of object chunks
 
 [s3/s3.ts:81](https://github.com/aligent/microservice-development-utilities/blob/6029aa3ed377277764d6a6f496cad1ea8d56a51e/packages/microservice-util-lib/src/s3/s3.ts#L81)
 
-***
+---
 
 <a id="fetchdata" name="fetchdata"></a>
 
@@ -120,7 +120,7 @@ the body of the object
 
 [s3/s3.ts:66](https://github.com/aligent/microservice-development-utilities/blob/6029aa3ed377277764d6a6f496cad1ea8d56a51e/packages/microservice-util-lib/src/s3/s3.ts#L66)
 
-***
+---
 
 <a id="storechunked" name="storechunked"></a>
 
@@ -132,7 +132,7 @@ Store an array of object as individual chunks in S3
 
 #### Type Parameters
 
-• **T** *extends* `any`[]
+• **T** _extends_ `any`[]
 
 #### Parameters
 
@@ -154,7 +154,7 @@ an array of objects which can be used to fetch the chunks
 
 [s3/s3.ts:56](https://github.com/aligent/microservice-development-utilities/blob/6029aa3ed377277764d6a6f496cad1ea8d56a51e/packages/microservice-util-lib/src/s3/s3.ts#L56)
 
-***
+---
 
 <a id="storedata" name="storedata"></a>
 

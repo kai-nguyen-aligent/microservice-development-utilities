@@ -1,6 +1,6 @@
 [**@aligent/microservice-util-lib**](../modules.md) • **Docs**
 
-***
+---
 
 [@aligent/microservice-util-lib](../modules.md) / remap
 
@@ -12,9 +12,9 @@ Map one object's values to another structure
 
 ## Type Parameters
 
-• **Original** *extends* `object`
+• **Original** _extends_ `object`
 
-• **MapArray** *extends* [`ObjectMap`](../type-aliases/ObjectMap.md)
+• **MapArray** _extends_ [`ObjectMap`](../type-aliases/ObjectMap.md)
 
 ## Parameters
 
@@ -37,26 +37,24 @@ the remapped object
 ```ts
 const map = [
   ['foo', 'baz'],
-  ['bar', 'qux.0']
+  ['bar', 'qux.0'],
 ] as const;
-const obj = { foo: 'hi', bar: 7 }
+const obj = { foo: 'hi', bar: 7 };
 remap(obj, map); // { baz: 'hi', qux: [7] }
 ```
 
 ```ts
 const map = [
- ['foo', 'baz'],
- ['bar', 'qux.0', (x: number) => x + 1]
+  ['foo', 'baz'],
+  ['bar', 'qux.0', (x: number) => x + 1],
 ] as const;
-const obj = { foo: 'hi', bar: 7 }
+const obj = { foo: 'hi', bar: 7 };
 remap(obj, map); // { baz: 'hi', qux: [8] }
 ```
 
 ```ts
-const map = [
-  ['', 'baz', (x: { foo: number, bar: number }) => x.foo + x.bar]
-]
-const obj = { foo: 3, bar: 7 }
+const map = [['', 'baz', (x: { foo: number; bar: number }) => x.foo + x.bar]];
+const obj = { foo: 3, bar: 7 };
 remap(obj, map); // { baz: 10 }
 ```
 

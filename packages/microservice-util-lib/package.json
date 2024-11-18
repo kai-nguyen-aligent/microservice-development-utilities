@@ -22,8 +22,5 @@
     "object-hash": "^3.0.0"
   },
   "author": "Aligent",
-  "license": "ISC",
-  "nx": {
-    "name": "microservice-util-lib"
-  }
+  "license": "ISC"
 }

@@ -1,18 +1,46 @@
-# package directories
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Environment
+*.env
+
+# Compiled output
+dist
+tmp
+/out-tsc
+coverage
+.build
+
+# Dependencies
 node_modules
 jspm_packages
 
-# IDE folders
-vscode
-.vscode
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
-# Localstack directories
-.localstack
+# IDE - VSCode
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
-# Coverage output
-**/coverage
+# misc
+/.sass-cache
+/connect.lock
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
 
-dist/
+# System Files
+.DS_Store
+Thumbs.db
 
 # Nx cache
 .nx/cache

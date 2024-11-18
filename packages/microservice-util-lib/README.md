@@ -1,6 +1,6 @@
 # Microservices Utilities Library
 
-This library includes utility functions to simplify & standardise common 
+This library includes utility functions to simplify & standardise common
 MicroServices tasks.
 
 ## Documentation
@@ -29,7 +29,7 @@ from your project root.
 
 ## Testing & Linting
 
-Jest tests, linting & type-checking can be run with
+Vitest tests, linting & type-checking can be run with
 
 ```sh
 npm run test

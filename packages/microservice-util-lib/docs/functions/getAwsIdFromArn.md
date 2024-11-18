@@ -34,4 +34,4 @@ getAwsIdFromArn('arn:aws:states:ap-southeast-2:123123123:execution:prj-int-entit
 
 ## Defined in
 
-[getAwsIdFromArn/getAwsIdFromArn.ts:11](https://github.com/aligent/microservice-development-utilities/blob/aa4b5d2c0fc3925dee03a46aa2f9ce02720aa69b/packages/microservice-util-lib/src/getAwsIdFromArn/getAwsIdFromArn.ts#L11)
+[get-aws-id-from-arn/get-aws-id-from-arn.ts:11](https://github.com/aligent/microservice-development-utilities/blob/6029aa3ed377277764d6a6f496cad1ea8d56a51e/packages/microservice-util-lib/src/get-aws-id-from-arn/get-aws-id-from-arn.ts#L11)

@@ -39,4 +39,4 @@ retryWrapper(someAsyncFunction, {
 
 ## Defined in
 
-[retryWrapper/retryWrapper.ts:78](https://github.com/aligent/microservice-development-utilities/blob/aa4b5d2c0fc3925dee03a46aa2f9ce02720aa69b/packages/microservice-util-lib/src/retryWrapper/retryWrapper.ts#L78)
+[retry-wrapper/retry-wrapper.ts:78](https://github.com/aligent/microservice-development-utilities/blob/6029aa3ed377277764d6a6f496cad1ea8d56a51e/packages/microservice-util-lib/src/retry-wrapper/retry-wrapper.ts#L78)

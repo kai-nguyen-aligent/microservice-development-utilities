@@ -34,7 +34,7 @@ the keys of the parameters to fetch
 
 ### Defined in
 
-[fetchSsmParams/fetchSsmParams.ts:14](https://github.com/aligent/microservice-development-utilities/blob/aa4b5d2c0fc3925dee03a46aa2f9ce02720aa69b/packages/microservice-util-lib/src/fetchSsmParams/fetchSsmParams.ts#L14)
+[fetch-ssm-params/fetch-ssm-params.ts:14](https://github.com/aligent/microservice-development-utilities/blob/6029aa3ed377277764d6a6f496cad1ea8d56a51e/packages/microservice-util-lib/src/fetch-ssm-params/fetch-ssm-params.ts#L14)
 
 ## fetchSsmParams(params)
 
@@ -58,4 +58,4 @@ the keys of the parameters to fetch
 
 ### Defined in
 
-[fetchSsmParams/fetchSsmParams.ts:21](https://github.com/aligent/microservice-development-utilities/blob/aa4b5d2c0fc3925dee03a46aa2f9ce02720aa69b/packages/microservice-util-lib/src/fetchSsmParams/fetchSsmParams.ts#L21)
+[fetch-ssm-params/fetch-ssm-params.ts:21](https://github.com/aligent/microservice-development-utilities/blob/6029aa3ed377277764d6a6f496cad1ea8d56a51e/packages/microservice-util-lib/src/fetch-ssm-params/fetch-ssm-params.ts#L21)

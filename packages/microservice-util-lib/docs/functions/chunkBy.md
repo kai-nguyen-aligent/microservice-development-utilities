@@ -36,4 +36,4 @@ chunkBy([1, 2, 3, 4, 5, 6, 7], 2) // [[1, 2], [3, 4], [5, 6], [7]]
 
 ## Defined in
 
-[chunkBy/chunkBy.ts:10](https://github.com/aligent/microservice-development-utilities/blob/aa4b5d2c0fc3925dee03a46aa2f9ce02720aa69b/packages/microservice-util-lib/src/chunkBy/chunkBy.ts#L10)
+[chunk-by/chunk-by.ts:10](https://github.com/aligent/microservice-development-utilities/blob/6029aa3ed377277764d6a6f496cad1ea8d56a51e/packages/microservice-util-lib/src/chunk-by/chunk-by.ts#L10)

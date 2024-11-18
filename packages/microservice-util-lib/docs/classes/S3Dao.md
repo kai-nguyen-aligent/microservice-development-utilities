@@ -28,7 +28,7 @@ the location of the bucket that objects should be stored in
 
 #### Defined in
 
-[s3/s3.ts:19](https://github.com/aligent/microservice-development-utilities/blob/aa4b5d2c0fc3925dee03a46aa2f9ce02720aa69b/packages/microservice-util-lib/src/s3/s3.ts#L19)
+[s3/s3.ts:19](https://github.com/aligent/microservice-development-utilities/blob/6029aa3ed377277764d6a6f496cad1ea8d56a51e/packages/microservice-util-lib/src/s3/s3.ts#L19)
 
 ## Methods
 
@@ -52,7 +52,7 @@ the object to delete
 
 #### Defined in
 
-[s3/s3.ts:100](https://github.com/aligent/microservice-development-utilities/blob/aa4b5d2c0fc3925dee03a46aa2f9ce02720aa69b/packages/microservice-util-lib/src/s3/s3.ts#L100)
+[s3/s3.ts:100](https://github.com/aligent/microservice-development-utilities/blob/6029aa3ed377277764d6a6f496cad1ea8d56a51e/packages/microservice-util-lib/src/s3/s3.ts#L100)
 
 ***
 
@@ -88,7 +88,7 @@ the list of object chunks
 
 #### Defined in
 
-[s3/s3.ts:81](https://github.com/aligent/microservice-development-utilities/blob/aa4b5d2c0fc3925dee03a46aa2f9ce02720aa69b/packages/microservice-util-lib/src/s3/s3.ts#L81)
+[s3/s3.ts:81](https://github.com/aligent/microservice-development-utilities/blob/6029aa3ed377277764d6a6f496cad1ea8d56a51e/packages/microservice-util-lib/src/s3/s3.ts#L81)
 
 ***
 
@@ -118,7 +118,7 @@ the body of the object
 
 #### Defined in
 
-[s3/s3.ts:66](https://github.com/aligent/microservice-development-utilities/blob/aa4b5d2c0fc3925dee03a46aa2f9ce02720aa69b/packages/microservice-util-lib/src/s3/s3.ts#L66)
+[s3/s3.ts:66](https://github.com/aligent/microservice-development-utilities/blob/6029aa3ed377277764d6a6f496cad1ea8d56a51e/packages/microservice-util-lib/src/s3/s3.ts#L66)
 
 ***
 
@@ -152,7 +152,7 @@ an array of objects which can be used to fetch the chunks
 
 #### Defined in
 
-[s3/s3.ts:56](https://github.com/aligent/microservice-development-utilities/blob/aa4b5d2c0fc3925dee03a46aa2f9ce02720aa69b/packages/microservice-util-lib/src/s3/s3.ts#L56)
+[s3/s3.ts:56](https://github.com/aligent/microservice-development-utilities/blob/6029aa3ed377277764d6a6f496cad1ea8d56a51e/packages/microservice-util-lib/src/s3/s3.ts#L56)
 
 ***
 
@@ -192,4 +192,4 @@ the hash of the data
 
 #### Defined in
 
-[s3/s3.ts:30](https://github.com/aligent/microservice-development-utilities/blob/aa4b5d2c0fc3925dee03a46aa2f9ce02720aa69b/packages/microservice-util-lib/src/s3/s3.ts#L30)
+[s3/s3.ts:30](https://github.com/aligent/microservice-development-utilities/blob/6029aa3ed377277764d6a6f496cad1ea8d56a51e/packages/microservice-util-lib/src/s3/s3.ts#L30)

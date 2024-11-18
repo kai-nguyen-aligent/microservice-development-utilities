@@ -26,7 +26,7 @@ The amount to increase the delay by each retry (in ms)
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:17](https://github.com/aligent/microservice-development-utilities/blob/aa4b5d2c0fc3925dee03a46aa2f9ce02720aa69b/packages/microservice-util-lib/src/retryWrapper/retryWrapper.ts#L17)
+[retry-wrapper/retry-wrapper.ts:17](https://github.com/aligent/microservice-development-utilities/blob/6029aa3ed377277764d6a6f496cad1ea8d56a51e/packages/microservice-util-lib/src/retry-wrapper/retry-wrapper.ts#L17)
 
 ***
 
@@ -46,7 +46,7 @@ The base delay between retries (in ms)
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:12](https://github.com/aligent/microservice-development-utilities/blob/aa4b5d2c0fc3925dee03a46aa2f9ce02720aa69b/packages/microservice-util-lib/src/retryWrapper/retryWrapper.ts#L12)
+[retry-wrapper/retry-wrapper.ts:12](https://github.com/aligent/microservice-development-utilities/blob/6029aa3ed377277764d6a6f496cad1ea8d56a51e/packages/microservice-util-lib/src/retry-wrapper/retry-wrapper.ts#L12)
 
 ***
 
@@ -78,7 +78,7 @@ the configuration supplied to the retryWrapper
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:24](https://github.com/aligent/microservice-development-utilities/blob/aa4b5d2c0fc3925dee03a46aa2f9ce02720aa69b/packages/microservice-util-lib/src/retryWrapper/retryWrapper.ts#L24)
+[retry-wrapper/retry-wrapper.ts:24](https://github.com/aligent/microservice-development-utilities/blob/6029aa3ed377277764d6a6f496cad1ea8d56a51e/packages/microservice-util-lib/src/retry-wrapper/retry-wrapper.ts#L24)
 
 ***
 
@@ -98,4 +98,4 @@ The number of retries to attempt after the first run
 
 #### Defined in
 
-[retryWrapper/retryWrapper.ts:7](https://github.com/aligent/microservice-development-utilities/blob/aa4b5d2c0fc3925dee03a46aa2f9ce02720aa69b/packages/microservice-util-lib/src/retryWrapper/retryWrapper.ts#L7)
+[retry-wrapper/retry-wrapper.ts:7](https://github.com/aligent/microservice-development-utilities/blob/6029aa3ed377277764d6a6f496cad1ea8d56a51e/packages/microservice-util-lib/src/retry-wrapper/retry-wrapper.ts#L7)

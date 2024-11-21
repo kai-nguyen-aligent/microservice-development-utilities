@@ -35,4 +35,7 @@ jobs:
         uses: nrwl/nx-set-shas@v4
 
       - name: ⚙️ Run Tests
-        run: npx nx affected -t lint test build
+        run: npx nx affected -t lint test --parallel=2
+
+      - name: ⚙️ Run Build
+        run: npx nx affected -t build

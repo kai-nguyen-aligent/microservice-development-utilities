@@ -9,8 +9,6 @@
     "test:all": "nx run-many -t test --coverage",
     "lint": "nx affected -t lint",
     "lint:all": "nx run-many -t lint",
-    "format": "prettier . --check",
-    "format:write": "prettier . --write",
     "check-types": "nx affected -t check-types",
     "check-types:all": "nx run-many -t check-types",
     "prepare": "[ -d .git ] && git config core.hooksPath '.git-hooks' || true"
@@ -27,8 +25,9 @@
     "object-hash": "^3.0.0"
   },
   "devDependencies": {
-    "@aligent/ts-code-standards": "^1.4.0",
+    "@aligent/ts-code-standards": "^1.4.1",
     "@nx/eslint": "20.0.12",
+    "@nx/eslint-plugin": "20.0.12",
     "@nx/js": "20.0.12",
     "@nx/vite": "20.0.12",
     "@nx/web": "20.0.12",
@@ -40,11 +39,13 @@
     "@vitest/ui": "^2.0.5",
     "aws-sdk-client-mock": "^4.1.0",
     "eslint": "^9.14.0",
+    "eslint-plugin-import": "^2.31.0",
     "nx": "20.0.12",
     "prettier": "^3.3.3",
     "typedoc": "^0.26.11",
     "typedoc-plugin-markdown": "^4.2.10",
     "typescript": "^5.6.3",
+    "verdaccio": "^5.32.2",
     "vite": "^5.0.0",
     "vitest": "^2.0.5"
   },

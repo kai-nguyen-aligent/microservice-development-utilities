@@ -1,6 +1,5 @@
 {
   "name": "@aligent/microservice-development-utilities",
-  "version": "1.0.0",
   "description": "A set of utilities for Aligent Microservices Development",
   "scripts": {
     "build": "nx affected -t build",
@@ -32,6 +31,8 @@
     "@nx/vite": "20.0.12",
     "@nx/web": "20.0.12",
     "@smithy/util-stream": "^3.2.1",
+    "@swc-node/register": "^1.10.9",
+    "@swc/core": "^1.9.2",
     "@types/lodash": "^4.17.13",
     "@types/node": "^22.9.0",
     "@types/object-hash": "^3.0.6",

@@ -5,8 +5,8 @@ import {
     PutObjectCommand,
     S3Client,
 } from '@aws-sdk/client-s3';
-import hash from 'object-hash';
 import chunkBy from '../chunk-by/chunk-by';
+import hash from 'object-hash';
 
 /** A data access object for an S3 bucket */
 class S3Dao {
@@ -34,7 +34,7 @@ class S3Dao {
 
         const getObject: GetObjectCommandInput = {
             Bucket: this.bucket,
-            Key: name || hash(data as any),
+            Key: name || hash(data),
         };
 
         await this.s3.send(
@@ -53,7 +53,7 @@ class S3Dao {
      * @param chunkSize the number of entries that should be in each chunk
      * @returns an array of objects which can be used to fetch the chunks
      */
-    public async storeChunked<T extends any[]>(data: T, chunkSize: number) {
+    public async storeChunked<T extends unknown[]>(data: T, chunkSize: number) {
         const chunks = chunkBy(data, chunkSize);
         return Promise.all(chunks.map(chunk => this.storeData(chunk)));
     }

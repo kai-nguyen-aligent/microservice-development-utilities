@@ -51,32 +51,12 @@
     "vitest": "^2.0.5"
   },
   "author": "Aligent",
-  "license": "ISC",
+  "license": "MIT",
   "workspaces": [
     "packages/*"
   ],
   "nx": {
     "name": "microservice-development-utilities",
-    "includedScripts": [],
-    "targets": {
-      "start-local-registry": {
-        "executor": "nx:run-commands",
-        "options": {
-          "commands": [
-            "verdaccio --listen 4873 --config .verdaccio/config.yml",
-            "npm set registry http://localhost:4873/"
-          ]
-        }
-      },
-      "stop-local-registry": {
-        "executor": "nx:run-commands",
-        "options": {
-          "commands": [
-            "npm set registry https://registry.npmjs.org/",
-            "kill $(lsof -t -i:4873)"
-          ]
-        }
-      }
-    }
+    "includedScripts": []
   }
 }

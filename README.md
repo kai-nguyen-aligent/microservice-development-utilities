@@ -1,36 +1,7 @@
-# Microservices Utilities Library
+# Microservice Development Utilities
 
-This library includes utility functions to simplify & standardise common 
-MicroServices tasks.
+Aligent's monorepo for Microservice Development Utilities. For more details about each package, check out the read me file for each of them.
 
-## Documentation
+# Packages
 
-Documentation on each function can be found [here](docs/modules.md)
-
-## Build
-
-This library is written in typescript and can be built using the NPM script:
-
-```sh
-npm install
-npm run build
-```
-
-## Installation
-
-You can locally install this package to your NPM projects by pulling this repo,
-building it, then running:
-
-```sh
-npm install --save ./path/to/this/project
-```
-
-from your project root.
-
-## Testing & Linting
-
-Jest tests, linting & type-checking can be run with
-
-```sh
-npm run test
-```
+- [Microservice Util Lib](/packages/microservice-util-lib/README.md)

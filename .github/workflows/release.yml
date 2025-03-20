@@ -38,8 +38,10 @@ jobs:
         shell: bash
 
       - name: Release new version
-        run: npx nx release version ${{ github.event.release.tag_name }}
+        run: npx nx release version ${{ env.TAG_NAME }}
         shell: bash
+        env:
+          TAG_NAME: ${{ github.event.release.tag_name }}
 
       - name: Publish to NPM
         run: npx nx release publish --tag=latest

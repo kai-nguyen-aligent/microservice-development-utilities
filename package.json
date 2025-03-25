@@ -19,13 +19,13 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.687.0",
     "@aws-sdk/client-ssm": "^3.687.0",
-    "@nx/devkit": "20.0.12",
     "axios": "^1.7.7",
     "lodash": "^4.17.21",
     "object-hash": "^3.0.0"
   },
   "devDependencies": {
     "@aligent/ts-code-standards": "^3.0.0",
+    "@nx/devkit": "20.0.12",
     "@nx/eslint": "20.0.12",
     "@nx/eslint-plugin": "20.0.12",
     "@nx/js": "20.0.12",

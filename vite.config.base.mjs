@@ -4,16 +4,14 @@ import { defineConfig } from 'vite';
 
 export const viteBaseConfig = defineConfig({
     plugins: [nxViteTsPaths()],
-
     test: {
         globals: true,
         watch: false,
         environment: 'node',
-        passWithNoTests: true,
         reporters: ['default'],
         coverage: {
             provider: 'v8',
-            exclude: ['node_modules/', '**/types', '*.mjs'],
+            exclude: ['node_modules/', '**/types', '*.{js,mjs}'],
             thresholds: {
                 branches: 80,
                 functions: 80,

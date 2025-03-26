@@ -1,5 +1,7 @@
 # openapi-plugin
 
+Generate typed REST clients from OpenAPI 3.0.0 Specifications.
+
 This plugin was generated with [Nx](https://nx.dev).
 
 The openapi-plugin can create api clients based on local or remote schema files. The source files must be .yaml or .json and must adhere to the OpenAPI Specification 3.0.0

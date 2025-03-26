@@ -5,9 +5,7 @@ const nxEslintPlugin = require('@nx/eslint-plugin');
 
 const eslintBaseConfig = [
     ...eslintConfigs.core,
-    {
-        ignores: ['**/*.js', '**/*.mjs', '**/coverage', '**/dist'],
-    },
+    { ignores: ['**/*.{js,mjs}', '**/coverage', '**/dist'] },
     {
         files: ['**/*.ts'],
         plugins: {

@@ -30,13 +30,14 @@
             "cache": true,
             "dependsOn": ["^build"],
             "inputs": ["production", "^production"]
+        },
+        "nx-release-publish": {
+            "dependsOn": ["build"],
+            "inputs": ["production", "^production"]
         }
     },
     "release": {
         "projects": ["packages/*"],
-        "projectsRelationship": "independent",
-        "version": {
-            "preVersionCommand": "npx nx run-many -t build"
-        }
+        "projectsRelationship": "independent"
     }
 }

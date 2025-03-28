@@ -49,6 +49,7 @@
     "typedoc": "^0.28.0",
     "typedoc-plugin-markdown": "^4.5.1",
     "typescript": "^5.6.3",
+    "verdaccio": "^5.0.4",
     "vite": "^5.0.0",
     "vitest": "2.0.5"
   },
@@ -59,6 +60,26 @@
   ],
   "nx": {
     "name": "microservice-development-utilities",
-    "includedScripts": []
+    "includedScripts": [],
+    "targets": {
+      "start-local-registry": {
+        "executor": "nx:run-commands",
+        "options": {
+          "commands": [
+            "verdaccio --listen 4873 --config .verdaccio/config.yml",
+            "npm set registry http://localhost:4873/ --location project"
+          ]
+        }
+      },
+      "stop-local-registry": {
+        "executor": "nx:run-commands",
+        "options": {
+          "commands": [
+            "npm set registry https://registry.npmjs.org/ --location project",
+            "kill $(lsof -t -i:4873)"
+          ]
+        }
+      }
+    }
   }
 }

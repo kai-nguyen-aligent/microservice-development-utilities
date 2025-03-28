@@ -9,11 +9,12 @@ import { InitGeneratorSchema } from './schema';
  * plugin with default options.
  *
  * @param {Tree} tree - The file system tree representing the current project.
- * @param {InitGeneratorSchema} _options - The options passed to the generator (currently unused).
+ * @param {InitGeneratorSchema} _options - The options passed to the generator.
  * @returns {Promise<void>} A promise that resolves when the generator has completed its task.
  */
 export async function initGenerator(tree: Tree, _options: InitGeneratorSchema): Promise<void> {
     const nxJson = readNxJson(tree) || {};
+
     const hasPlugin = nxJson.plugins?.some(p =>
         typeof p === 'string'
             ? p === '@aligent/nx-serverless/plugin'

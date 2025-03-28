@@ -4,7 +4,7 @@ import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { serviceGenerator } from './generator';
 import { serviceGeneratorSchema } from './schema';
 
-describe('service generator', () => {
+describe('@nx/nx-serverless service generator', () => {
     let tree: Tree;
     beforeEach(() => {
         tree = createTreeWithEmptyWorkspace();

@@ -4,15 +4,6 @@ import { serviceGeneratorSchema } from './schema';
 
 const SERVICES_FOLDER = 'services';
 
-const buildRunCommandConfig = (command: string, dir = '{projectRoot}') => ({
-    executor: 'nx:run-commands',
-    options: {
-        cwd: dir,
-        color: true,
-        command: command,
-    },
-});
-
 const getTemplateFilesLocation = (type: serviceGeneratorSchema['type'] = 'general') => {
     if (type === 'notification') {
         return path.join(__dirname, 'notification-files');
@@ -33,17 +24,7 @@ export async function serviceGenerator(tree: Tree, options: serviceGeneratorSche
         root: projectRoot,
         projectType: 'application',
         sourceRoot: `${projectRoot}/src`,
-        targets: {
-            build: {
-                ...buildRunCommandConfig('sls package'),
-            },
-            deploy: {
-                ...buildRunCommandConfig('sls deploy'),
-            },
-            remove: {
-                ...buildRunCommandConfig('sls remove'),
-            },
-        },
+        targets: {},
         tags: ['service', type, name],
     });
 

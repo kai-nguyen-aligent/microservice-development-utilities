@@ -42,4 +42,9 @@ The `@aligent/nx-serverless` package provides Nx generators, executors and plugi
 
 ## Plugins
 
-<!-- MI-198: To be implemented in near future -->
+- This plugin identify our project by looking for `serverless.yml` file. For each project it can find, the following targets are added to the project:
+  - `build`: build the project using `serverless package` command.
+  - `deploy`: deploy the project using `serverless deploy` command.
+  - `remove`: remove the project using `serverless remove` command.
+  
+<!-- MI-198: More to come in near future -->

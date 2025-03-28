@@ -53,7 +53,7 @@ The flow for the generator is as follows:
 
 ```mermaid
 graph LR;
-  R[Recieve path arguments from Nx cli]-->GL[Get local schema from filesystem];
+  R[Receive path arguments from Nx cli]-->GL[Get local schema from filesystem];
   R-->GR[Get remote schema from url];
   GL-->G[Generate TS];
   GR-->G;

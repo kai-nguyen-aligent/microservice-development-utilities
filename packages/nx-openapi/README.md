@@ -1,10 +1,10 @@
-# openapi-plugin
+# OpenAPI REST Client Generator Nx Plugin
 
-Generate typed REST clients from OpenAPI 3.0.0 Specifications.
+Generate typed REST clients from OpenAPI 3.0+ Specifications.
 
 This plugin was generated with [Nx](https://nx.dev).
 
-The openapi-plugin can create api clients based on local or remote schema files. The source files must be .yaml or .json and must adhere to the OpenAPI Specification 3.0.0
+The openapi-plugin can create api clients based on local or remote schema files. The source files must be .yaml or .json and must adhere to the OpenAPI Specification 3.0+
 
 ## Usage
 
@@ -24,7 +24,7 @@ Run `nx g @aligent/nx-openapi:client` with optional flags:
 - `--configPath` path to the redocly config file responsible for authentication when fetching a schema remotely. For more information: https://openapi-ts.dev/cli#auth.
 - `--skipValidate` If passed, this will skip schema pre-validation. Only do this if you have good reason to - not validating the schema beforehand may produce unpredictable results (either things may not generate at all or they may generate something that is incorrect).
 
-**Do not edit the files in the `/generated` folder after generating a client. These files are generated using the OpenAPI Schema and editing them may put you at risk of no longer conforming to the specifications of the API you are using!**
+**:rotating_light: Do not edit the files in the `/generated` folder after generating a client. These files are generated using the OpenAPI Schema and editing them may put you at risk of no longer conforming to the specifications of the API you are using! :rotating_light:**
 
 ### Regenerating types for an existing client
 
@@ -43,10 +43,11 @@ Run `nx run nx-openapi:test` to execute the unit tests.
 ### Details
 
 The plugin was created following the standards for Nx custom plugins. It contains a single `generator.ts` file which is responsible for the main logic behind generating the client.
-For more information on client generation check [Nx plugin documentation]()
+For more information on client generation check [Nx plugin documentation](https://nx.dev/features/generate-code)
 
-Normally, plugin generator take pre-defined files specified in the `/files` directory and automatically use that a basis for writing to a `Tree` object (the data structure Nx uses to generate files).
-Since we are using `openapi-typescript` to generate files in real time, we can't simply create a pre-defined template. Instead we must write to the tree ourselves. We do this by taking the output of the Typescript generation and calling a built in `write` process, to write the returned generated code into a file whilst the generator runs.
+Normally, plugin generators take pre-defined files specified in the `/files` directory and automatically use that a basis for writing to a `Tree` object (the data structure Nx uses to generate files).
+
+Since we are using `openapi-typescript` to generate files in real time, we can't create a pre-defined template. Instead perform write operations to the `Tree` ourselves. We do this by taking the output of the Typescript generation and calling a built in `write` process, to write the generated code into a file as part of the generation.
 
 The flow for the generator is as follows:
 

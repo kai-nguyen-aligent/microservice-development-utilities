@@ -1,5 +1,10 @@
-/* v8 ignore next */
-import { Tree, getProjects, logger, updateProjectConfiguration } from '@nx/devkit';
+import {
+    ProjectConfiguration,
+    Tree,
+    getProjects,
+    logger,
+    updateProjectConfiguration,
+} from '@nx/devkit';
 import { hasNonExistProject } from '../../helpers/projects';
 import { UnlinkGeneratorSchema } from './schema';
 
@@ -12,16 +17,13 @@ export async function unlinkGenerator(tree: Tree, options: UnlinkGeneratorSchema
 
     if (nonExistTargets.length || nonExistDependencies.length) {
         throw new Error(
-            `Projects ${nonExistTargets.concat(nonExistDependencies).join(', ')} does not exist`
+            `Projects ${nonExistTargets.concat(nonExistDependencies).join(', ')} do not exist`
         );
     }
 
     for (const target of targets) {
-        const current = projects.get(target);
-
-        if (!current) {
-            throw new Error(`Project ${target} does not exist`);
-        }
+        // We're 99% sure that target project exist so it's safe to cast type
+        const current = projects.get(target) as ProjectConfiguration;
 
         const implicitDependencies = current.implicitDependencies || [];
 
@@ -36,7 +38,7 @@ export async function unlinkGenerator(tree: Tree, options: UnlinkGeneratorSchema
     }
 
     logger.info(
-        `Successfully removed ${dependencies.join(', ')} as dependencies of  ${targets.join(', ')}`
+        `Successfully removed ${dependencies.join(', ')} from dependencies of ${targets.join(', ')}`
     );
 }
 

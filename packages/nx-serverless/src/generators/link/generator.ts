@@ -1,5 +1,10 @@
-/* v8 ignore next */
-import { getProjects, logger, Tree, updateProjectConfiguration } from '@nx/devkit';
+import {
+    getProjects,
+    logger,
+    ProjectConfiguration,
+    Tree,
+    updateProjectConfiguration,
+} from '@nx/devkit';
 import { hasNonExistProject } from '../../helpers/projects';
 import { LinkGeneratorSchema } from './schema';
 
@@ -12,7 +17,7 @@ export async function linkGenerator(tree: Tree, options: LinkGeneratorSchema) {
 
     if (nonExistTargets.length || nonExistDependencies.length) {
         throw new Error(
-            `Projects ${nonExistTargets.concat(nonExistDependencies).join(', ')} does not exist`
+            `Projects ${nonExistTargets.concat(nonExistDependencies).join(', ')} do not exist`
         );
     }
 
@@ -20,11 +25,8 @@ export async function linkGenerator(tree: Tree, options: LinkGeneratorSchema) {
         // This ensure we do not have circular dependencies
         const implicitDependencies = dependencies.filter(dep => dep != target);
 
-        const current = projects.get(target);
-
-        if (!current) {
-            throw new Error(`Project ${target} does not exist`);
-        }
+        // We're 99% sure that target project exist so it's safe to cast type
+        const current = projects.get(target) as ProjectConfiguration;
 
         updateProjectConfiguration(tree, target, {
             ...current,
@@ -35,7 +37,7 @@ export async function linkGenerator(tree: Tree, options: LinkGeneratorSchema) {
     }
 
     logger.info(
-        `Successfully added ${dependencies.join(', ')} as dependencies of  ${targets.join(', ')}`
+        `Successfully added ${dependencies.join(', ')} as dependencies of ${targets.join(', ')}`
     );
 }
 

@@ -10,11 +10,10 @@
     "directory": "packages/nx-openapi"
   },
   "dependencies": {
-    "openapi-typescript": "^7.5.2",
-    "enquirer": "^2.3.6",
-    "@nx/devkit": "19.8.3",
-    "@redocly/openapi-core": "^1.27.2",
-    "vitest": "2.0.0"
+    "@nx/devkit": "20.7.0",
+    "@redocly/openapi-core": "^1.34.1",
+    "openapi-typescript": "^7.6.1",
+    "enquirer": "^2.3.6"
   },
   "generators": "./generators.json",
   "author": "Aligent",

@@ -1,4 +1,3 @@
-/* v8 ignore next */
 import { ProjectConfiguration } from '@nx/devkit';
 
 /**

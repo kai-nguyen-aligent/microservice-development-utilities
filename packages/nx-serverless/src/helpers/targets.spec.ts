@@ -16,7 +16,7 @@ describe('buildBuildTarget', () => {
             cache: true,
             dependsOn: [
                 {
-                    projects: '{dependencies}',
+                    dependencies: true,
                     target: 'build',
                     params: 'forward',
                 },
@@ -53,7 +53,7 @@ describe('buildBuildTarget', () => {
             cache: true,
             dependsOn: [
                 {
-                    projects: '{dependencies}',
+                    dependencies: true,
                     target: 'build',
                     params: 'forward',
                 },
@@ -91,7 +91,7 @@ describe('buildDeployTarget', () => {
             cache: false,
             dependsOn: [
                 {
-                    projects: '{dependencies}',
+                    dependencies: true,
                     target: 'deploy',
                     params: 'forward',
                 },
@@ -126,7 +126,7 @@ describe('buildDeployTarget', () => {
             cache: false,
             dependsOn: [
                 {
-                    projects: '{dependencies}',
+                    dependencies: true,
                     target: 'deploy',
                     params: 'forward',
                 },

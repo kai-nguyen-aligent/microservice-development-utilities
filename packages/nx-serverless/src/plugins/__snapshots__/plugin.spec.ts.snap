@@ -15,8 +15,8 @@ exports[`@nx/nx-serverless plugin > should create nodes 1`] = `
               "command": "serverless package",
               "dependsOn": [
                 {
+                  "dependencies": true,
                   "params": "forward",
-                  "projects": "{dependencies}",
                   "target": "build",
                 },
               ],
@@ -56,143 +56,8 @@ exports[`@nx/nx-serverless plugin > should create nodes 1`] = `
               "command": "serverless deploy",
               "dependsOn": [
                 {
+                  "dependencies": true,
                   "params": "forward",
-                  "projects": "{dependencies}",
-                  "target": "deploy",
-                },
-              ],
-              "inputs": [
-                "production",
-                "^production",
-                {
-                  "externalDependencies": [
-                    "serverless",
-                  ],
-                },
-              ],
-              "metadata": {
-                "description": "Deploy stack using Serverless",
-                "help": {
-                  "command": "npx nx run my-app:deploy --help",
-                  "example": {
-                    "options": {
-                      "profile": "development",
-                      "stage": "dev",
-                    },
-                  },
-                },
-                "technologies": [
-                  "Serverless",
-                ],
-              },
-              "options": {
-                "cwd": "my-app",
-              },
-            },
-            "remove": {
-              "cache": false,
-              "command": "serverless remove",
-              "dependsOn": [
-                {
-                  "params": "forward",
-                  "projects": [],
-                  "target": "remove",
-                },
-              ],
-              "inputs": [
-                "production",
-                "^production",
-                {
-                  "externalDependencies": [
-                    "serverless",
-                  ],
-                },
-              ],
-              "metadata": {
-                "description": "Remove stack using Serverless",
-                "help": {
-                  "command": "npx nx run my-app:remove --help",
-                  "example": {
-                    "options": {
-                      "profile": "development",
-                      "stage": "dev",
-                    },
-                  },
-                },
-                "technologies": [
-                  "Serverless",
-                ],
-              },
-              "options": {
-                "cwd": "my-app",
-              },
-            },
-          },
-        },
-      },
-    },
-  ],
-]
-`;
-
-exports[`@nx/nx-serverless/plugin > should create nodes 1`] = `
-[
-  [
-    "my-app/serverless.yml",
-    {
-      "projects": {
-        "my-app": {
-          "metadata": {},
-          "root": "my-app",
-          "targets": {
-            "build": {
-              "cache": true,
-              "command": "serverless package",
-              "dependsOn": [
-                {
-                  "params": "forward",
-                  "projects": "{dependencies}",
-                  "target": "build",
-                },
-              ],
-              "inputs": [
-                "production",
-                "^production",
-                {
-                  "externalDependencies": [
-                    "serverless",
-                  ],
-                },
-              ],
-              "metadata": {
-                "description": "Build stack using Serverless",
-                "help": {
-                  "command": "npx nx run my-app:build --help",
-                  "example": {
-                    "options": {
-                      "profile": "development",
-                      "stage": "dev",
-                    },
-                  },
-                },
-                "technologies": [
-                  "Serverless",
-                ],
-              },
-              "options": {
-                "cwd": "my-app",
-              },
-              "outputs": [
-                "{projectRoot}/.serverless",
-              ],
-            },
-            "deploy": {
-              "cache": false,
-              "command": "serverless deploy",
-              "dependsOn": [
-                {
-                  "params": "forward",
-                  "projects": "{dependencies}",
                   "target": "deploy",
                 },
               ],

@@ -1,4 +1,4 @@
-import { getPackageManagerCommand, joinPathFragments, TargetDependencyConfig } from '@nx/devkit';
+import { getPackageManagerCommand, joinPathFragments } from '@nx/devkit';
 
 const pmc = getPackageManagerCommand();
 
@@ -17,37 +17,14 @@ export function buildBuildTarget(
     namedInputs: Record<string, unknown>,
     outputs: string[]
 ): object {
-    const dependenciesConfig: TargetDependencyConfig = {
-        projects: '{dependencies}',
-        target: 'build',
-        params: 'forward',
-    };
-
     return {
         command: 'serverless package',
         options: { cwd: joinPathFragments(projectRoot) },
         cache: true,
-        dependsOn: [dependenciesConfig],
-        inputs: [
-            ...('production' in namedInputs
-                ? ['production', '^production']
-                : ['default', '^default']),
-            { externalDependencies: ['serverless'] },
-        ],
+        dependsOn: [{ dependencies: true, target: 'build', params: 'forward' }],
+        inputs: constructInputs(namedInputs),
         outputs,
-        metadata: {
-            technologies: ['Serverless'],
-            description: `Build stack using Serverless`,
-            help: {
-                command: `${pmc.exec} nx run ${name}:build --help`,
-                example: {
-                    options: {
-                        stage: 'dev',
-                        profile: 'development',
-                    },
-                },
-            },
-        },
+        metadata: constructMetaData(name, 'build', 'Build stack using Serverless'),
     };
 }
 
@@ -65,36 +42,13 @@ export function buildDeployTarget(
     projectRoot: string,
     namedInputs: Record<string, unknown>
 ): object {
-    const dependenciesConfig: TargetDependencyConfig = {
-        projects: '{dependencies}',
-        target: 'deploy',
-        params: 'forward',
-    };
-
     return {
         command: 'serverless deploy',
         options: { cwd: joinPathFragments(projectRoot) },
         cache: false,
-        dependsOn: [dependenciesConfig],
-        inputs: [
-            ...('production' in namedInputs
-                ? ['production', '^production']
-                : ['default', '^default']),
-            { externalDependencies: ['serverless'] },
-        ],
-        metadata: {
-            technologies: ['Serverless'],
-            description: `Deploy stack using Serverless`,
-            help: {
-                command: `${pmc.exec} nx run ${name}:deploy --help`,
-                example: {
-                    options: {
-                        stage: 'dev',
-                        profile: 'development',
-                    },
-                },
-            },
-        },
+        dependsOn: [{ dependencies: true, target: 'deploy', params: 'forward' }],
+        inputs: constructInputs(namedInputs),
+        metadata: constructMetaData(name, 'deploy', 'Deploy stack using Serverless'),
     };
 }
 
@@ -116,33 +70,33 @@ export function buildRemoveTarget(
     // Find and collect all the project names where this project is a dependency
     const projects = Object.keys(dependencies).filter(dep => dependencies[dep]?.includes(name));
 
-    const dependenciesConfig: TargetDependencyConfig = {
-        projects,
-        target: 'remove',
-        params: 'forward',
-    };
-
     return {
         command: 'serverless remove',
         options: { cwd: joinPathFragments(projectRoot) },
         cache: false,
-        dependsOn: [dependenciesConfig],
-        inputs: [
-            ...('production' in namedInputs
-                ? ['production', '^production']
-                : ['default', '^default']),
-            { externalDependencies: ['serverless'] },
-        ],
-        metadata: {
-            technologies: ['Serverless'],
-            description: `Remove stack using Serverless`,
-            help: {
-                command: `${pmc.exec} nx run ${name}:remove --help`,
-                example: {
-                    options: {
-                        stage: 'dev',
-                        profile: 'development',
-                    },
+        dependsOn: [{ projects, target: 'remove', params: 'forward' }],
+        inputs: constructInputs(namedInputs),
+        metadata: constructMetaData(name, 'remove', `Remove stack using Serverless`),
+    };
+}
+
+function constructInputs(namedInputs: Record<string, unknown>) {
+    return [
+        ...('production' in namedInputs ? ['production', '^production'] : ['default', '^default']),
+        { externalDependencies: ['serverless'] },
+    ];
+}
+
+function constructMetaData(projectName: string, targetName: string, description: string) {
+    return {
+        technologies: ['Serverless'],
+        description,
+        help: {
+            command: `${pmc.exec} nx run ${projectName}:${targetName} --help`,
+            example: {
+                options: {
+                    stage: 'dev',
+                    profile: 'development',
                 },
             },
         },

@@ -8,7 +8,17 @@ import {
 import { hasNonExistProject } from '../../helpers/projects';
 import { LinkGeneratorSchema } from './schema';
 
-export async function linkGenerator(tree: Tree, options: LinkGeneratorSchema) {
+/**
+ * Links the specified targets as dependencies of the given targets.
+ *
+ * This generator will throw errors if any of the specified targets or dependencies do not exist.
+ * It will then add the specified dependencies to the targets implicitDependencies list.
+ *
+ * @param {Tree} tree - The file system tree representing the current project.
+ * @param {LinkGeneratorSchema} options - The options passed to the generator, containing the targets and dependencies.
+ * @returns {Promise<void>} A promise that resolves when the generator has completed its task.
+ */
+export async function linkGenerator(tree: Tree, options: LinkGeneratorSchema): Promise<void> {
     const { targets, dependencies } = options;
     const projects = getProjects(tree);
 

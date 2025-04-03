@@ -1,4 +1,5 @@
-import { getPackageManagerCommand, joinPathFragments } from '@nx/devkit';
+import { getPackageManagerCommand, joinPathFragments, TargetConfiguration } from '@nx/devkit';
+import { InputDefinition, TargetMetadata } from 'nx/src/config/workspace-json-project-json';
 
 const pmc = getPackageManagerCommand();
 
@@ -9,14 +10,14 @@ const pmc = getPackageManagerCommand();
  * @param {string} projectRoot - The root directory of the project.
  * @param {Record<string, unknown>} namedInputs - The named inputs for the `build` target.
  * @param {string[]} outputs - The output paths for the `build` target.
- * @returns {object} The configuration object of the `build` target.
+ * @returns {TargetConfiguration} The configuration object of the `build` target.
  */
 export function buildBuildTarget(
     name: string,
     projectRoot: string,
     namedInputs: Record<string, unknown>,
     outputs: string[]
-): object {
+): TargetConfiguration {
     return {
         command: 'serverless package',
         options: { cwd: joinPathFragments(projectRoot) },
@@ -35,13 +36,13 @@ export function buildBuildTarget(
  * @param {string} projectRoot - The root directory of the project.
  * @param {Record<string, unknown>} namedInputs - The named inputs for the `deploy` target.
  * @param {string[]} outputs - The output paths for the `deploy` target.
- * @returns {object} The configuration object of the `deploy` target.
+ * @returns {TargetConfiguration} The configuration object of the `deploy` target.
  */
 export function buildDeployTarget(
     name: string,
     projectRoot: string,
     namedInputs: Record<string, unknown>
-): object {
+): TargetConfiguration {
     return {
         command: 'serverless deploy',
         options: { cwd: joinPathFragments(projectRoot) },
@@ -66,7 +67,7 @@ export function buildRemoveTarget(
     projectRoot: string,
     dependencies: Record<string, string[]>,
     namedInputs: Record<string, unknown>
-): object {
+): TargetConfiguration {
     // Find and collect all the project names where this project is a dependency
     const projects = Object.keys(dependencies).filter(dep => dependencies[dep]?.includes(name));
 
@@ -80,14 +81,32 @@ export function buildRemoveTarget(
     };
 }
 
-function constructInputs(namedInputs: Record<string, unknown>) {
+/**
+ * Constructs the inputs for a target.
+ *
+ * @param {Record<string, unknown>} namedInputs - The named inputs for the target.
+ * @returns {Array} An array containing the inputs for the target.
+ */
+function constructInputs(namedInputs: Record<string, unknown>): Array<InputDefinition | string> {
     return [
         ...('production' in namedInputs ? ['production', '^production'] : ['default', '^default']),
         { externalDependencies: ['serverless'] },
     ];
 }
 
-function constructMetaData(projectName: string, targetName: string, description: string) {
+/**
+ * Constructs the metadata for a target.
+ *
+ * @param {string} projectName - The name of the project.
+ * @param {string} targetName - The name of the target.
+ * @param {string} description - The description of the target.
+ * @returns {TargetMetadata} The metadata object for the target.
+ */
+function constructMetaData(
+    projectName: string,
+    targetName: string,
+    description: string
+): TargetMetadata {
     return {
         technologies: ['Serverless'],
         description,

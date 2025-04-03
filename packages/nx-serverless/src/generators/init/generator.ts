@@ -4,9 +4,8 @@ import { InitGeneratorSchema } from './schema';
 /**
  * Initializes the Nx Serverless plugin by adding it to the `nx.json` configuration file.
  *
- * This generator ensures that the `@nx/nx-serverless/plugin` is registered in the `plugins` section
- * of the `nx.json` file. If the plugin is already present, no changes are made. If not, it adds the
- * plugin with default options.
+ * This generator ensures that the `@nx/nx-serverless/plugin` is registered.
+ * If the plugin is not present yet, it is added the with default options.
  *
  * @param {Tree} tree - The file system tree representing the current project.
  * @param {InitGeneratorSchema} _options - The options passed to the generator.

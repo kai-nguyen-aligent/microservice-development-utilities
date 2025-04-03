@@ -8,6 +8,16 @@ import {
 import { hasNonExistProject } from '../../helpers/projects';
 import { UnlinkGeneratorSchema } from './schema';
 
+/**
+ * Unlinks the specified dependencies from the given targets.
+ *
+ * This generator will throw errors if any of the specified targets or dependencies do not exist.
+ * It will then remove the specified dependencies from the specified targets.
+ *
+ * @param {Tree} tree - The file system tree representing the current project.
+ * @param {UnlinkGeneratorSchema} options - The options passed to the generator, containing the targets and dependencies.
+ * @returns {Promise<void>} A promise that resolves when the generator has completed its task.
+ */
 export async function unlinkGenerator(tree: Tree, options: UnlinkGeneratorSchema) {
     const { targets, dependencies } = options;
     const projects = getProjects(tree);

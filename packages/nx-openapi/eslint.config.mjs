@@ -1,8 +1,8 @@
-const baseConfig = require('../../eslint.config.js');
-const jsonParser = require('jsonc-eslint-parser');
-const nxEslintPlugin = require('@nx/eslint-plugin');
+import nxEslintPlugin from '@nx/eslint-plugin';
+import jsonParser from 'jsonc-eslint-parser';
+import baseConfig from '../../eslint.config.mjs';
 
-module.exports = [
+export default [
     ...baseConfig,
     {
         files: ['./package.json'],

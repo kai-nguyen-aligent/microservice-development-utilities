@@ -7,8 +7,8 @@ import { LinkGeneratorSchema } from './schema';
 describe('link generator', () => {
     let tree: Tree;
     const options: LinkGeneratorSchema = {
-        targets: ['projectA'],
-        dependencies: ['projectB', 'projectC'],
+        targets: 'projectA',
+        dependencies: 'projectB, projectC',
     };
 
     beforeEach(() => {
@@ -31,8 +31,8 @@ describe('link generator', () => {
 
     it('should not add circular dependencies', async () => {
         const circularOptions: LinkGeneratorSchema = {
-            targets: ['projectA'],
-            dependencies: ['projectA', 'projectB'],
+            targets: 'projectA',
+            dependencies: 'projectA, projectB',
         };
 
         await linkGenerator(tree, circularOptions);
@@ -43,8 +43,8 @@ describe('link generator', () => {
 
     it('should throw an error if target projects do not exist', async () => {
         const invalidOptions: LinkGeneratorSchema = {
-            targets: ['nonExistentProject'],
-            dependencies: ['projectB'],
+            targets: 'nonExistentProject',
+            dependencies: 'projectB',
         };
 
         await expect(linkGenerator(tree, invalidOptions)).rejects.toThrow(
@@ -54,8 +54,8 @@ describe('link generator', () => {
 
     it('should throw an error if dependency projects do not exist', async () => {
         const invalidOptions: LinkGeneratorSchema = {
-            targets: ['projectA'],
-            dependencies: ['nonExistentProject'],
+            targets: 'projectA',
+            dependencies: 'nonExistentProject',
         };
 
         await expect(linkGenerator(tree, invalidOptions)).rejects.toThrow(

@@ -1,8 +1,8 @@
 import {
     ProjectConfiguration,
     Tree,
+    formatFiles,
     getProjects,
-    logger,
     updateProjectConfiguration,
 } from '@nx/devkit';
 import { hasNonExistProject } from '../../helpers/projects';
@@ -19,7 +19,8 @@ import { UnlinkGeneratorSchema } from './schema';
  * @returns {Promise<void>} A promise that resolves when the generator has completed its task.
  */
 export async function unlinkGenerator(tree: Tree, options: UnlinkGeneratorSchema) {
-    const { targets, dependencies } = options;
+    const targets = options.targets.split(',').map(target => target.trim());
+    const dependencies = options.dependencies.split(',').map(dep => dep.trim());
     const projects = getProjects(tree);
 
     const nonExistTargets = hasNonExistProject(projects, targets);
@@ -35,21 +36,19 @@ export async function unlinkGenerator(tree: Tree, options: UnlinkGeneratorSchema
         // We're 99% sure that target project exist so it's safe to cast type
         const current = projects.get(target) as ProjectConfiguration;
 
-        const implicitDependencies = current.implicitDependencies || [];
+        const currentImplicitDependencies = current.implicitDependencies || [];
 
-        const updatedImplicitDependencies = implicitDependencies.filter(
+        const implicitDependencies = currentImplicitDependencies.filter(
             dep => !dependencies.includes(dep)
         );
 
         updateProjectConfiguration(tree, target, {
             ...current,
-            implicitDependencies: updatedImplicitDependencies,
+            implicitDependencies: implicitDependencies.length ? implicitDependencies : undefined,
         });
     }
 
-    logger.info(
-        `Successfully removed ${dependencies.join(', ')} from dependencies of ${targets.join(', ')}`
-    );
+    await formatFiles(tree);
 }
 
 export default unlinkGenerator;

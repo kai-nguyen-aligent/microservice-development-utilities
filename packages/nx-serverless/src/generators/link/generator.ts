@@ -1,6 +1,6 @@
 import {
+    formatFiles,
     getProjects,
-    logger,
     ProjectConfiguration,
     Tree,
     updateProjectConfiguration,
@@ -19,7 +19,8 @@ import { LinkGeneratorSchema } from './schema';
  * @returns {Promise<void>} A promise that resolves when the generator has completed its task.
  */
 export async function linkGenerator(tree: Tree, options: LinkGeneratorSchema): Promise<void> {
-    const { targets, dependencies } = options;
+    const targets = options.targets.split(',').map(target => target.trim());
+    const dependencies = options.dependencies.split(',').map(dep => dep.trim());
     const projects = getProjects(tree);
 
     const nonExistTargets = hasNonExistProject(projects, targets);
@@ -33,22 +34,22 @@ export async function linkGenerator(tree: Tree, options: LinkGeneratorSchema): P
 
     for (const target of targets) {
         // This ensure we do not have circular dependencies
-        const implicitDependencies = dependencies.filter(dep => dep != target);
+        const newImplicitDependencies = dependencies.filter(dep => dep != target);
 
         // We're 99% sure that target project exist so it's safe to cast type
         const current = projects.get(target) as ProjectConfiguration;
 
+        const implicitDependencies = Array.from(
+            new Set((current.implicitDependencies || []).concat(newImplicitDependencies))
+        );
+
         updateProjectConfiguration(tree, target, {
             ...current,
-            implicitDependencies: Array.from(
-                new Set((current.implicitDependencies || []).concat(implicitDependencies))
-            ),
+            implicitDependencies: implicitDependencies.length ? implicitDependencies : undefined,
         });
     }
 
-    logger.info(
-        `Successfully added ${dependencies.join(', ')} as dependencies of ${targets.join(', ')}`
-    );
+    await formatFiles(tree);
 }
 
 export default linkGenerator;

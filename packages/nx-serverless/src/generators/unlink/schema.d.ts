@@ -1,4 +1,4 @@
 export interface UnlinkGeneratorSchema {
-    targets: string[];
-    dependencies: string[];
+    targets: string;
+    dependencies: string;
 }

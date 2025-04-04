@@ -7,8 +7,8 @@ import { UnlinkGeneratorSchema } from './schema';
 describe('unlinkGenerator', () => {
     let tree: Tree;
     const options: UnlinkGeneratorSchema = {
-        targets: ['projectA'],
-        dependencies: ['projectB', 'projectC'],
+        targets: 'projectA',
+        dependencies: 'projectB, projectC',
     };
 
     beforeEach(() => {
@@ -36,8 +36,8 @@ describe('unlinkGenerator', () => {
 
     it('should throw an error if target projects do not exist', async () => {
         const invalidOptions: UnlinkGeneratorSchema = {
-            targets: ['nonExistentProject'],
-            dependencies: ['projectB'],
+            targets: 'nonExistentProject',
+            dependencies: 'projectB',
         };
 
         await expect(unlinkGenerator(tree, invalidOptions)).rejects.toThrow(
@@ -47,8 +47,8 @@ describe('unlinkGenerator', () => {
 
     it('should throw an error if dependency projects do not exist', async () => {
         const invalidOptions: UnlinkGeneratorSchema = {
-            targets: ['projectA'],
-            dependencies: ['nonExistentProject'],
+            targets: 'projectA',
+            dependencies: 'nonExistentProject',
         };
 
         await expect(unlinkGenerator(tree, invalidOptions)).rejects.toThrow(
@@ -59,8 +59,8 @@ describe('unlinkGenerator', () => {
     it('should not throw an error if dependencies are not in the implicitDependencies list', async () => {
         tree.write('projectE/project.json', JSON.stringify({ name: 'projectE' }));
         const optionsWithNonExistentDependencies: UnlinkGeneratorSchema = {
-            targets: ['projectA'],
-            dependencies: ['projectE'],
+            targets: 'projectA',
+            dependencies: 'projectE',
         };
 
         await expect(

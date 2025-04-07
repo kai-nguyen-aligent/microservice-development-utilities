@@ -24,6 +24,11 @@ export async function clientGenerator(tree: Tree, options: ClientGeneratorSchema
         skipValidate = false,
     } = options;
 
+    const ext = schemaPath.split('.').pop();
+    if (ext !== 'yaml' && ext !== 'yml' && ext !== 'json') {
+        throw new Error(`Invalid schema file extension: ${ext}`);
+    }
+
     const projectRoot = `clients/${name}`;
 
     let existingProject = false;
@@ -39,7 +44,7 @@ export async function clientGenerator(tree: Tree, options: ClientGeneratorSchema
                     executor: 'nx:run-commands',
                     options: {
                         cwd: projectRoot,
-                        command: 'npx @redocly/cli lint schema' + schemaPath.slice(-5),
+                        command: `npx @redocly/cli lint schema.${ext}`,
                     },
                 },
             },

@@ -14,6 +14,8 @@ import {
 } from '../../helpers/generate-openapi-types';
 import { ClientGeneratorSchema } from './schema';
 
+const VALID_EXTENSIONS = ['yaml', 'yml', 'json'];
+
 export async function clientGenerator(tree: Tree, options: ClientGeneratorSchema) {
     const {
         name,
@@ -24,13 +26,8 @@ export async function clientGenerator(tree: Tree, options: ClientGeneratorSchema
         skipValidate = false,
     } = options;
 
-    // Up the top of the file
-    const validExtensions = ['yaml', 'yml', 'json'];
-    
-    // ...
-   
-    const ext = schemaPath.split('.').pop();
-    if (!validExtensions.includes(ext)) {
+    const ext = schemaPath.split('.').pop() || '';
+    if (!VALID_EXTENSIONS.includes(ext)) {
         throw new Error(`Invalid schema file extension: ${ext}`);
     }
 

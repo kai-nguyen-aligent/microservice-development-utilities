@@ -24,8 +24,13 @@ export async function clientGenerator(tree: Tree, options: ClientGeneratorSchema
         skipValidate = false,
     } = options;
 
+    // Up the top of the file
+    const validExtensions = ['yaml', 'yml', 'json'];
+    
+    // ...
+   
     const ext = schemaPath.split('.').pop();
-    if (ext !== 'yaml' && ext !== 'yml' && ext !== 'json') {
+    if (!validExtensions.includes(ext)) {
         throw new Error(`Invalid schema file extension: ${ext}`);
     }
 

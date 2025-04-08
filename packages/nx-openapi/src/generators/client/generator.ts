@@ -14,6 +14,8 @@ import {
 } from '../../helpers/generate-openapi-types';
 import { ClientGeneratorSchema } from './schema';
 
+const VALID_EXTENSIONS = ['yaml', 'yml', 'json'];
+
 export async function clientGenerator(tree: Tree, options: ClientGeneratorSchema) {
     const {
         name,
@@ -23,6 +25,11 @@ export async function clientGenerator(tree: Tree, options: ClientGeneratorSchema
         configPath,
         skipValidate = false,
     } = options;
+
+    const ext = schemaPath.split('.').pop() || '';
+    if (!VALID_EXTENSIONS.includes(ext)) {
+        throw new Error(`Invalid schema file extension: ${ext}`);
+    }
 
     const projectRoot = `clients/${name}`;
 
@@ -39,7 +46,7 @@ export async function clientGenerator(tree: Tree, options: ClientGeneratorSchema
                     executor: 'nx:run-commands',
                     options: {
                         cwd: projectRoot,
-                        command: 'npx @redocly/cli lint schema' + schemaPath.slice(-5),
+                        command: `npx @redocly/cli lint schema.${ext}`,
                     },
                 },
             },

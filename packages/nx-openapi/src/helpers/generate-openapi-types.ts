@@ -92,12 +92,17 @@ export async function copySchema(tree: Tree, name: string, schemaPath: string, r
     } else {
         schemaBuffer = tree.read(schemaPath);
     }
-    if (schemaBuffer) {
-        tree.write(
-            `clients/${name}/schema` + schemaPath.slice(-5), // Use last 5 characters to determine file type
-            schemaBuffer
-        );
+
+    if (!schemaBuffer) {
+        throw new Error(`Failed to read schema at ${schemaPath}`);
     }
+
+    const ext = schemaPath.split('.').pop() || 'yaml';
+    const destination = `clients/${name}/schema.${ext}`;
+
+    tree.write(destination, schemaBuffer);
+
+    return destination;
 }
 
 // This is ignored by coverage because its relying on a third party package to do the validation step

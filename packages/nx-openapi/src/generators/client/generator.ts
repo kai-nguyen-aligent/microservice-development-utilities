@@ -1,85 +1,43 @@
-import {
-    Tree,
-    addProjectConfiguration,
-    formatFiles,
-    generateFiles,
-    joinPathFragments,
-    updateJson,
-} from '@nx/devkit';
-import { prompt } from 'enquirer';
+import { Tree, formatFiles, generateFiles, joinPathFragments, logger } from '@nx/devkit';
 import {
     copySchema,
     generateOpenApiTypes,
     validateSchema,
 } from '../../helpers/generate-openapi-types';
+import { addTsConfigPath, attemptToAddProjectConfiguration } from '../../helpers/utilities';
 import { ClientGeneratorSchema } from './schema';
 
 const VALID_EXTENSIONS = ['yaml', 'yml', 'json'];
 
 export async function clientGenerator(tree: Tree, options: ClientGeneratorSchema) {
-    const {
-        name,
-        schemaPath,
-        remote,
-        importPath = `@clients/${name}`,
-        configPath,
-        skipValidate = false,
-    } = options;
+    const { name, schemaPath, importPath = `@clients/${name}`, skipValidate, override } = options;
 
     const ext = schemaPath.split('.').pop() || '';
     if (!VALID_EXTENSIONS.includes(ext)) {
         throw new Error(`Invalid schema file extension: ${ext}`);
     }
 
-    const projectRoot = `clients/${name}`;
-
-    let existingProject = false;
-
-    // Add to project config. If project already exists then ask to overwrite existing types/schema
-    try {
-        addProjectConfiguration(tree, name, {
-            root: projectRoot,
-            projectType: 'library',
-            sourceRoot: `${projectRoot}/src`,
-            targets: {
-                validate: {
-                    executor: 'nx:run-commands',
-                    options: {
-                        cwd: projectRoot,
-                        command: `npx @redocly/cli lint schema.${ext}`,
-                    },
-                },
-            },
-            tags: ['client', name],
-        });
-        /* v8 ignore start */ // Testing this is a pain.
-    } catch (error) {
-        if (isExistingProject(error as Error)) {
-            existingProject = true;
-            const response = await confirmOverwrite(name);
-            if (!response.overwrite) {
-                console.log('Cancelling...');
-                return;
-            }
-        } else {
-            throw error;
-        }
-        /* v8 ignore end */
-    }
-
+    // TODO MI-201 Unit tests fail when performing schema validation
+    /* v8 ignore next 3 */
     if (!skipValidate) {
         await validateSchema(schemaPath);
     }
 
-    const contents = await generateOpenApiTypes(tree, schemaPath, remote, configPath);
+    const projectRoot = `clients/${name}`;
+    const schemaDest = `${projectRoot}/schema.${ext}`;
+    const typesDest = `${projectRoot}/generated/index.ts`;
 
-    await copySchema(tree, name, schemaPath, remote);
+    const isNewProject = attemptToAddProjectConfiguration(tree, name, projectRoot);
 
-    tree.write(`${projectRoot}/generated/index.ts`, contents);
+    if (!isNewProject && !override) {
+        logger.info(
+            `Project ${name} already exists. Use --override to override the existing schema.`
+        );
+        return;
+    }
 
-    // Generate new files if the project is new
-    if (!existingProject) {
-        console.log('Generating supplementary files...');
+    if (isNewProject) {
+        logger.info(`Creating new project at ${projectRoot}`);
 
         // Generate other files
         generateFiles(tree, joinPathFragments(__dirname, './files'), projectRoot, options);
@@ -88,52 +46,11 @@ export async function clientGenerator(tree: Tree, options: ClientGeneratorSchema
         addTsConfigPath(tree, importPath, [joinPathFragments(projectRoot, './src', 'index.ts')]);
     }
 
+    await copySchema(tree, schemaDest, schemaPath);
+
+    await generateOpenApiTypes(tree, schemaDest, typesDest);
+
     await formatFiles(tree);
-}
-
-export function isExistingProject(error: Error): boolean {
-    return error.message.includes('already exists');
-}
-
-export async function confirmOverwrite(name: string): Promise<{ overwrite: boolean }> {
-    return await prompt({
-        type: 'confirm',
-        name: 'overwrite',
-        message: `Project ${name} already exists. Do you want to overwrite it?`,
-    });
-}
-
-/**
- * These utility functions are only exported by '@nx/js', not '@nx/devkit'
- * They're simple so we recreate them here instead of adding '@nx/js' as a dependency
- * Source: {@link https://github.com/nrwl/nx/blob/master/packages/js/src/utils/typescript/ts-config.ts}
- */
-export function getRootTsConfigPathInTree(tree: Tree): string {
-    for (const path of ['tsconfig.base.json', 'tsconfig.json']) {
-        if (tree.exists(path)) {
-            return path;
-        }
-    }
-
-    return 'tsconfig.base.json';
-}
-
-function addTsConfigPath(tree: Tree, importPath: string, lookupPaths: string[]) {
-    updateJson(tree, getRootTsConfigPathInTree(tree), json => {
-        json.compilerOptions ??= {};
-        const c = json.compilerOptions;
-        c.paths ??= {};
-
-        if (c.paths[importPath]) {
-            throw new Error(
-                `You already have a library using the import path "${importPath}". Make sure to specify a unique one.`
-            );
-        }
-
-        c.paths[importPath] = lookupPaths;
-
-        return json;
-    });
 }
 
 export default clientGenerator;

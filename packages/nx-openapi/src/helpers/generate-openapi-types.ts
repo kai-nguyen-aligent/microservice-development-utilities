@@ -1,112 +1,55 @@
-// @ts-expect-error This is ignored because openapi-typescript has issues with CJS support. https://arethetypeswrong.github.io/?p=openapi-typescript%407.5.2
-import openapiTS, { astToString } from 'openapi-typescript';
-
-import { Tree } from '@nx/devkit';
-import { loadConfig } from '@redocly/openapi-core';
+import { logger, Tree } from '@nx/devkit';
 import { spawn } from 'child_process';
-
-/**
- * Generates the open api types using openapi-typescript,
- * @returns Generated type contents
- */
-export async function generateOpenApiTypes(
-    tree: Tree,
-    schemaPath: string,
-    remote = false,
-    configPath?: string
-) {
-    // Parse schema into type definition
-    let contents;
-    if (remote) {
-        console.log('Getting remote schema...');
-        contents = await generateTypesFromRemoteSchema(schemaPath, configPath);
-    } else {
-        console.log('Getting local schema... (use --remote to get remote schema)');
-        contents = await generateTypesFromLocalSchema(tree.root, schemaPath);
-    }
-
-    return contents;
-}
-
-function parseUrlString(url: string): URL {
-    const parsed = new URL(url);
-
-    if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') {
-        throw new Error(`${parsed.href} is an invalid remote url.`);
-    }
-    return parsed;
-}
-
-/**
- * Gets the remote schema from an endpoint url. Uses configured authorization or passed in via the user
- * @param url Remote url to fetch the schema from
- * @param configPath The path to a local 'redocly' config file. This will be passed into the requests, mainly to specify auth details if required.
- * @returns a string representation of the remote schema
- */
-/* v8 ignore start */ // Ignored because these are just wrappers around the ts gen library. No point testing
-export async function generateTypesFromRemoteSchema(url: string, configPath?: string) {
-    const parsedUrl = parseUrlString(url);
-    if (configPath) {
-        const config = await loadConfig({ configPath });
-        console.log('Loaded Config: ', config);
-        console.log('Generating types...');
-        const ast = await openapiTS(parsedUrl, {
-            redocly: config,
-        });
-        return astToString(ast);
-    } else {
-        const ast = await openapiTS(parsedUrl);
-        return astToString(ast);
-    }
-}
+import { readFileSync } from 'fs';
+import openapiTS, { astToString } from 'openapi-typescript';
 
 /**
  * Grabs schema data from local directory. The schemaPath is evaluated relative to the root of the template project,
  * not the root of the generator.
  * @param rootDir Root directory of the project tree
  * @param schemaPath Path of the schema relative to the root of the entire project.
- * @returns a string representation of the schema contents.
+ * @param typeDest Destination of the generated types.
+ * @returns Promise<void>
  */
-async function generateTypesFromLocalSchema(rootDir: string, schemaPath: string) {
+export async function generateOpenApiTypes(tree: Tree, schemaPath: string, typeDest: string) {
     try {
-        console.log('Generating types...');
-        const ast = await openapiTS(`file:///${rootDir}/${schemaPath}`);
-        return astToString(ast);
+        logger.info(`Generating types from ${schemaPath}`);
+        const ast = await openapiTS(tree.read(schemaPath));
+
+        tree.write(typeDest, astToString(ast));
     } catch (e) {
-        throw new Error(
-            `Failed to generate local file at path ${rootDir}/${schemaPath} (did you mean to pass --remote?)` +
-                e
-        );
+        throw new Error(`Failed to generate types for path ${schemaPath}` + e);
     }
 }
-/* v8 ignore end */
 
+// We do not want to test this function.
+// It only download/copy the schema to a specified destination.
+/* v8 ignore start */
 /**
  * Copies the original schema from the source to newly generated client
  */
-export async function copySchema(tree: Tree, name: string, schemaPath: string, remote?: boolean) {
-    let schemaBuffer;
-    if (remote) {
+export async function copySchema(tree: Tree, destination: string, schemaPath: string) {
+    const isRemoteSchema = schemaPath.startsWith('http://') || schemaPath.startsWith('https://');
+
+    let schema: Buffer | null;
+
+    if (isRemoteSchema) {
         const response = await fetch(schemaPath);
-        schemaBuffer = Buffer.from(await response.arrayBuffer());
+        schema = Buffer.from(await response.arrayBuffer());
     } else {
-        schemaBuffer = tree.read(schemaPath);
+        schema = readFileSync(schemaPath);
     }
 
-    if (!schemaBuffer) {
+    if (!schema || !schema.length) {
         throw new Error(`Failed to read schema at ${schemaPath}`);
     }
 
-    const ext = schemaPath.split('.').pop() || 'yaml';
-    const destination = `clients/${name}/schema.${ext}`;
+    tree.write(destination, schema);
 
-    tree.write(destination, schemaBuffer);
-
-    return destination;
+    console.log(`Schema copied to ${destination}, length: ${schema.length}`);
 }
 
 // This is ignored by coverage because its relying on a third party package to do the validation step
-/* v8 ignore start */
 export async function validateSchema(schemaPath: string) {
     return new Promise((resolve, reject) => {
         const child = spawn('npx', ['@redocly/cli', 'lint', schemaPath], {
@@ -122,3 +65,4 @@ export async function validateSchema(schemaPath: string) {
         });
     });
 }
+/* v8 ignore end */

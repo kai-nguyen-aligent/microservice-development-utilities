@@ -13,7 +13,7 @@ describe('client generator', () => {
         const options: ClientGeneratorSchema = {
             name: 'test',
             schemaPath: `${__dirname}/unit-test-schemas/valid.yaml`,
-            skipValidate: true, // Validation breaks this unit test for some reason (TODO: figure out wtf is going on here)
+            skipValidate: false,
             override: false,
         };
         await clientGenerator(tree, options);
@@ -61,5 +61,16 @@ describe('client generator', () => {
 
         expect(tree.exists('clients/test/schema.yaml')).toBe(false);
         expect(tree.exists('clients/test/generated/index.ts')).toBe(false);
+    });
+
+    it('should throw error when validation failed (has problem with severity `error`)', async () => {
+        const options: ClientGeneratorSchema = {
+            name: 'test',
+            schemaPath: `${__dirname}/unit-test-schemas/invalid.yaml`,
+            skipValidate: false,
+            override: false,
+        };
+
+        await expect(clientGenerator(tree, options)).rejects.toThrowError();
     });
 });

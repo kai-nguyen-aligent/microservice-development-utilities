@@ -17,10 +17,11 @@ export async function clientGenerator(tree: Tree, options: ClientGeneratorSchema
         throw new Error(`Invalid schema file extension: ${ext}`);
     }
 
-    // TODO MI-201 Unit tests fail when performing schema validation
-    /* v8 ignore next 3 */
     if (!skipValidate) {
-        await validateSchema(schemaPath);
+        const hasError = await validateSchema(schemaPath);
+        if (hasError) {
+            throw new Error('Schema validation failed!');
+        }
     }
 
     const projectRoot = `clients/${name}`;
@@ -36,6 +37,10 @@ export async function clientGenerator(tree: Tree, options: ClientGeneratorSchema
         return;
     }
 
+    await copySchema(tree, schemaDest, schemaPath);
+
+    await generateOpenApiTypes(tree, schemaDest, typesDest);
+
     if (isNewProject) {
         logger.info(`Creating new project at ${projectRoot}`);
 
@@ -45,10 +50,6 @@ export async function clientGenerator(tree: Tree, options: ClientGeneratorSchema
         // Add the project to the tsconfig paths so it can be imported by namespace
         addTsConfigPath(tree, importPath, [joinPathFragments(projectRoot, './src', 'index.ts')]);
     }
-
-    await copySchema(tree, schemaDest, schemaPath);
-
-    await generateOpenApiTypes(tree, schemaDest, typesDest);
 
     await formatFiles(tree);
 }

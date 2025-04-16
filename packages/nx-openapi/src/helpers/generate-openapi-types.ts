@@ -1,5 +1,5 @@
 import { logger, Tree } from '@nx/devkit';
-import { spawn } from 'child_process';
+import { lint, loadConfig } from '@redocly/openapi-core';
 import { readFileSync } from 'fs';
 import openapiTS, { astToString } from 'openapi-typescript';
 
@@ -48,21 +48,37 @@ export async function copySchema(tree: Tree, destination: string, schemaPath: st
 
     console.log(`Schema copied to ${destination}, length: ${schema.length}`);
 }
-
-// This is ignored by coverage because its relying on a third party package to do the validation step
-export async function validateSchema(schemaPath: string) {
-    return new Promise((resolve, reject) => {
-        const child = spawn('npx', ['@redocly/cli', 'lint', schemaPath], {
-            stdio: ['pipe', 'inherit', 'inherit'],
-        });
-
-        child.on('close', code => {
-            if (code === 0) {
-                resolve(`Validation completed`);
-            } else {
-                reject(new Error(`Validation failed with code ${code}`));
-            }
-        });
-    });
-}
 /* v8 ignore end */
+
+export async function validateSchema(path: string) {
+    let hasError = false;
+    try {
+        const config = await loadConfig();
+        const results = await lint({ ref: path, config });
+
+        results.forEach(result => {
+            const location = result.location.map(({ pointer, reportOnKey }) => ({
+                pointer,
+                reportOnKey,
+            }));
+
+            if (result.severity === 'warn') {
+                logger.warn(
+                    JSON.stringify({ location, message: result.message, severity: result.severity })
+                );
+                return;
+            }
+
+            logger.error(
+                JSON.stringify({ location, message: result.message, severity: result.severity })
+            );
+            hasError = true;
+        });
+    } catch (e) {
+        const message = e instanceof Error ? e.message : 'Unknown error';
+        logger.error(`Failed to validate schema: ${message}`);
+        hasError = true;
+    }
+
+    return hasError;
+}

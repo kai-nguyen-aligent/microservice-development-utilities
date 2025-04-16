@@ -65,8 +65,6 @@ export async function copySchema(
     }
 
     tree.write(destination, schema);
-
-    console.log(`Schema copied to ${destination}, length: ${schema.length}`);
 }
 /* v8 ignore end */
 

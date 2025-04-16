@@ -22,6 +22,10 @@
             },
             "x-prompt": "Absolute schema path (a valid HTTP url or a local file): "
         },
+        "configPath": {
+            "type": "string",
+            "description": "Path to the redocly config file responsible for auth. For more information: https://openapi-ts.dev/cli#auth."
+        },
         "importPath": {
             "type": "string",
             "description": "The package name used to import the client, like @myorg/my-awesome-client. Defaults to @clients/{name} if not supplied"

@@ -4,14 +4,20 @@ import { readFileSync } from 'fs';
 import openapiTS, { astToString } from 'openapi-typescript';
 
 /**
- * Grabs schema data from local directory. The schemaPath is evaluated relative to the root of the template project,
- * not the root of the generator.
- * @param rootDir Root directory of the project tree
- * @param schemaPath Path of the schema relative to the root of the entire project.
- * @param typeDest Destination of the generated types.
- * @returns Promise<void>
+ * Generates TypeScript types from an OpenAPI schema
+ * and writes the generated types to a specified destination.
+ *
+ * @param {Tree} tree - The file system tree representing the current project.
+ * @param {string} schemaPath - The path to the OpenAPI schema file.
+ * @param {string} typeDest - The destination path for the generated TypeScript types.
+ * @returns {Promise<void>} A promise that resolves when the types are successfully generated.
+ * @throws {Error} If the schema cannot be read or the types cannot be generated.
  */
-export async function generateOpenApiTypes(tree: Tree, schemaPath: string, typeDest: string) {
+export async function generateOpenApiTypes(
+    tree: Tree,
+    schemaPath: string,
+    typeDest: string
+): Promise<void> {
     try {
         logger.info(`Generating types from ${schemaPath}`);
         const ast = await openapiTS(tree.read(schemaPath));
@@ -26,9 +32,22 @@ export async function generateOpenApiTypes(tree: Tree, schemaPath: string, typeD
 // It only download/copy the schema to a specified destination.
 /* v8 ignore start */
 /**
- * Copies the original schema from the source to newly generated client
+ * Copies the OpenAPI schema from the source to a specified destination.
+ *
+ * This function supports both local and remote schemas. If the schema is remote (HTTP/HTTPS),
+ * it fetches the schema from the URL. If the schema is local, it reads the schema from the file system.
+ *
+ * @param {Tree} tree - The file system tree representing the current project.
+ * @param {string} destination - The destination path where the schema will be copied.
+ * @param {string} schemaPath - The path to the schema file (local or remote).
+ * @returns {Promise<void>} A promise that resolves when the schema is successfully copied.
+ * @throws {Error} If the schema cannot be read or is empty.
  */
-export async function copySchema(tree: Tree, destination: string, schemaPath: string) {
+export async function copySchema(
+    tree: Tree,
+    destination: string,
+    schemaPath: string
+): Promise<void> {
     const isRemoteSchema = schemaPath.startsWith('http://') || schemaPath.startsWith('https://');
 
     let schema: Buffer | null;
@@ -50,7 +69,16 @@ export async function copySchema(tree: Tree, destination: string, schemaPath: st
 }
 /* v8 ignore end */
 
-export async function validateSchema(path: string) {
+/**
+ * Validates an OpenAPI schema using the Redocly OpenAPI linter.
+ *
+ * This function uses the `@redocly/openapi-core` library to lint the schema at the specified path.
+ * It logs warnings and errors based on the severity of the issues found in the schema.
+ *
+ * @param {string} path - The path to the OpenAPI schema file.
+ * @returns {Promise<boolean>} A promise that resolves to `true` if validation errors are found, otherwise `false`.
+ */
+export async function validateSchema(path: string): Promise<boolean> {
     let hasError = false;
     try {
         const config = await loadConfig();

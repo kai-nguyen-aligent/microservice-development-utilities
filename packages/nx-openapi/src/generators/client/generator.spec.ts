@@ -17,8 +17,10 @@ describe('client generator', () => {
             override: false,
         };
         await clientGenerator(tree, options);
-        const config = readProjectConfiguration(tree, 'test');
-        expect(config).toBeDefined();
+
+        expect(readProjectConfiguration(tree, 'test')).toBeDefined();
+        expect(tree.exists('clients/test/schema.yaml')).toBe(true);
+        expect(tree.exists('clients/test/generated/index.ts')).toBe(true);
     });
 
     it('should throw an error if schemaPath does point to a supported file type', async () => {

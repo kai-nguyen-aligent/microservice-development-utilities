@@ -52,6 +52,7 @@ export async function copySchema(
 
     let schema: Buffer | null;
 
+    // TODO: MI-203 - Support private schema endpoint
     if (isRemoteSchema) {
         const response = await fetch(schemaPath);
         schema = Buffer.from(await response.arrayBuffer());
@@ -81,6 +82,7 @@ export async function copySchema(
 export async function validateSchema(path: string): Promise<boolean> {
     let hasError = false;
     try {
+        // TODO: MI-203 - Support private schema endpoint
         const config = await loadConfig();
         const results = await lint({ ref: path, config });
 

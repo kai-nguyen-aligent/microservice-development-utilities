@@ -18,14 +18,16 @@ export async function generateOpenApiTypes(
     schemaPath: string,
     typeDest: string
 ): Promise<void> {
-    try {
-        logger.info(`Generating types from ${schemaPath}`);
-        const ast = await openapiTS(tree.read(schemaPath));
+    logger.info(`Generating types from ${schemaPath}`);
+    const schema = tree.read(schemaPath);
 
-        tree.write(typeDest, astToString(ast));
-    } catch (e) {
-        throw new Error(`Failed to generate types for path ${schemaPath}` + e);
+    if (!schema) {
+        throw new Error(`Failed to read schema at ${schemaPath}`);
     }
+
+    const ast = await openapiTS(schema);
+
+    tree.write(typeDest, astToString(ast));
 }
 
 // We do not want to test this function.

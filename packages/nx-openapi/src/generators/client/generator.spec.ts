@@ -75,4 +75,15 @@ describe('client generator', () => {
 
         await expect(clientGenerator(tree, options)).rejects.toThrowError();
     });
+
+    it('should not throw error when validation failed due to unsupported specification', async () => {
+        const options: ClientGeneratorSchema = {
+            name: 'test',
+            schemaPath: `${__dirname}/unit-test-schemas/unsupported.yaml`,
+            skipValidate: false,
+            override: false,
+        };
+
+        await expect(clientGenerator(tree, options)).rejects.toThrowError();
+    });
 });

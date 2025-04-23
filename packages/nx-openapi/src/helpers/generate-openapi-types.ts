@@ -19,6 +19,7 @@ export async function generateOpenApiTypes(
     typeDest: string
 ): Promise<void> {
     logger.info(`Generating types from ${schemaPath}`);
+    logger.info('testing new change!');
     const schema = tree.read(schemaPath);
 
     if (!schema) {

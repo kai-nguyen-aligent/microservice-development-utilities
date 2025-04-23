@@ -1,43 +1,45 @@
 {
-    "$schema": "./node_modules/nx/schemas/nx-schema.json",
-    "defaultBase": "origin/main",
-    "namedInputs": {
-        "default": ["{projectRoot}/**/*", "sharedGlobals"],
-        "production": [
-            "default",
-            "!{projectRoot}/eslint.config.js",
-            "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
-            "!{projectRoot}/tsconfig.spec.json"
-        ],
-        "sharedGlobals": ["{workspaceRoot}/.github/workflows/pull-request.yml"]
-    },
-    "plugins": [
-        {
-            "plugin": "@nx/eslint/plugin",
-            "options": {}
-        },
-        {
-            "plugin": "@nx/vite/plugin",
-            "options": {}
-        }
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "defaultBase": "origin/main",
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "production": [
+      "default",
+      "!{projectRoot}/eslint.config.js",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json"
     ],
-    "targetDefaults": {
-        "@nx/vite:test": {
-            "cache": true,
-            "inputs": ["default", "^production"]
-        },
-        "@nx/js:tsc": {
-            "cache": true,
-            "dependsOn": ["^build"],
-            "inputs": ["production", "^production"]
-        },
-        "nx-release-publish": {
-            "dependsOn": ["build"],
-            "inputs": ["production", "^production"]
-        }
+    "sharedGlobals": ["{workspaceRoot}/.github/workflows/pull-request.yml"]
+  },
+  "plugins": [
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {}
     },
-    "release": {
-        "projects": ["packages/*"],
-        "projectsRelationship": "independent"
+    {
+      "plugin": "@nx/vite/plugin",
+      "options": {}
     }
+  ],
+  "targetDefaults": {
+    "@nx/vite:test": {
+      "cache": true,
+      "inputs": ["default", "^production"]
+    },
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    },
+    "nx-release-publish": {
+      "dependsOn": ["build"],
+      "inputs": ["production", "^production"]
+    }
+  },
+  "release": {
+    "versionPlans": true,
+    "projects": ["packages/*"],
+    "projectsRelationship": "independent",
+    "releaseTagPattern": "release/{projectName}/{version}"
+  }
 }

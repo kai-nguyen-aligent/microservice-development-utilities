@@ -37,14 +37,16 @@ jobs:
         run: npm ci
         shell: bash
 
-      - name: Release new 
+      - name: Check version plan exists
+        run: npx nx release plan:check
+        shell: bash
+
+      - name: Release new
         run: npx nx release
         shell: bash
-        env:
-          TAG_NAME: ${{ github.event.release.tag_name }}
 
       - name: Publish to NPM
-        run: npx nx release publish --tag=latest
+        run: npx nx release publish
         shell: bash
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}

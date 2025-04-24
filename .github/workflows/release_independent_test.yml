@@ -38,6 +38,10 @@ jobs:
         run: npm ci
         shell: bash
 
+      - name: Check version plan exists
+        run: npx nx release plan:check
+        shell: bash
+
       - name: Release new independent package versions
         run: npx nx release --dry-run
         shell: bash

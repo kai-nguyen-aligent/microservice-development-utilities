@@ -1,6 +1,6 @@
 {
   "name": "@aligent/nx-serverless",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "type": "commonjs",
   "main": "./src/index.js",
   "typings": "./src/index.d.ts",

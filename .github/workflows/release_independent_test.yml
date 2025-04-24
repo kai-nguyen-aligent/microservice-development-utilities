@@ -1,6 +1,9 @@
 name: Publish to NPM
 
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - 30-nx-openapi-update-aligentmicroservice-development-utilities-pipeline-mi-207
 
 jobs:
   build-and-publish:
@@ -35,11 +38,11 @@ jobs:
         run: npm ci
         shell: bash
 
-      - name: Release new package versions
+      - name: Release new independent package versions
         run: npx nx release --dry-run
         shell: bash
 
-      - name: Publish to NPM
+      - name: Publish independent packages to NPM
         run: npx nx release publish --dry-run
         shell: bash
         env:

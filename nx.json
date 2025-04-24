@@ -35,6 +35,11 @@
             "cache": true,
             "inputs": ["default", "^production"]
         },
+        "@nx/js:tsc": {
+            "cache": true,
+            "dependsOn": ["^build"],
+            "inputs": ["production", "^production"]
+        },
         "nx-release-publish": {
             "dependsOn": ["build"],
             "inputs": ["production", "^production"]

@@ -11,7 +11,6 @@ export function hasNonExistProject(
     projects: Map<string, ProjectConfiguration>,
     names: string[]
 ): string[] {
-    console.log('workflow change');
     const projectNames = new Set(projects.keys());
     return names.filter(name => !projectNames.has(name));
 }

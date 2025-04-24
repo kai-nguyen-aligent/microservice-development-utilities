@@ -1,6 +1,6 @@
 {
   "name": "@aligent/nx-openapi",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "type": "commonjs",
   "main": "./src/index.js",
   "typings": "./src/index.d.ts",

@@ -10,7 +10,7 @@ Aligent's monorepo for Microservice Development Utilities. For more details abou
 
 # Release Process
 
-Each of the packages in the monorepo have seperate versioning and independent npm releases. To perform a release of one or more packages we use Version Plans to define the type of updates and provide messages. Nx will then detect the version plans and automatically update version numbers appropriately, as well as perform seperate builds and deployments in the pipeline if a version plan is detected.
+Each of the packages in the monorepo have seperate versioning and independent npm releases. To perform a release of one or more packages we use [Version Plans](https://nx.dev/recipes/nx-release/file-based-versioning-version-plans) to define the type of updates and provide messages. Nx will then detect the version plans and automatically update version numbers appropriately, as well as perform seperate builds and deployments in the pipeline if a version plan is detected.
 
 ### To create a release:
 
@@ -19,4 +19,7 @@ Each of the packages in the monorepo have seperate versioning and independent np
 - Upon merge the release pipeline will use the version file to perform the independent releases to npm
 
 [!WARNING]
+The pipeline will fail if a version plan is not present as part of your merged changes.
+
+[!NOTE]
 Nx is responsible for removing the version plans after a publish occurs. This is because **having multiple version plan files may produce unpredicible results**. For this reason make sure dont commit more than 1 version file. Its also good practice to create version files via the CLI tool rather than manually, as they will have more unique identifiers attached to their file names.

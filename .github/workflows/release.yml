@@ -41,11 +41,11 @@ jobs:
         run: npx nx release plan:check
         shell: bash
 
-      - name: Release new
+      - name: Independently release new package versions
         run: npx nx release
         shell: bash
 
-      - name: Publish to NPM
+      - name: Publish new package versions
         run: npx nx release publish
         shell: bash
         env:

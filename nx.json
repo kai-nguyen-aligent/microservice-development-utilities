@@ -37,7 +37,9 @@
         }
     },
     "release": {
+        "versionPlans": true,
         "projects": ["packages/*"],
-        "projectsRelationship": "independent"
+        "projectsRelationship": "independent",
+        "releaseTagPattern": "release/{projectName}/{version}"
     }
 }

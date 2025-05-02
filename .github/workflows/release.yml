@@ -1,8 +1,8 @@
 name: Publish to NPM
 
 on:
-  release:
-    types: [published]
+  push:
+    branches: [main]
 
 jobs:
   build-and-publish:
@@ -37,14 +37,16 @@ jobs:
         run: npm ci
         shell: bash
 
-      - name: Release new version
-        run: npx nx release version ${{ env.TAG_NAME }}
+      - name: Check version plan exists
+        run: npx nx release plan:check
         shell: bash
-        env:
-          TAG_NAME: ${{ github.event.release.tag_name }}
 
-      - name: Publish to NPM
-        run: npx nx release publish --tag=latest
+      - name: Independently release new package versions
+        run: npx nx release
+        shell: bash
+
+      - name: Publish new package versions
+        run: npx nx release publish
         shell: bash
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}

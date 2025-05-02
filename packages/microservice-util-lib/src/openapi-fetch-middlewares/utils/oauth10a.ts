@@ -4,43 +4,6 @@ import { MiddlewareCallbackParams } from 'openapi-fetch';
 import { OAuth10a } from '../authentications';
 
 /**
- * Takes an object of query parameters and returns it ready for
- * OAuth signing using. Returns an empty object if no params
- * are provided.
- *
- * Axios replaces all whitespace (or whitespace encoded as %20)
- * with the + character AFTER using encodeURIComponent
- *
- * This breaks OAuth signing because the Axios plugin does not
- * use the Axios parameter serializer.
- *
- * For this reason, we pre-emptively replace whitespace with +
- * ourselves. Replacement is on a 1:1 basis in case we ever
- * need to filter/match by free text in the backend
- *
- * See these tickets for related discussion:
- * https://aligent.atlassian.net/browse/MICRO-306
- * https://github.com/axios/axios/issues/678
- */
-export function sanitizeQueryParams(params?: Record<string, unknown>): Record<string, unknown> {
-    if (!params) {
-        return {};
-    }
-
-    const sanitizedParams: Record<string, unknown> = {};
-
-    for (const [key, value] of Object.entries(params)) {
-        if (typeof value === 'string') {
-            sanitizedParams[key] = value.replaceAll(' ', '+');
-        } else {
-            sanitizedParams[key] = value;
-        }
-    }
-
-    return sanitizedParams;
-}
-
-/**
  * Determines whether a given URL is absolute.
  *
  * A URL is considered absolute if it begins with a scheme (e.g., "http://", "https://")
@@ -60,14 +23,53 @@ function isAbsoluteURL(url: string): boolean {
     return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url);
 }
 
+/**
+ * Combines a base URL and a relative URL into a single URL.
+ *
+ * @param {string} baseURL - The base URL.
+ * @param {string} relativeURL - The relative URL to combine with the base URL.
+ * @returns {string} The combined URL.
+ *
+ * @example
+ * combineURLs('https://example.com', '/path'); // 'https://example.com/path'
+ */
 function combineURLs(baseURL: string, relativeURL: string): string {
     return relativeURL
         ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '')
         : baseURL;
 }
 
-function handleOAuthUrl(baseUrl: string, url: string) {
-    const oauthUrl = new URL(!baseUrl || isAbsoluteURL(url) ? url : combineURLs(baseUrl, url));
+/**
+ * Replaces placeholders in a URL with corresponding values from the path parameters.
+ *
+ * @param {string} url - The URL containing placeholders (e.g., `{id}`).
+ * @param {Record<string, unknown>} [pathParams] - The path parameters to replace in the URL.
+ * @returns {string} The URL with placeholders replaced by actual values.
+ *
+ * @example
+ * combineUrlAndPathParams('/users/{id}', { id: 123 }); // '/users/123'
+ */
+function combineUrlAndPathParams(url: string, pathParams?: Record<string, unknown>): string {
+    if (!pathParams) {
+        return url;
+    }
+
+    for (const [key, value] of Object.entries(pathParams)) {
+        url = url.replace(`{${key}}`, String(value));
+    }
+
+    return url;
+}
+
+/**
+ * Processes a URL for OAuth 1.0a by removing unnecessary parts and preparing it for signing.
+ *
+ * @param {string} baseURL - The base URL.
+ * @param {string} url - The URL to process.
+ * @returns {{ baseUri: string, searchParams: URLSearchParams | null }} The processed URL and its search parameters.
+ */
+function handleOAuthUrl(baseURL: string, url: string) {
+    const oauthUrl = new URL(!baseURL || isAbsoluteURL(url) ? url : combineURLs(baseURL, url));
 
     let searchParams: URLSearchParams | null = null;
 
@@ -94,15 +96,18 @@ function handleOAuthUrl(baseUrl: string, url: string) {
     };
 }
 
-function generateNonce(size: number = 16): string {
-    return crypto.randomBytes(0 | (size * 0.75)).toString('base64');
-}
-
+/**
+ * Adds a parameter to the list of parameters to sign.
+ *
+ * @param {Record<string, string | string[]>} paramsToSign - The parameters to sign.
+ * @param {string} key - The key of the parameter.
+ * @param {string} value - The value of the parameter.
+ */
 function addParamToSign(
     paramsToSign: Record<string, string | string[]>,
     key: string,
     value: string
-) {
+): void {
     const existingValue = paramsToSign[key];
 
     if (typeof existingValue === 'string') {
@@ -114,6 +119,12 @@ function addParamToSign(
     }
 }
 
+/**
+ * Adds multiple parameters to the list of parameters to sign.
+ *
+ * @param {Record<string, string | string[]>} paramsToSign - The parameters to sign.
+ * @param {URLSearchParams | Record<string, unknown> | string} params - The parameters to add.
+ */
 function addParamsToSign(
     paramsToSign: Record<string, string | string[]>,
     params: URLSearchParams | Record<string, unknown> | string
@@ -135,11 +146,19 @@ function addParamsToSign(
     });
 }
 
+/**
+ * Determines whether a body hash should be generated for the request.
+ *
+ * @param {string} body - The request body.
+ * @param {string} method - The HTTP method.
+ * @param {OAuth10a['includeBodyHash']} includeBodyHash - The body hash inclusion setting.
+ * @returns {boolean} `true` if a body hash should be generated, otherwise `false`.
+ */
 function shouldGenerateBodyHash(
     body: string,
     method: string,
     includeBodyHash: OAuth10a['includeBodyHash']
-) {
+): boolean {
     if (includeBodyHash === 'auto' && ['POST', 'PUT'].includes(method) && body) {
         return true;
     }
@@ -147,12 +166,21 @@ function shouldGenerateBodyHash(
     return includeBodyHash === true;
 }
 
+/**
+ * Generates OAuth 1.0a parameters for signing a request.
+ *
+ * @param {MiddlewareCallbackParams['request']} request - The request object.
+ * @param {MiddlewareCallbackParams['options']} options - The options object.
+ * @param {MiddlewareCallbackParams['params']} params - The parameters object.
+ * @param {OAuth10a} config - The OAuth 1.0a configuration.
+ * @returns {Promise<string>} The generated OAuth 1.0a Authorization header.
+ */
 export async function generateOauthParams(
     request: MiddlewareCallbackParams['request'],
     options: MiddlewareCallbackParams['options'],
     params: MiddlewareCallbackParams['params'],
     config: OAuth10a
-) {
+): Promise<string> {
     const {
         algorithm,
         consumerKey,
@@ -166,19 +194,17 @@ export async function generateOauthParams(
     } = config;
 
     const method = (request.method || 'GET').toUpperCase();
-
-    // TODO: construct the correct url from request.url & params.path
-    const url = request.url;
+    const url = combineUrlAndPathParams(request.url, params.path);
 
     const oauthParams: Record<string, string> = {
         oauth_consumer_key: consumerKey,
-        oauth_nonce: generateNonce(),
+        oauth_nonce: crypto.randomUUID(),
         oauth_signature_method: algorithm,
         oauth_timestamp: String(Math.floor(Date.now() * 0.001)),
         oauth_version: '1.0',
     };
 
-    // If provided, oauth_token can be included in the oauth parameters
+    // if provided, oauth_token can be included in the oauth parameters
     // more information: https://datatracker.ietf.org/doc/html/rfc5849#section-3.1
     if (token) {
         oauthParams.oauth_token = token;
@@ -207,19 +233,21 @@ export async function generateOauthParams(
     }
 
     const body = await request.text();
-    const generateBodyHash = shouldGenerateBodyHash(body, method, includeBodyHash);
 
     // If user submit a form, then include form parameters in the
     // signature as parameters rather than the body hash
     if (request.headers.get('Content-Type') === 'application/x-www-form-urlencoded') {
         addParamsToSign(paramsToSign, new URLSearchParams(body));
-    } else if (generateBodyHash) {
-        const bodyHash = crypto
-            .createHash(algorithm === 'HMAC-SHA1' ? 'sha1' : 'sha256')
-            .update(Buffer.from(body))
-            .digest('base64');
-        oauthParams.oauth_body_hash = bodyHash;
-        addParamToSign(paramsToSign, 'oauth_body_hash', bodyHash);
+        console.log(JSON.stringify(paramsToSign));
+    } else {
+        if (shouldGenerateBodyHash(body, method, includeBodyHash)) {
+            const bodyHash = crypto
+                .createHash(algorithm === 'HMAC-SHA1' ? 'sha1' : 'sha256')
+                .update(Buffer.from(body))
+                .digest('base64');
+            oauthParams.oauth_body_hash = bodyHash;
+            addParamToSign(paramsToSign, 'oauth_body_hash', bodyHash);
+        }
     }
 
     oauthParams.oauth_signature = sign(

@@ -32,7 +32,7 @@ export interface OAuth10a {
     algorithm: 'HMAC-SHA1' | 'HMAC-SHA256';
     consumerKey: string;
     consumerSecret: string;
-    token: string;
+    token?: string;
     tokenSecret: string;
     includeBodyHash?: boolean | 'auto';
     realm?: string;

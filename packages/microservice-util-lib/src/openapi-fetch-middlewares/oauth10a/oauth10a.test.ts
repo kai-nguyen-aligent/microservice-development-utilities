@@ -38,8 +38,17 @@ describe('generateOauthParams', () => {
         parseAs: 'json',
     };
 
+    const credentialsWithToken = {
+        consumerKey: 'k',
+        consumerSecret: 's',
+        token: 't',
+        tokenSecret: 'ts',
+    };
+
+    const credentialsWithoutToken = { consumerKey: 'k', consumerSecret: 's', tokenSecret: 'ts' };
+
     beforeEach(() => {
-        vi.spyOn(crypto, 'randomUUID').mockImplementation(() => '123-456-789-0ab-cde');
+        vi.spyOn(crypto, 'randomUUID').mockReturnValue('123-456-789-0ab-cde');
         vi.useFakeTimers();
         vi.setSystemTime(new Date('2025-04-30T12:00:00Z'));
     });
@@ -61,10 +70,7 @@ describe('generateOauthParams', () => {
         const params: MiddlewareCallbackParams['params'] = {};
         const config: OAuth10a = {
             algorithm: 'HMAC-SHA256',
-            consumerKey: 'k',
-            consumerSecret: 's',
-            token: 't',
-            tokenSecret: 'ts',
+            credentials: () => new Promise(res => res(credentialsWithToken)),
         };
 
         const expected = [
@@ -93,9 +99,7 @@ describe('generateOauthParams', () => {
         const params: MiddlewareCallbackParams['params'] = {};
         const config: OAuth10a = {
             algorithm: 'HMAC-SHA1',
-            consumerKey: 'k',
-            consumerSecret: 's',
-            tokenSecret: 'ts',
+            credentials: () => new Promise(res => res(credentialsWithoutToken)),
         };
 
         const expected = [
@@ -124,10 +128,7 @@ describe('generateOauthParams', () => {
         const params: MiddlewareCallbackParams['params'] = {};
         const config: OAuth10a = {
             algorithm: 'HMAC-SHA256',
-            consumerKey: 'k',
-            consumerSecret: 's',
-            token: 't',
-            tokenSecret: 'ts',
+            credentials: () => new Promise(res => res(credentialsWithToken)),
         };
 
         const expected = [
@@ -159,9 +160,7 @@ describe('generateOauthParams', () => {
         const params: MiddlewareCallbackParams['params'] = {};
         const config: OAuth10a = {
             algorithm: 'HMAC-SHA1',
-            consumerKey: 'k',
-            consumerSecret: 's',
-            tokenSecret: 'ts',
+            credentials: () => new Promise(res => res(credentialsWithoutToken)),
         };
 
         const expected = [
@@ -191,9 +190,7 @@ describe('generateOauthParams', () => {
         };
         const config: OAuth10a = {
             algorithm: 'HMAC-SHA1',
-            consumerKey: 'k',
-            consumerSecret: 's',
-            tokenSecret: 'ts',
+            credentials: () => new Promise(res => res(credentialsWithoutToken)),
         };
 
         const expected = [
@@ -221,9 +218,7 @@ describe('generateOauthParams', () => {
         const params: MiddlewareCallbackParams['params'] = {};
         const config: OAuth10a = {
             algorithm: 'HMAC-SHA1',
-            consumerKey: 'k',
-            consumerSecret: 's',
-            tokenSecret: 'ts',
+            credentials: () => new Promise(res => res(credentialsWithoutToken)),
         };
 
         const expected = [
@@ -251,9 +246,7 @@ describe('generateOauthParams', () => {
         const params: MiddlewareCallbackParams['params'] = {};
         const config: OAuth10a = {
             algorithm: 'HMAC-SHA1',
-            consumerKey: 'k',
-            consumerSecret: 's',
-            tokenSecret: 'ts',
+            credentials: () => new Promise(res => res(credentialsWithoutToken)),
             callback: 'https://cb.url',
         };
 
@@ -283,9 +276,7 @@ describe('generateOauthParams', () => {
         const params: MiddlewareCallbackParams['params'] = {};
         const config: OAuth10a = {
             algorithm: 'HMAC-SHA256',
-            consumerKey: 'k',
-            consumerSecret: 's',
-            tokenSecret: 'ts',
+            credentials: () => new Promise(res => res(credentialsWithoutToken)),
             verifier: 'v',
         };
 
@@ -315,9 +306,7 @@ describe('generateOauthParams', () => {
         const params: MiddlewareCallbackParams['params'] = {};
         const config: OAuth10a = {
             algorithm: 'HMAC-SHA1',
-            consumerKey: 'k',
-            consumerSecret: 's',
-            tokenSecret: 'ts',
+            credentials: () => new Promise(res => res(credentialsWithoutToken)),
             callback: 'https://cb.url',
             verifier: 'v',
             realm: 'r',
@@ -353,9 +342,7 @@ describe('generateOauthParams', () => {
         };
         const config: OAuth10a = {
             algorithm: 'HMAC-SHA1',
-            consumerKey: 'k',
-            consumerSecret: 's',
-            tokenSecret: 'ts',
+            credentials: () => new Promise(res => res(credentialsWithoutToken)),
         };
 
         const expected = [
@@ -385,10 +372,7 @@ describe('generateOauthParams', () => {
         };
         const config: OAuth10a = {
             algorithm: 'HMAC-SHA256',
-            consumerKey: 'k',
-            consumerSecret: 's',
-            token: 't',
-            tokenSecret: 'ts',
+            credentials: () => new Promise(res => res(credentialsWithToken)),
         };
 
         const expected = [

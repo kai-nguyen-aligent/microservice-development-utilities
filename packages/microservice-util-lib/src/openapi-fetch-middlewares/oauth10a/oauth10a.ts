@@ -181,17 +181,8 @@ export async function generateOauthParams(
     params: MiddlewareCallbackParams['params'],
     config: OAuth10a
 ): Promise<string> {
-    const {
-        algorithm,
-        consumerKey,
-        consumerSecret,
-        token,
-        tokenSecret,
-        includeBodyHash = 'auto',
-        realm,
-        callback,
-        verifier,
-    } = config;
+    const { algorithm, includeBodyHash = 'auto', realm, callback, verifier } = config;
+    const { consumerKey, consumerSecret, token, tokenSecret } = await config.credentials();
 
     const method = (request.method || 'GET').toUpperCase();
     const url = combineUrlAndPathParams(request.url, params.path);

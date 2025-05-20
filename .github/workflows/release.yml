@@ -44,7 +44,7 @@ jobs:
         shell: bash
 
       - name: Check for version plan
-        run: npx nx release plan:check --verbose
+        run: npx nx release plan:check --verbose --verbose
         shell: bash
 
       - name: Release new version

@@ -10,16 +10,36 @@ Aligent's monorepo for Microservice Development Utilities. For more details abou
 
 # Release Process
 
-Each of the packages in the monorepo have seperate versioning and independent npm releases. To perform a release of one or more packages we use [Version Plans](https://nx.dev/recipes/nx-release/file-based-versioning-version-plans) to define the type of updates and provide messages. Nx will then detect the version plans and automatically update version numbers appropriately, as well as perform seperate builds and deployments in the pipeline if a version plan is detected.
+Each of the packages in the monorepo have separate versioning and independent npm releases. To perform a release of one or more packages we use [Version Plans](https://nx.dev/recipes/nx-release/file-based-versioning-version-plans) to define the type of updates and provide change log. Nx will then detect the version plans and automatically update version numbers appropriately, as well as perform builds and deployments separately in the pipeline if a version plan is detected.
 
-### To create a release:
+### Step-by-Step Guide
 
-- `npm run release-plan` to create a release plan based on the detected changes in one or more services. This will prompt you to provide the type of change for each package (patch, minor, major etc.) and the description of the changes. This generates a version-plan file.
-- Commit the changes to the repository.
-- Upon merge the release pipeline will use the version file to perform the independent releases to npm
+1. Start by creating a new branch from the latest `main` branch.
 
-[!WARNING]
-The pipeline will fail if a version plan is not present as part of your merged changes.
+2. Create a new version plan: Run the following command to generate a version plan based on your changes:
 
-[!NOTE]
-Nx is responsible for removing the version plans after a publish occurs. This is because **having multiple version plan files may produce unpredicible results**. For this reason make sure dont commit more than 1 version file. Its also good practice to create version files via the CLI tool rather than manually, as they will have more unique identifiers attached to their file names.
+   ```bash
+   npm run release-plan
+   ```
+
+   Follow the prompts to select the type of change (patch, minor, major, etc.) and provide a description for each affected package. This will create a version plan file in the repository.
+
+3. Merge to `main`:
+
+   - Commit your changes, including the version plan file.
+   - Open a pull request targeting the `main` branch.
+   - Ensure your PR contains only one version plan file.
+   - Once approved, merge your branch into `main`.
+
+4. Manually run the `release` Pipeline
+   - After merging, trigger the `release` pipeline manually (via Github Action UI).
+   - The pipeline will:
+     - Detect the version plan file.
+     - Build and publish the affected packages to npm.
+     - Remove the version plan file after a successful publish.
+
+### Notes
+
+- The `release` pipeline will fail if a version plan is not present in your merged changes. However, the `pull-request` pipeline does not check for version plan. We do this as there might be situations where we want to commit to main without a release.
+- Nx is responsible for removing the version plans after a release. This is because **having multiple version plan files may produce unpredictable results**. For this reason make sure not to commit more than one version plan file.
+- Always use the provided command to generate version plan files for uniqueness and correctness.

@@ -1,8 +1,13 @@
 name: Publish to NPM
 
 on:
-  push:
-    branches: [main]
+  # Run manually using Github UI
+  workflow_dispatch:
+    inputs:
+      publish-options:
+        description: 'Additional flags to pass to `nx release publish` command'
+        required: false
+        default: ''
 
 jobs:
   build-and-publish:
@@ -27,7 +32,8 @@ jobs:
           git config --global user.name "Automated NPM Release"
           git config --global user.email "${{ secrets.DEVOPS_GITHUB_EMAIL }}"
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
@@ -37,16 +43,16 @@ jobs:
         run: npm ci
         shell: bash
 
-      - name: Check version plan exists
-        run: npx nx release plan:check --verbose
+      - name: Check for version plan
+        run: npx nx release plan:check --verbose --verbose
         shell: bash
 
-      - name: Independently release new package versions
-        run: npx nx release
+      - name: Release new version
+        run: npx nx release --verbose
         shell: bash
 
-      - name: Publish new package versions
-        run: npx nx release publish
+      - name: Publish versioned package
+        run: npx nx release publish --verbose ${{ inputs.publish-options }}
         shell: bash
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}

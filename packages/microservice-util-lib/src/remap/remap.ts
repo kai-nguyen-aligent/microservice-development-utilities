@@ -1,6 +1,63 @@
-/* eslint-disable array-callback-return */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import _ from 'lodash';
+
+/**
+ * Get a value from an object using a dot-notation path
+ * @param obj The object to get the value from
+ * @param path The dot-notation path (e.g., 'foo.bar.baz')
+ * @returns The value at the path, or undefined if not found
+ */
+function getValue(obj: any, path: string): any {
+    let current = obj;
+    for (const key of path.split('.')) {
+        if (current == null) return undefined;
+        current = current[key];
+    }
+    return current;
+}
+
+/**
+ * Check if a key looks like an array index (numeric string)
+ */
+function isArrayIndex(key: string): boolean {
+    return /^\d+$/.test(key);
+}
+
+/**
+ * Set a value in an object using a dot-notation path
+ * @param obj The object to set the value in
+ * @param path The dot-notation path (e.g., 'foo.bar.baz')
+ * @param value The value to set
+ */
+function setValue(obj: any, path: string, value: any): void {
+    const keys = path.split('.').filter(key => !!key); // Skip empty keys, e.g. in 'foo..bar'
+    const lastKey = keys.pop();
+
+    if (!lastKey) {
+        // Somehow we've been given a path with no keys, so we can't set anything
+        return;
+    }
+
+    // Navigate to the parent object, creating nested structures as needed
+    let current = obj;
+    for (let i = 0; i < keys.length; i++) {
+        const key = keys[i] as string; // We've already filtered out empty keys, so this is safe
+
+        // If this key already has a valid object to put the next key on, continue
+        if (key in current && typeof current[key] === 'object' && current[key] !== null) {
+            current = current[key];
+            continue;
+        }
+
+        // Otherwise, set the current key as an object or array based on what the next key is
+        const nextKey = keys.at(i + 1) ?? lastKey;
+        current[key] = isArrayIndex(nextKey) ? [] : {};
+
+        current = current[key];
+    }
+
+    // Set the final value
+    current[lastKey] = value;
+}
 
 /** Turn a type like { foo: number } & { bar: string } into { foo: number; bar: string; } */
 export type SimplifyIntersection<A> = A extends object
@@ -187,8 +244,8 @@ function remap<Original extends { [key: string]: any }, MapArray extends ObjectM
     const out = {};
     map.forEach(item => {
         const parser = item[2] ? item[2] : (val: any) => val;
-        const value = item[0] ? _.get(object, item[0]) : object;
-        return _.set(out, item[1], parser(value as any));
+        const value = item[0] ? getValue(object, item[0]) : object;
+        setValue(out, item[1], parser(value as any));
     });
     return out as any;
 }

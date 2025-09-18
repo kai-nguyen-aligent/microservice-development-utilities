@@ -31,7 +31,7 @@ export async function generateOpenApiTypes(
 }
 
 // We do not want to test this function.
-// It only download/copy the schema to a specified destination.
+// It only downloads/copies the schema to a specified destination.
 /* v8 ignore start */
 /**
  * Copies the OpenAPI schema from the source to a specified destination.

@@ -1,4 +1,4 @@
-name: CI
+name: Pull request check
 
 on:
   pull_request:
@@ -42,3 +42,6 @@ jobs:
 
       - name: ⚙️ Run Build
         run: npx nx affected -t build
+
+      - name: ⚙️ Check for version plan
+        run: npx nx release plan:check --verbose

@@ -1,0 +1,83 @@
+name: Smart release & publish
+
+on:
+  push:
+    branches:
+      - main
+  # Run manually using Github UI
+  workflow_dispatch:
+    inputs:
+      publish-options:
+        description: 'Additional flags to pass to `nx release publish` command'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  build-and-publish:
+    name: Build and publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Fetch target
+        run: git fetch origin ${{ env.BASE_REF }}
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+
+      - name: Config git user
+        run: |
+          git config --global user.name "Automated NPM Release"
+          git config --global user.email "kai.nguyen@aligent.com.au"
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install dependencies
+        run: npm ci
+        shell: bash
+
+      # Check if version plan exist
+      - name: Check for release marker files
+        id: check_files
+        run: |
+          echo "hash=${{ hashFiles('.nx/version-plans/version-plan-*') }}" >> $GITHUB_OUTPUT
+        shell: bash
+
+      # Run publish directly
+      - name: 🚀 Publish packages
+        if: steps.check_files.outputs.hash == ''
+        run: npx nx release publish --verbose ${{ inputs.publish-options }}
+        shell: bash
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPMJS_AUTH_TOKEN }}
+
+      # Otherwise, prepare version bumps and PR
+      - name: 📝 Release new version (skip publish)
+        if: steps.check_files.outputs.hash != ''
+        run: npx nx release --skip-publish --verbose
+        shell: bash
+
+      - name: 📤 Create Release PR
+        if: steps.check_files.outputs.hash != ''
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: release/${{ github.run_id }}
+          commit-message: "chore: version bump"
+          title: "chore: release"
+          body: |
+            Automated release PR created by Nx Release.
+            - Version bumps
+            - Updated changelogs
+          base: main

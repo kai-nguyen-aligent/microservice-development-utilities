@@ -37,3 +37,4 @@ npm run test
 
 ## Tests
 1. Release test 1
+2. Release test 3

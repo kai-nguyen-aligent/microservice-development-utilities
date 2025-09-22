@@ -1,6 +1,6 @@
 {
   "name": "@aligent/microservice-util-lib",
-  "version": "3.0.0",
+  "version": "6.0.0",
   "description": "A set of utility functions for Aligent Microservices",
   "type": "commonjs",
   "main": "./src/index.js",

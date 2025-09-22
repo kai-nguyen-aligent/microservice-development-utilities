@@ -14,16 +14,24 @@ jobs:
     name: Check and Release
     runs-on: ubuntu-latest
     steps:
+      - name: Display Environment Info
+        run: |
+          echo "Runner Machine Name: $(hostname)"
+          echo "Operating System: $(uname)"
+          echo "Commit SHA: $GITHUB_SHA"
+          echo "Git Ref: $GITHUB_REF"
+          echo "Ref: ${{ github.ref_name }}"
+
+      - name: Get branch name from GITHUB_REF
+        run: echo "BRANCH_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.ref }}
-
-      - name: Fetch target
-        run: git fetch origin ${{ env.BASE_REF }}
+          ref: ${{ env.BRANCH_NAME }}
         env:
-          BASE_REF: ${{ github.event.pull_request.base.ref }}
+          BRANCH_NAME: ${{ env.BRANCH_NAME }}
 
       - name: Configure Git
         run: |
@@ -40,8 +48,22 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: ⚙️ Check for version plan
-        run: npx nx release plan:check --verbose
+      # - name: ⚙️ Check for version plan
+      #   run: npx nx release plan:check --verbose
 
-      - name: 📝 Release new version (skip publish)
-        run: npx nx release --skip-publish --verbose
+      # - name: 📝 Release new version (skip publish)
+      #   run: npx nx release --skip-publish --verbose
+
+      - name: 📤 Create publish pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: ${{ env.BRANCH_NAME }}
+          title: 'Chore: Publish packages'
+          commit-message: 'chore: publish package'
+          body: |
+            Automated publish PR created by Nx Release workflow.
+            - Version bumps
+            - Updated changelogs
+          base: main
+        env:
+          BRANCH_NAME: ${{ env.BRANCH_NAME }}

@@ -2,8 +2,10 @@ name: Release and create Publish PR
 
 on:
   push:
-    branches: [releases/**]
-    paths: [.nx/version-plans/version-plan-*]
+    branches:
+      - releases/**
+    paths:
+      - .nx/version-plans/**.md
 
 permissions:
   contents: write

@@ -1,3 +1,13 @@
+# 4.0.0 (2025-09-22)
+
+### ⚠️  Breaking Changes
+
+- 3.00 ([273efdd](https://github.com/kai-nguyen-aligent/microservice-development-utilities/commit/273efdd))
+
+### ❤️ Thank You
+
+- Kai Nguyen
+
 # 3.0.0 (2025-09-22)
 
 ### ⚠️  Breaking Changes

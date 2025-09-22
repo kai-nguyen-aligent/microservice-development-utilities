@@ -1,9 +1,6 @@
 name: Pull request check
 
-on:
-  pull_request:
-    branches-ignore:
-      - releases/**
+on: [pull_request]
 
 permissions:
   actions: read
@@ -11,6 +8,7 @@ permissions:
 
 jobs:
   code-quality:
+    if: '!startsWith(github.head_ref, "releases/")'
     name: 🕵️‍♀️ Code Quality Check
     runs-on: ubuntu-latest
     steps:

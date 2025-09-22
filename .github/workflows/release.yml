@@ -20,6 +20,7 @@ jobs:
           echo "Operating System: $(uname)"
           echo "Commit SHA: $GITHUB_SHA"
           echo "Git Ref: $GITHUB_REF"
+          echo "Event Push: ${{ github.event.push }}"
           echo "Event Ref: ${{ github.event.push.ref }}"
           echo "Event Base: Ref ${{ github.event.push.base_ref }}"
           echo "Head Ref: ${{ github.head_ref }}"

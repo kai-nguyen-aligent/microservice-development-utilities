@@ -1,9 +1,6 @@
 name: Pull request check
 
-on:
-  pull_request:
-    branches:
-      - '**' # Trigger on all branches
+on: [pull_request]
 
 permissions:
   actions: read
@@ -43,5 +40,5 @@ jobs:
       - name: ⚙️ Run Build
         run: npx nx affected -t build
 
-      - name: ⚙️ Check for version plan
+      - name: ⚙️ Run release plan check
         run: npx nx release plan:check --verbose

@@ -1,3 +1,13 @@
+## 2.0.2 (2025-09-22)
+
+### 🩹 Fixes
+
+- Release test 1 ([bb37820](https://github.com/kai-nguyen-aligent/microservice-development-utilities/commit/bb37820))
+
+### ❤️ Thank You
+
+- Kai Nguyen
+
 ## 2.0.1 (2025-09-22)
 
 ### 🩹 Fixes

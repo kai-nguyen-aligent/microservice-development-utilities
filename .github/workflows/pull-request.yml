@@ -8,6 +8,7 @@ permissions:
 
 jobs:
   code-quality:
+    if: '!startsWith(github.head_ref, "releases/")'
     name: 🕵️‍♀️ Code Quality Check
     runs-on: ubuntu-latest
     steps:

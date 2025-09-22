@@ -22,8 +22,8 @@ jobs:
           echo "Git Ref: $GITHUB_REF"
           echo "Ref: ${{ github.ref_name }}"
 
-      - name: Get branch name from GITHUB_REF
-        run: echo "BRANCH_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+      # - name: Get branch name from GITHUB_REF
+      #   run: echo "BRANCH_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
 
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -52,16 +52,14 @@ jobs:
       # - name: 📝 Release new version (skip publish)
       #   run: npx nx release --skip-publish --verbose
 
-      # - name: 📤 Create publish pull request
-      #   uses: peter-evans/create-pull-request@v7
-      #   with:
-      #     branch: ${{ env.BRANCH_NAME }}
-      #     title: 'Chore: Publish packages'
-      #     commit-message: 'chore: publish package'
-      #     body: |
-      #       Automated publish PR created by Nx Release workflow.
-      #       - Version bumps
-      #       - Updated changelogs
-      #     base: main
-      #   env:
-      #     BRANCH_NAME: ${{ env.BRANCH_NAME }}
+      - name: 📤 Create publish pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: auto/${{ github.run_id }}
+          title: 'Chore: Publish packages'
+          commit-message: 'chore: publish package'
+          body: |
+            Automated publish PR created by Nx Release workflow.
+            - Version bumps
+            - Updated changelogs
+          base: main

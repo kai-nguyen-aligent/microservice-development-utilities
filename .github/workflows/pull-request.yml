@@ -12,6 +12,13 @@ jobs:
     name: 🕵️‍♀️ Code Quality Check
     runs-on: ubuntu-latest
     steps:
+      - name: Display Environment Info
+        run: |
+          echo "Runner Machine Name: $(hostname)"
+          echo "Operating System: $(uname)"
+          echo "Commit SHA: $GITHUB_SHA"
+          echo "Git Ref: $GITHUB_REF"
+          echo "Head Ref: ${{ github.event.pull_request.head.ref }}"
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:

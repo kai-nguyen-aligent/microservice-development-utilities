@@ -67,7 +67,7 @@ jobs:
       - name: 📤 Create publish pull request
         run: |
           gh pr create --base main --head ${{ github.ref_name }} \
-          --title "Chore: Publish packages"
+          --title "Chore: Publish packages" \
           --body $'Automated publish PR created by Nx Release workflow.\n- Version bumps\n- Updated changelogs'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

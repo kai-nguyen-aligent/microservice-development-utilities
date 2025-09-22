@@ -32,10 +32,10 @@ jobs:
         env:
           BASE_REF: ${{ github.event.pull_request.base.ref }}
 
-      - name: Config git user
+      - name: Configure Git
         run: |
-          git config --global user.name "Automated NPM Release"
-          git config --global user.email "kai.nguyen@aligent.com.au"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -69,13 +69,13 @@ jobs:
         run: npx nx release --skip-publish --verbose
         shell: bash
 
-      - name: 📤 Create Release PR
+      - name: 📤 Create Publish Pull Request
         if: steps.check_files.outputs.hash != ''
         uses: peter-evans/create-pull-request@v7
         with:
-          branch: release/${{ github.run_id }}
-          commit-message: "chore: version bump"
-          title: "chore: release"
+          branch: auto-release/${{ github.run_id }}
+          title: "Chore: Release packages"
+          commit-message: "Chore: Release packages"
           body: |
             Automated release PR created by Nx Release.
             - Version bumps

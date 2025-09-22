@@ -16,7 +16,7 @@ npm install
 npm run build
 ```
 
-## Installation:
+## Installation
 
 You can locally install this package to your NPM projects by pulling this repo,
 building it, then running:
@@ -27,7 +27,7 @@ npm install --save ./path/to/this/project
 
 from your project root.
 
-## Testing & Linting:
+## Testing & Linting
 
 Vitest tests, linting & type-checking can be run with
 

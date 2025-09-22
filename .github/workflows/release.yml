@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - releases/**
-    paths:
-      - .nx/version-plans/**.md
 
 permissions:
   contents: write

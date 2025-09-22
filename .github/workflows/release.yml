@@ -14,46 +14,54 @@ jobs:
     name: Check and Release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: ${{ github.event.push.ref }}
-
-      - name: Fetch target
-        run: git fetch origin ${{ env.BASE_REF }}
-        env:
-          BASE_REF: ${{ github.event.push.base_ref }}
-
-      - name: Configure Git
+      - name: Display Environment Info
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          echo "Runner Machine Name: $(hostname)"
+          echo "Operating System: $(uname)"
+          echo "Commit SHA: $GITHUB_SHA"
+          echo "Git Ref: $GITHUB_REF"
+          echo "Event Ref: ${{ github.event.push.ref }}"
+          echo "Event Base: Ref ${{ github.event.push.base_ref }}"
+          echo "Head Ref: ${{ github.head_ref }}"
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'npm'
-          registry-url: https://registry.npmjs.org/
+      # - name: Checkout Repository
+      #   uses: actions/checkout@v4
+      #   with:
+      #     fetch-depth: 0
+      #     ref: ${{ github.event.push.ref }}
 
-      - name: Install dependencies
-        run: npm ci
+      # - name: Fetch target
+      #   run: git fetch origin ${{ github.event.push.base_ref }}
 
-      - name: ⚙️ Check for version plan
-        run: npx nx release plan:check --verbose
+      # - name: Configure Git
+      #   run: |
+      #     git config --global user.name "github-actions[bot]"
+      #     git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: 📝 Release new version (skip publish)
-        run: npx nx release --skip-publish --verbose
+      # - name: Setup Node
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version-file: '.nvmrc'
+      #     cache: 'npm'
+      #     registry-url: https://registry.npmjs.org/
 
-      - name: 📤 Create publish pull request
-        uses: peter-evans/create-pull-request@v7
-        with:
-          branch: ${{ github.head_ref }}
-          title: 'Chore: Publish packages'
-          commit-message: 'chore: publish package'
-          body: |
-            Automated publish PR created by Nx Release workflow.
-            - Version bumps
-            - Updated changelogs
-          base: main
+      # - name: Install dependencies
+      #   run: npm ci
+
+      # - name: ⚙️ Check for version plan
+      #   run: npx nx release plan:check --verbose
+
+      # - name: 📝 Release new version (skip publish)
+      #   run: npx nx release --skip-publish --verbose
+
+      # - name: 📤 Create publish pull request
+      #   uses: peter-evans/create-pull-request@v7
+      #   with:
+      #     branch: ${{ github.head_ref }}
+      #     title: 'Chore: Publish packages'
+      #     commit-message: 'chore: publish package'
+      #     body: |
+      #       Automated publish PR created by Nx Release workflow.
+      #       - Version bumps
+      #       - Updated changelogs
+      #     base: main

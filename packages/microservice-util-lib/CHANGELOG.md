@@ -1,3 +1,13 @@
+## 2.0.3 (2025-09-22)
+
+### 🩹 Fixes
+
+- patch 3 ([4d65e96](https://github.com/kai-nguyen-aligent/microservice-development-utilities/commit/4d65e96))
+
+### ❤️ Thank You
+
+- Kai Nguyen
+
 ## 2.0.2 (2025-09-22)
 
 ### 🩹 Fixes

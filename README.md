@@ -43,3 +43,4 @@ Each of the packages in the monorepo have separate versioning and independent np
 - The `release` pipeline will fail if a version plan is not present in your merged changes. However, the `pull-request` pipeline does not check for version plan. We do this as there might be situations where we want to commit to main without a release.
 - Nx is responsible for removing the version plans after a release. This is because **having multiple version plan files may produce unpredictable results**. For this reason make sure not to commit more than one version plan file.
 - Always use the provided command to generate version plan files for uniqueness and correctness.
+- Test no version plan

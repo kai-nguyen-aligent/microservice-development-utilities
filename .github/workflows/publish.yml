@@ -1,6 +1,9 @@
 name: Publish to NPM
 
 on:
+  push:
+    branches:
+      - main
   # Run manually using Github UI
   workflow_dispatch:
     inputs:
@@ -9,12 +12,13 @@ on:
         required: false
         default: ''
 
+permissions:
+  contents: read
+
 jobs:
   build-and-publish:
     name: Build and publish
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -27,11 +31,6 @@ jobs:
         env:
           BASE_REF: ${{ github.event.pull_request.base.ref }}
 
-      # - name: Config git user
-      #   run: |
-      #     git config --global user.name "Automated NPM Release"
-      #     git config --global user.email "${{ secrets.DEVOPS_GITHUB_EMAIL }}"
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -43,21 +42,8 @@ jobs:
         run: npm ci
         shell: bash
 
-      # - name: Check for version plan
-      #   run: npx nx release plan:check --verbose
-      #   shell: bash
-
-      # - name: Release new version
-      #   run: npx nx release --skip-publish --verbose
-      #   shell: bash
-
-      - name: Publish versioned package
+      - name: 🚀 Publish versioned packages
         run: npx nx release publish --verbose ${{ inputs.publish-options }}
         shell: bash
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPMJS_AUTH_TOKEN }}
-
-      # - name: Push version changes
-      #   run: git push
-      #   env:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}

@@ -29,9 +29,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: ${{ env.BRANCH_NAME }}
-        env:
-          BRANCH_NAME: ${{ env.BRANCH_NAME }}
+          ref: ${{ github.ref_name }}
 
       - name: Configure Git
         run: |
@@ -54,16 +52,16 @@ jobs:
       # - name: 📝 Release new version (skip publish)
       #   run: npx nx release --skip-publish --verbose
 
-      - name: 📤 Create publish pull request
-        uses: peter-evans/create-pull-request@v7
-        with:
-          branch: ${{ env.BRANCH_NAME }}
-          title: 'Chore: Publish packages'
-          commit-message: 'chore: publish package'
-          body: |
-            Automated publish PR created by Nx Release workflow.
-            - Version bumps
-            - Updated changelogs
-          base: main
-        env:
-          BRANCH_NAME: ${{ env.BRANCH_NAME }}
+      # - name: 📤 Create publish pull request
+      #   uses: peter-evans/create-pull-request@v7
+      #   with:
+      #     branch: ${{ env.BRANCH_NAME }}
+      #     title: 'Chore: Publish packages'
+      #     commit-message: 'chore: publish package'
+      #     body: |
+      #       Automated publish PR created by Nx Release workflow.
+      #       - Version bumps
+      #       - Updated changelogs
+      #     base: main
+      #   env:
+      #     BRANCH_NAME: ${{ env.BRANCH_NAME }}

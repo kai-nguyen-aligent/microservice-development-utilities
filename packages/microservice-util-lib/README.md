@@ -34,3 +34,6 @@ Vitest tests, linting & type-checking can be run with
 ```sh
 npm run test
 ```
+
+## Tests
+1. Release test 1

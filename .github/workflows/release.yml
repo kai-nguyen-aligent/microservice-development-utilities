@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - releases/**
-    paths:
-      - .nx/version-plans/**.md
 
 permissions:
   contents: write
@@ -52,8 +50,8 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           branch: auto-release/${{ github.run_id }}
-          title: "Chore: Release packages"
-          commit-message: "Chore: Release packages"
+          title: 'Chore: Release packages'
+          commit-message: 'Chore: Release packages'
           body: |
             Automated publish PR created by Nx Release.
             - Version bumps

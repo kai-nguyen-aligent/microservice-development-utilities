@@ -1,3 +1,13 @@
+# 5.0.0 (2025-09-22)
+
+### ⚠️  Breaking Changes
+
+- Test 9 in 7 ([4c41602](https://github.com/kai-nguyen-aligent/microservice-development-utilities/commit/4c41602))
+
+### ❤️ Thank You
+
+- Kai Nguyen
+
 # 4.0.0 (2025-09-22)
 
 ### ⚠️  Breaking Changes
